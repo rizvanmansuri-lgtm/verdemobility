@@ -38,7 +38,8 @@
     --shadow-md: 0 4px 20px rgba(0,100,50,0.10);
     --shadow-lg: 0 12px 48px rgba(0,100,50,0.14);
 
-    --font-display: 'Syne', sans-serif;
+        
+    --font-display: 'Outfit-bold', sans-serif;
     --font-body: 'Outfit', sans-serif;
     --font-mono: 'Syne Mono', monospace;
 
@@ -138,7 +139,7 @@
     max-width: var(--container);
     margin: 0 auto;
     padding: 72px var(--container-pad) 64px;
-    display: flex; flex-direction: row; gap: 48px; align-items: center;
+    display: flex; flex-direction: row; gap: 48px; align-items: center; justify-content: space-between;
   }
 
   .hero-content { }
@@ -287,7 +288,7 @@
   .features-grid { display: flex; flex-wrap: wrap; gap: 2px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; }
   .feature-card { flex: 1 1 calc(33.333% - 2px); min-width: 260px; background: var(--bg); padding: 36px 32px; transition: background 0.3s, box-shadow 0.3s; }
   .feature-card:hover { background: var( --green); color: white; transition: background 0.2s; }
-  .feature-card:hover * { color: white;   }
+  .feature-card:hover * { color: white;  transition: background 0.2s;  }
   .feature-icon { width: 48px; height: 48px; background: var(--green-pale); border: 1px solid var(--border-strong); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
   .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .feature-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 10px; }
