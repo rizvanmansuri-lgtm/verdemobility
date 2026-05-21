@@ -308,7 +308,7 @@
   .variants-section { background: var(--bg); }
   .variants-grid { display: flex; flex-direction: row; gap: 24px; }
   .variant-card {
-    flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border-solid);
+    flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--green-bright);
     border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
     transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
     box-shadow: var(--shadow-sm);
@@ -329,6 +329,24 @@
   .variant-cta.secondary { border: 1px solid var(--border-solid); color: var(--text); }
   .variant-cta.secondary:hover { border-color: var(--green); color: var(--green); }
 
+  .variant-img-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d0d;   /* or match your card bg */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  min-height: 260px;
+}
+
+.variant-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
   /* ── USE CASES ── */
   .usecases { background: var(--bg2); }
   .usecases-grid { display: flex; flex-wrap: wrap; gap: 16px; }
@@ -961,35 +979,26 @@
     <h2 class="section-title reveal">Two variants.<br/>One compact form.</h2>
     <p class="section-sub reveal">Both models share the same mini footprint — scale your power output to match your site's load and demand.</p>
     <div class="variants-grid">
+
       <div class="variant-card reveal">
         <div class="variant-power">60<span> kW</span></div>
         <div class="variant-name">Mini DC Standard</div>
-        <ul class="variant-features">
-          <li><span class="check">✓</span> Ideal for commercial parking &amp; malls</li>
-          <li><span class="check">✓</span> Single CCS2 output (IEC 62196.3-2014)</li>
-          <li><span class="check">✓</span> Charges most EVs 0–80% in ~45 minutes</li>
-          <li><span class="check">✓</span> GSM/3G/4G, Wi-Fi, Ethernet, Bluetooth</li>
-          <li><span class="check">✓</span> OCPP 1.6J (upgradable to 2.1)</li>
-          <li><span class="check">✓</span> 750×520×1500 mm · IP55 rated</li>
-          <li><span class="check">✓</span> 3-year on-site warranty</li>
-        </ul>
+        <div class="variant-img-wrap">
+          <img src="charger-60kw.png" alt="VerdeMobility 60 kW Mini DC Standard EV Charger" />
+        </div>
         <a href="#contact" class="variant-cta secondary">Request Quote</a>
       </div>
+
       <div class="variant-card featured reveal">
         <div class="variant-badge">Most Popular</div>
         <div class="variant-power">120<span> kW</span></div>
         <div class="variant-name">Mini DC Pro</div>
-        <ul class="variant-features">
-          <li><span class="check">✓</span> Ideal for highways, fleet &amp; fuel stations</li>
-          <li><span class="check">✓</span> 2 × CCS2 simultaneous output (120A per gun)</li>
-          <li><span class="check">✓</span> Charges premium EVs 0–80% in &lt;30 minutes</li>
-          <li><span class="check">✓</span> GSM/3G/4G, Wi-Fi, Ethernet, Bluetooth</li>
-          <li><span class="check">✓</span> OCPP 1.6J (upgradable to 2.1) + load management</li>
-          <li><span class="check">✓</span> Same 750×520×1500 mm · IP55 footprint</li>
-          <li><span class="check">✓</span> 3-year on-site warranty + remote diagnostics</li>
-        </ul>
+        <div class="variant-img-wrap">
+          <img src="charger-120kw.png" alt="VerdeMobility 120 kW Mini DC Pro EV Charger" />
+        </div>
         <a href="#contact" class="variant-cta primary">Request Quote</a>
       </div>
+
     </div>
   </div>
 </section>
@@ -1182,28 +1191,62 @@
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Ready to deploy<br/>fast charging?</h2>
     <p class="section-sub">Whether it's a single unit or a 100-charger network, our team will help you scope, install, and go live fast.</p>
+
     <div class="cta-form">
-      <input type="email" class="cta-input" placeholder="Enter your work email" />
-      <a href="mailto:sales@verdemobility.com" class="btn-primary" style="white-space:nowrap;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Get a Quote
-      </a>
+      <input
+        type="email"
+        id="cta-email"
+        class="cta-input"
+        placeholder="Enter your work email"
+      />
+      <button id="cta-btn" class="btn-primary" style="white-space:nowrap; border:none; cursor:pointer;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"
+          style="width:18px;height:18px;">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        <span id="cta-btn-text">Get a Quote</span>
+      </button>
     </div>
+
+    <!-- Feedback messages -->
+    <p id="cta-success" style="display:none; color:#22c55e; font-size:0.9rem; margin-top:0.75rem;">
+      ✓ We got your request! Expect a reply within 48 hours.
+    </p>
+    <p id="cta-error" style="display:none; color:#f87171; font-size:0.9rem; margin-top:0.75rem;">
+      Something went wrong. Please email us directly at sales@verdemobility.com
+    </p>
+    <p id="cta-invalid" style="display:none; color:#f87171; font-size:0.9rem; margin-top:0.75rem;">
+      Please enter a valid email address.
+    </p>
+
     <div class="cta-tags">
       <span class="cta-tag">No commitment required</span>
       <span class="cta-tag">Site assessment included</span>
       <span class="cta-tag">3-year warranty</span>
       <span class="cta-tag">48-hour response</span>
     </div>
+
     <div class="cta-stats">
-      <div style="text-align:center;"><div class="cta-stat-num">500+</div><div class="cta-stat-label">Chargers Deployed</div></div>
+      <div style="text-align:center;">
+        <div class="cta-stat-num">500+</div>
+        <div class="cta-stat-label">Chargers Deployed</div>
+      </div>
       <div class="cta-divider"></div>
-      <div style="text-align:center;"><div class="cta-stat-num">15+</div><div class="cta-stat-label">States Covered</div></div>
+      <div style="text-align:center;">
+        <div class="cta-stat-num">15+</div>
+        <div class="cta-stat-label">States Covered</div>
+      </div>
       <div class="cta-divider"></div>
-      <div style="text-align:center;"><div class="cta-stat-num">24/7</div><div class="cta-stat-label">Support &amp; Monitoring</div></div>
+      <div style="text-align:center;">
+        <div class="cta-stat-num">24/7</div>
+        <div class="cta-stat-label">Support &amp; Monitoring</div>
+      </div>
     </div>
   </div>
 </section>
+
+
 
 <!-- FOOTER -->
 <footer>
@@ -1278,6 +1321,75 @@
       answer.classList.add('open');
     }
   }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    /*email js */
+  emailjs.init("aNA95KuGQLa0gK375");
+  const btn       = document.getElementById('cta-btn');
+  const btnText   = document.getElementById('cta-btn-text');
+  const emailInput = document.getElementById('cta-email');
+  const msgSuccess = document.getElementById('cta-success');
+  const msgError   = document.getElementById('cta-error');
+  const msgInvalid = document.getElementById('cta-invalid');
+
+  function hideAllMessages() {
+    msgSuccess.style.display = 'none';
+    msgError.style.display   = 'none';
+    msgInvalid.style.display = 'none';
+  }
+
+  btn.addEventListener('click', async () => {
+    hideAllMessages();
+
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      msgInvalid.style.display = 'block';
+      emailInput.focus();
+      return;
+    }
+
+    // Loading state
+    btn.disabled = true;
+    btnText.textContent = 'Sending...';
+
+    try {
+      await emailjs.send(
+        'service_5evtjim',    // e.g. 'service_abc123'
+        'template_tdcdtb8',   // e.g. 'template_xyz789'
+        {
+          from_email: email,
+          reply_to:   email,
+          to_name:    'VerdeMobility Sales',
+          message:    `New quote request from: ${email}`
+        }
+      );
+
+      msgSuccess.style.display = 'block';
+      emailInput.value = '';
+      btnText.textContent = 'Sent ✓';
+
+      // Reset button after 4 seconds
+      setTimeout(() => {
+        btn.disabled = false;
+        btnText.textContent = 'Get a Quote';
+      }, 4000);
+
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      msgError.style.display = 'block';
+      btn.disabled = false;
+      btnText.textContent = 'Get a Quote';
+    }
+  });
+
+  // Allow Enter key to submit
+  emailInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') btn.click();
+  });
 </script>
 </body>
 </html>
