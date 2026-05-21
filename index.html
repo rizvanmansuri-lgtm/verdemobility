@@ -138,7 +138,7 @@
     max-width: var(--container);
     margin: 0 auto;
     padding: 72px var(--container-pad) 64px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    display: flex; flex-direction: row; gap: 48px; align-items: center;
   }
 
   .hero-content { }
@@ -270,13 +270,13 @@
   /* ── SECTIONS COMMON ── */
   section { padding: 96px 0; }
   .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
-  .section-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -1px; color: var(--text); margin-bottom: 20px; }
+  .section-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(32px, 4vw, 46px); line-height: 1.05; letter-spacing: -1px; color: var(--text); margin-bottom: 20px; }
   .section-sub { font-size: 17px; color: var(--text-dim); max-width: 540px; line-height: 1.65; margin-bottom: 56px; }
 
   /* ── STATS BAR ── */
   .stats-bar { background: var(--bg); border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); }
-  .stats-inner { display: grid; grid-template-columns: repeat(5, 1fr); }
-  .stat-item { padding: 36px 28px; border-right: 1px solid var(--border-solid); }
+  .stats-inner { display: flex; flex-direction: row; }
+  .stat-item { flex: 1; min-width: 0; padding: 36px 28px; border-right: 1px solid var(--border-solid); }
   .stat-item:last-child { border-right: none; }
   .stat-num { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; color: var(--green); letter-spacing: -1px; margin-bottom: 6px; }
   .stat-unit { font-size: 18px; font-weight: 600; color: var(--green-deep); }
@@ -284,8 +284,8 @@
 
   /* ── FEATURES ── */
   .features { background: var(--bg); }
-  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; }
-  .feature-card { background: var(--bg); padding: 36px 32px; transition: background 0.3s, box-shadow 0.3s; }
+  .features-grid { display: flex; flex-wrap: wrap; gap: 2px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; }
+  .feature-card { flex: 1 1 calc(33.333% - 2px); min-width: 260px; background: var(--bg); padding: 36px 32px; transition: background 0.3s, box-shadow 0.3s; }
   .feature-card:hover { background: var(--bg2); }
   .feature-icon { width: 48px; height: 48px; background: var(--green-pale); border: 1px solid var(--border-strong); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
   .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -294,7 +294,7 @@
 
   /* ── SPECS ── */
   .specs { background: var(--bg2); }
-  .specs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .specs-layout { display: flex; flex-direction: row; gap: 48px; align-items: flex-start; }
   .specs-table { background: var(--bg); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
   .specs-table-header { background: var(--green-pale); padding: 16px 24px; border-bottom: 1px solid var(--border-solid); font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--green-deep); letter-spacing: 1px; text-transform: uppercase; }
   .spec-row { display: flex; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--border); }
@@ -306,9 +306,9 @@
 
   /* ── VARIANTS ── */
   .variants-section { background: var(--bg); }
-  .variants-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .variants-grid { display: flex; flex-direction: row; gap: 24px; }
   .variant-card {
-    background: var(--bg); border: 1px solid var(--border-solid);
+    flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border-solid);
     border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
     transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
     box-shadow: var(--shadow-sm);
@@ -331,8 +331,8 @@
 
   /* ── USE CASES ── */
   .usecases { background: var(--bg2); }
-  .usecases-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .usecase-card { background: var(--bg); border: 1px solid var(--border-solid); border-radius: 16px; padding: 28px 24px; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
+  .usecases-grid { display: flex; flex-wrap: wrap; gap: 16px; }
+  .usecase-card { flex: 1 1 calc(25% - 12px); min-width: 180px; background: var(--bg); border: 1px solid var(--border-solid); border-radius: 16px; padding: 28px 24px; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
   .usecase-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-md); }
   .usecase-icon { font-size: 32px; margin-bottom: 16px; display: block; }
   .usecase-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--text); margin-bottom: 8px; }
@@ -340,7 +340,7 @@
 
   /* ── SOFTWARE ── */
   .software { background: var(--bg); }
-  .software-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .software-grid { display: flex; flex-direction: row; gap: 64px; align-items: center; }
   .software-list { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
   .software-item { display: flex; gap: 16px; align-items: flex-start; }
   .software-item-icon { width: 40px; height: 40px; background: var(--green-pale); border: 1px solid var(--border-strong); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -365,22 +365,22 @@
   .cms-bars { display: flex; align-items: flex-end; gap: 6px; height: 50px; }
   .cms-bar { flex: 1; background: var(--green-pale2); border-radius: 3px 3px 0 0; }
   .cms-bar.active { background: var(--green); }
-  .cms-stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px; }
-  .cms-stat-box { background: #fff; border-radius: 8px; padding: 12px; border: 1px solid var(--border-solid); }
+  .cms-stats-row { display: flex; flex-direction: row; gap: 8px; margin-bottom: 16px; }
+  .cms-stat-box { flex: 1; background: #fff; border-radius: 8px; padding: 12px; border: 1px solid var(--border-solid); }
   .cms-stat-label { font-size: 10px; color: var(--text-dimmer); margin-bottom: 4px; }
   .cms-stat-val { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--text); }
   .cms-stat-val.green { color: var(--green); }
 
   /* ── WHY VERDE — social proof band ── */
   .proof-band { background: var(--green-pale); border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); padding: 64px 0; }
-  .proof-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 12px; overflow: hidden; }
-  .proof-item { background: var(--green-pale); padding: 32px 28px; text-align: center; }
+  .proof-grid { display: flex; flex-direction: row; gap: 1px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 12px; overflow: hidden; }
+  .proof-item { flex: 1; background: var(--green-pale); padding: 32px 28px; text-align: center; }
   .proof-num { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--green-deep); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
   .proof-label { font-size: 13px; color: var(--text-dim); font-weight: 500; }
 
   /* ── FAQ SECTION ── */
   .faq-section { background: var(--bg2); }
-  .faq-list { max-width: 720px; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; background: var(--bg); box-shadow: var(--shadow-sm); }
+  .faq-list { max-width: 100%; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; background: var(--bg); box-shadow: var(--shadow-sm); }
   .faq-item { border-bottom: 1px solid var(--border-solid); }
   .faq-item:last-child { border-bottom: none; }
   .faq-q {
@@ -399,9 +399,9 @@
 
   /* ── INSTALLATION STEPS ── */
   .install-section { background: var(--bg); }
-  .install-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+  .install-steps { display: flex; flex-direction: row; gap: 0; position: relative; }
   .install-steps::before { content: ''; position: absolute; top: 32px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(90deg, var(--green-pale2), var(--green), var(--green-pale2)); z-index: 0; }
-  .install-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .install-step { flex: 1; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
   .install-num {
     width: 64px; height: 64px; border-radius: 50%;
     background: var(--bg); border: 2px solid var(--green);
@@ -451,27 +451,192 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
+
+  /* Tablet landscape */
+  @media (max-width: 1100px) {
     :root { --container-pad: 32px; }
+    .software-grid { gap: 40px; }
+    .usecases-grid { gap: 12px; }
+    .usecase-card { flex: 1 1 calc(25% - 9px); }
   }
+
+  /* Tablet portrait */
   @media (max-width: 900px) {
-    :root { --container-pad: 20px; }
+    :root { --container-pad: 24px; }
+
+    /* Nav — hide links, show hamburger */
     .nav-links { display: none; }
-    .hero-inner { grid-template-columns: 1fr; padding: 64px var(--container-pad) 48px; }
-    .hero-visual { display: none; }
+    .nav-hamburger { display: flex; }
+
+    /* Hero */
+    .hero-inner {
+      flex-direction: column;
+      padding: 56px var(--container-pad) 48px;
+      gap: 40px;
+      text-align: center;
+    }
+    .hero-content { width: 100%; }
+    .hero-badge { display: inline-flex; }
+    .hero-subheadline { max-width: 100%; margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-trust { justify-content: center; }
+    .hero-power-display { justify-content: center; margin-bottom: 0; }
+    .hero-power-num, .hero-power-num2{     font-size: clamp(48px, 8vw, 88px);}
+    .hero-power-unit , .hero-power-unit2 {font-size: 18px;}
+    .hero-visual { width: 100%; max-width: 300px; margin: 0 auto; }
+    .charger-wrap { width: 260px; height: 380px; }
+    .spec-float.f1 { left: -10px; }
+    .spec-float.f2 { right: -10px; }
+    .spec-float.f3 { left: -10px; }
+
     section { padding: 64px 0; }
-    .stats-inner { grid-template-columns: repeat(3,1fr); }
-    .features-grid { grid-template-columns: 1fr; }
-    .specs-layout { grid-template-columns: 1fr; }
-    .variants-grid { grid-template-columns: 1fr; }
-    .usecases-grid { grid-template-columns: repeat(2,1fr); }
-    .software-grid { grid-template-columns: 1fr; }
-    .proof-grid { grid-template-columns: repeat(2,1fr); }
-    .install-steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
+
+    /* Stats bar — 3 then 2 on next row */
+    .stats-inner { flex-wrap: wrap; }
+    .stat-item {
+      flex: 1 1 calc(33.333% - 1px);
+      min-width: 0;
+      border-right: 1px solid var(--border-solid);
+      border-bottom: 1px solid var(--border-solid);
+    }
+    .stat-item:nth-child(3) { border-right: none; }
+    .stat-item:nth-child(4) { border-bottom: none; }
+    .stat-item:nth-child(5) { border-bottom: none; border-right: none; }
+    .stat-item:last-child { border-right: none; }
+
+    /* Features — 2 col */
+    .feature-card { flex: 1 1 calc(50% - 2px); min-width: 0; }
+
+    /* Specs — stack */
+    .specs-layout { flex-direction: column; gap: 0; }
+    .specs-layout > div { width: 100%; }
+
+    /* Variants — stack */
+    .variants-grid { flex-direction: column; }
+    .variant-card { width: 100%; }
+
+    /* Use cases — 2 col */
+    .usecase-card { flex: 1 1 calc(50% - 8px); min-width: 0; }
+
+    /* Software — stack */
+    .software-grid { flex-direction: column; gap: 40px; }
+    .software-grid > div { width: 100%; }
+    .cms-mockup { max-width: 520px; margin: 0 auto; }
+
+    /* Proof — 2 col */
+    .proof-grid { flex-wrap: wrap; }
+    .proof-item { flex: 1 1 calc(50% - 1px); min-width: 0; border-bottom: 1px solid var(--border-solid); }
+    .proof-item:nth-child(2) { border-right: none; }
+    .proof-item:nth-child(3) { border-bottom: none; }
+    .proof-item:nth-child(4) { border-bottom: none; border-right: none; }
+
+    /* Install steps — 2 col */
+    .install-steps { flex-wrap: wrap; gap: 40px 24px; }
+    .install-step { flex: 1 1 calc(50% - 12px); min-width: 160px; }
     .install-steps::before { display: none; }
-    footer .footer-inner { flex-direction: column; text-align: center; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
+
+    /* CTA form */
+    .cta-form { flex-direction: column; max-width: 360px; }
+    .cta-stats { gap: 24px; }
+    .cta-divider { display: none; }
+
+    /* Footer */
+    .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    :root { --container-pad: 16px; }
+
+    /* Hero */
+    .hero-inner { padding: 48px var(--container-pad) 40px; gap: 32px; }
+    .hero-visual { max-width: 240px; }
+    .charger-wrap { width: 200px; height: 300px; }
+    .spec-float { padding: 8px 12px; }
+    .spec-float-val { font-size: 14px; }
+    .spec-float-label { font-size: 9px; }
+    .spec-float.f1 { left: -4px; top: 40px; }
+    .spec-float.f2 { right: -4px; top: 140px; }
+    .spec-float.f3 { left: -4px; bottom: 50px; }
+    .btn-primary, .btn-outline-hero { padding: 12px 20px; font-size: 14px; width: 100%; justify-content: center; }
+    .hero-actions { flex-direction: column; width: 100%; }
+
+    section { padding: 48px 0; }
+
+    /* Stats — all stack 2 col */
+    .stat-item { flex: 1 1 calc(50% - 1px); }
+    .stat-item:nth-child(3) { border-right: 1px solid var(--border-solid); }
+    .stat-item:nth-child(5) { border-right: none; border-bottom: none; }
+    .stat-num { font-size: 32px; }
+
+    /* Features — 1 col */
+    .feature-card { flex: 1 1 100%; }
+
+    /* Use cases — 1 col */
+    .usecase-card { flex: 1 1 100%; }
+
+    /* Proof — 2 col stays */
+    .proof-item { padding: 24px 16px; }
+    .proof-num { font-size: 32px; }
+
+    /* Install steps — 1 col */
+    .install-step { flex: 1 1 100%; }
+
+    /* CTA */
+    .cta-tags { gap: 8px; }
+    .cta-tag { font-size: 12px; }
+
+    /* Section titles */
+    .section-title { font-size: clamp(28px, 7vw, 40px); }
+  }
+
+  /* Small mobile */
+  @media (max-width: 380px) {
+    :root { --container-pad: 12px; }
+    .hero-headline { font-size: 38px; }
+    .hero-power-num { font-size: 56px; }
+    .hero-power-num2 { font-size: 56px; }
+    .stat-item { flex: 1 1 100%; border-right: none !important; }
+  }
+
+  /* Hamburger menu (mobile nav) */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column; gap: 5px; cursor: pointer;
+    padding: 8px; border: none; background: none;
+    border-radius: 6px; transition: background 0.2s;
+  }
+  .nav-hamburger:hover { background: var(--green-pale); }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+    background: #fff; border-bottom: 1px solid var(--border-solid);
+    box-shadow: var(--shadow-lg);
+    flex-direction: column; padding: 16px;
+    animation: slideDown 0.2s ease;
+  }
+  .mobile-menu.open { display: flex; }
+  @keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .mobile-menu a {
+    display: block; padding: 14px 16px; font-size: 15px; font-weight: 500;
+    color: var(--text); text-decoration: none; border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mobile-menu a:hover { background: var(--green-pale); color: var(--green); }
+  .mobile-menu .mobile-cta {
+    margin-top: 8px; background: var(--green); color: #fff !important;
+    text-align: center; font-weight: 600; border-radius: 8px;
+  }
+  .mobile-menu .mobile-cta:hover { background: var(--green-bright) !important; }
 </style>
 </head>
 <body>
@@ -483,6 +648,9 @@
       <div class="nav-logo-mark">VM</div>
       <span class="nav-logo-text">Verde<span>Mobility</span></span>
     </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#specs">Specifications</a></li>
@@ -493,6 +661,14 @@
     </ul>
   </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="closeMenu()">Features</a>
+  <a href="#specs" onclick="closeMenu()">Specifications</a>
+  <a href="#variants" onclick="closeMenu()">Models</a>
+  <a href="#usecases" onclick="closeMenu()">Use Cases</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Enquire Now</a>
+</div>
 
 <!-- HERO — full-width dark banner -->
 <section class="hero">
@@ -723,7 +899,7 @@
     <p class="section-label reveal">Technical Specifications</p>
     <h2 class="section-title reveal">Every number<br/>that matters.</h2>
     <div class="specs-layout reveal">
-      <div>
+      <div style="flex:1;min-width:0;">
         <div class="specs-table">
           <div class="specs-table-header">Power &amp; Electrical</div>
           <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
@@ -746,7 +922,7 @@
           <div class="spec-row"><span class="spec-key">Configuration</span><span class="spec-val">App &amp; Web Portal</span></div>
         </div>
       </div>
-      <div>
+      <div style="flex:1;min-width:0;">
         <div class="specs-table">
           <div class="specs-table-header">Mechanical &amp; Environment</div>
           <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
@@ -825,14 +1001,14 @@
     <h2 class="section-title reveal">Designed for<br/>every deployment.</h2>
     <p class="section-sub reveal">The Mini DC Fast Charger's compact form opens up locations where larger units simply can't go.</p>
     <div class="usecases-grid">
+        <div class="usecase-card reveal"><span class="usecase-icon">🏗️</span><div class="usecase-title">Residential Townships</div><p class="usecase-desc">Shared fast charging for large housing societies and gated communities with centralised billing.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🏢</span><div class="usecase-title">Commercial Complexes</div><p class="usecase-desc">Malls, office parks, and business centres where space is at a premium but EV demand is high.</p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">⛽</span><div class="usecase-title">Fuel Station Retrofits</div><p class="usecase-desc">Retrofit existing petrol stations without structural changes — same footprint, instant EV revenue.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🚛</span><div class="usecase-title">Fleet &amp; Logistics Hubs</div><p class="usecase-desc">Dedicated fast charging for commercial fleets — delivery vans, trucks, and e-buses on a tight turnaround.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🛣️</span><div class="usecase-title">Highway Corridors</div><p class="usecase-desc">En-route charging on national and state highways where installation simplicity is critical.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🏨</span><div class="usecase-title">Hotels &amp; Hospitality</div><p class="usecase-desc">Fast charging as a premium guest amenity — fits in hotel basements and surface lots with no dedicated room.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🏭</span><div class="usecase-title">Industrial Campuses</div><p class="usecase-desc">Factory and warehouse charging for shift workers and commercial vehicles with high daily mileage.</p></div>
       <div class="usecase-card reveal"><span class="usecase-icon">🏙️</span><div class="usecase-title">Smart City Nodes</div><p class="usecase-desc">Urban public charging hubs integrated with payment, monitoring, and city-level energy management systems.</p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🏗️</span><div class="usecase-title">Residential Townships</div><p class="usecase-desc">Shared fast charging for large housing societies and gated communities with centralised billing.</p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">⛽</span><div class="usecase-title">Fuel Station Retrofits</div><p class="usecase-desc">Retrofit existing petrol stations without structural changes — same footprint, instant EV revenue.</p></div>
     </div>
   </div>
 </section>
@@ -841,8 +1017,8 @@
 <section class="software">
   <div class="container">
     <div class="software-grid">
-      <div>
-        <p class="section-label reveal">VerdeCMS Platform</p>
+      <div style="flex:1;min-width:0;">
+        <p class="section-label reveal">Charger Management Software</p>
         <h2 class="section-title reveal">Manage every charger<br/>from one dashboard.</h2>
         <p class="section-sub reveal" style="margin-bottom:0;">The Mini DC integrates natively with VerdeMobility's cloud platform — real-time monitoring, revenue tracking, and remote control from anywhere.</p>
         <div class="software-list">
@@ -864,8 +1040,25 @@
           </div>
         </div>
       </div>
-      <div class="cms-mockup reveal">
-        <div class="cms-topbar">
+      <style>.image-box{
+  width: 100%;
+  height: 350px; /* set your box height */
+  overflow: hidden;
+}
+
+.fit-image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* use cover if you want full fill */
+}</style>
+      <div class="cms-mockup reveal" style="flex:1;min-width:0;">
+        <div class="image-box">
+  <img 
+    src="https://www.verdemobility.com/static/media/dashboard-c.62528c943f18e8a5177a.webp" 
+    class="w-100 fit-image"
+  >
+</div>
+        <!-- <div class="cms-topbar">
           <div class="cms-dot" style="background:#e24b4a;"></div>
           <div class="cms-dot" style="background:#ffb400;margin-left:4px;"></div>
           <div class="cms-dot" style="background:#00c96e;margin-left:4px;"></div>
@@ -899,7 +1092,7 @@
               <div class="cms-bar" style="height:60%"></div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -1049,6 +1242,27 @@
     let current = '';
     sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 80) current = sec.id; });
     navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : ''; });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    }
   });
 
   // FAQ accordion
