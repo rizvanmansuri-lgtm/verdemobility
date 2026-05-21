@@ -286,7 +286,8 @@
   .features { background: var(--bg); }
   .features-grid { display: flex; flex-wrap: wrap; gap: 2px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; }
   .feature-card { flex: 1 1 calc(33.333% - 2px); min-width: 260px; background: var(--bg); padding: 36px 32px; transition: background 0.3s, box-shadow 0.3s; }
-  .feature-card:hover { background: var(--bg2); }
+  .feature-card:hover { background: var( --green); color: white; }
+  .feature-card:hover * { color: white; }
   .feature-icon { width: 48px; height: 48px; background: var(--green-pale); border: 1px solid var(--border-strong); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
   .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .feature-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 10px; }
@@ -351,7 +352,7 @@
   .usecases { background: var(--bg2); }
   .usecases-grid { display: flex; flex-wrap: wrap; gap: 16px; }
   .usecase-card { flex: 1 1 calc(25% - 12px); min-width: 180px; background: var(--bg); border: 1px solid var(--border-solid); border-radius: 16px; padding: 28px 24px; transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s; }
-  .usecase-card:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .usecase-card:hover { border-color: var(--border-strong); transform: translateY(-10px) !important; box-shadow: var(--shadow-md); }
   .usecase-icon { font-size: 32px; margin-bottom: 16px; display: block; }
   .usecase-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--text); margin-bottom: 8px; }
   .usecase-desc { font-size: 13px; color: var(--text-dimmer); line-height: 1.6; }
@@ -1359,7 +1360,7 @@
     try {
       await emailjs.send(
         'service_5evtjim',    // e.g. 'service_abc123'
-        'template_tdcdtb8',   // e.g. 'template_xyz789'
+        'template_dabo1ob',   // e.g. 'template_xyz789'
         {
           from_email: email,
           reply_to:   email,
