@@ -430,27 +430,58 @@
   .install-desc { font-size: 13px; color: var(--text-dimmer); line-height: 1.6; }
 
   /* ── CTA ── */
-  .cta-section {
-    background: linear-gradient(135deg, #0a2415 0%, #0f3020 50%, #0a2415 100%);
-    position: relative; overflow: hidden;
-    padding: 96px 0;
-  }
-  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 800px 400px at 50% 50%, rgba(0,201,110,0.08) 0%, transparent 70%); pointer-events: none; }
-  .cta-inner { max-width: 760px; margin: 0 auto; text-align: center; position: relative; z-index: 2; padding: 0 var(--container-pad); }
-  .cta-section .section-label { color: var(--green-bright); }
-  .cta-section .section-title { color: #ffffff; }
-  .cta-section .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto; text-align: center; }
-  .cta-form { display: flex; gap: 12px; margin: 40px auto 0; max-width: 480px; }
-  .cta-input { flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 14px 18px; color: #fff; font-family: var(--font-body); font-size: 15px; outline: none; transition: border-color 0.2s; }
-  .cta-input::placeholder { color: rgba(255,255,255,0.35); }
-  .cta-input:focus { border-color: var(--green-bright); }
-  .cta-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-  .cta-tag { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,0.5); }
-  .cta-tag::before { content: '✓'; color: var(--green-bright); font-weight: 700; }
-  .cta-stats { margin-top: 56px; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
-  .cta-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--green-bright); }
-  .cta-stat-label { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; }
-  .cta-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.12); }
+.cta-section {
+  background: linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
+  position: relative; overflow: hidden;
+  padding: 96px 0;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,80,50,0.07) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,80,50,0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+.cta-section::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 800px 400px at 50% 50%, rgba(255,255,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  max-width: 760px; margin: 0 auto; text-align: center;
+  position: relative; z-index: 2; padding: 0 var(--container-pad);
+}
+
+/* Text colors — dark on light gradient */
+.cta-section .section-label { color: rgba(0,60,30,0.7); }
+.cta-section .section-title { color: #0a2415; }
+.cta-section .section-sub  { color: rgba(0,40,20,0.65); margin: 0 auto; text-align: center; }
+
+/* Input — frosted glass */
+.cta-form { display: flex; gap: 12px; margin: 40px auto 0; max-width: 480px; justify-content: center; }
+ 
+
+/* Tags */
+.cta-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.cta-tag { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(0,40,20,0.65); }
+.cta-tag::before { content: '✓'; color: #007a40; font-weight: 700; }
+
+/* Stats */
+.cta-stats { margin-top: 56px; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.cta-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: #0a2415; }
+.cta-stat-label { font-size: 13px; color: rgba(0,40,20,0.55); margin-top: 4px; }
+.cta-divider { width: 1px; height: 40px; background: rgba(0,60,30,0.2); }
+
+.cta-section .btn-primary {
+  background: #ffffff;
+  color: #007a40;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+.cta-section .btn-primary:hover {
+  background: #f0fdf6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
 
   /* ── FOOTER ── */
   footer { background: var(--bg); border-top: 1px solid var(--border-solid); padding: 40px 0; }
@@ -657,80 +688,93 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap');
 
-.vf { font-family:'Outfit',sans-serif; background:#0a1f12; padding:80px 0; color:#fff; }
-.vf-wrap { max-width:1140px; margin:0 auto; padding:0 32px; }
+.vf { font-family:'Outfit',sans-serif; background:linear-gradient(-190deg, rgb(2,221,183) 15%, rgb(3,208,119) 50%); padding:80px 0; color:#0a2415; position:relative; overflow:hidden; }
 
-.vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
-.vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#00c96e; margin-bottom:14px; }
-.vf-h2 { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; line-height:1.05; letter-spacing:-1px; color:#fff; max-width:480px; }
-.vf-h2 span { color:#00c96e; }
-.vf-sub { font-size:14px; color:rgba(255,255,255,0.4); max-width:260px; line-height:1.7; text-align:right; }
-
-/* BENTO GRID */
-.vf-bento {
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-template-rows:auto;
-  gap:10px;
+/* decorative grid overlay */
+.vf::before {
+  content:''; position:absolute; inset:0;
+  background-image: linear-gradient(rgba(0,80,50,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,80,50,0.07) 1px, transparent 1px);
+  background-size:56px 56px;
+  pointer-events:none;
 }
 
+.vf-wrap { max-width:1140px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
+
+.vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
+.vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(0,60,30,0.7); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.vf-eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:rgba(0,60,30,0.5); border-radius:2px; }
+.vf-h2 { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; line-height:1.05; letter-spacing:-1px; color:#0a2415; max-width:480px; }
+.vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25); }
+.vf-sub { font-size:14px; color:rgba(0,40,20,0.6); max-width:260px; line-height:1.7; text-align:right; }
+
+/* BENTO GRID */
+.vf-bento { display:grid; grid-template-columns:repeat(12,1fr); gap:10px; }
+
 .vf-cell {
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.07);
+  background:rgba(255,255,255,0.45);
+  border:1px solid rgba(255,255,255,0.6);
   border-radius:16px;
   padding:32px 28px;
   position:relative;
   overflow:hidden;
-  transition:background 0.3s, border-color 0.3s;
+  transition:background 0.3s, border-color 0.3s, transform 0.2s;
+  backdrop-filter:blur(8px);
 }
-.vf-cell:hover { background:rgba(0,201,110,0.07); border-color:rgba(0,201,110,0.25); }
+.vf-cell:hover { background:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.9); transform:translateY(-3px); }
 
-/* glow blob on hover */
 .vf-cell::after {
-  content:'';
-  position:absolute;
-  width:200px; height:200px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(0,201,110,0.15) 0%, transparent 70%);
-  top:-60px; right:-60px;
-  opacity:0;
-  transition:opacity 0.4s;
-  pointer-events:none;
+  content:''; position:absolute;
+  width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  top:-70px; right:-70px; opacity:0;
+  transition:opacity 0.4s; pointer-events:none;
 }
 .vf-cell:hover::after { opacity:1; }
 
 /* SPANS */
-.c1  { grid-column: span 5; }
-.c2  { grid-column: span 7; }
-.c3  { grid-column: span 4; }
-.c4  { grid-column: span 4; }
-.c5  { grid-column: span 4; }
-.c6  { grid-column: span 12; }
+.c1  { grid-column:span 5; }
+.c2  { grid-column:span 7; }
+.c3  { grid-column:span 4; }
+.c4  { grid-column:span 4; }
+.c5  { grid-column:span 4; }
+.c6  { grid-column:span 12; }
 
-/* WIDE CELL — horizontal layout */
+/* WIDE CELL */
 .vf-cell.wide { display:flex; align-items:center; gap:40px; }
 .wide .vf-cell-body { flex:1; }
 .wide .vf-cell-stat { flex-shrink:0; text-align:right; }
-.wide .vf-stat-num { font-family:'Syne',sans-serif; font-size:56px; font-weight:800; color:#00c96e; letter-spacing:-2px; line-height:1; }
-.wide .vf-stat-label { font-size:12px; color:rgba(255,255,255,0.35); letter-spacing:0.5px; margin-top:4px; }
+.wide .vf-stat-num { font-family:'Syne',sans-serif; font-size:56px; font-weight:800; color:#007a40; letter-spacing:-2px; line-height:1; }
+.wide .vf-stat-label { font-size:12px; color:rgba(0,40,20,0.5); letter-spacing:0.5px; margin-top:4px; }
 
 /* TALL FIRST CELL */
 .vf-cell.tall { display:flex; flex-direction:column; justify-content:space-between; min-height:220px; }
-.tall .vf-bg-num { position:absolute; bottom:-20px; right:-10px; font-family:'Syne',sans-serif; font-size:120px; font-weight:800; color:rgba(0,201,110,0.06); line-height:1; pointer-events:none; user-select:none; }
+.tall .vf-bg-num { position:absolute; bottom:-20px; right:-10px; font-family:'Syne',sans-serif; font-size:120px; font-weight:800; color:rgba(0,100,50,0.08); line-height:1; pointer-events:none; user-select:none; }
 
-.vf-num { font-size:11px; font-weight:700; color:rgba(0,201,110,0.6); letter-spacing:2px; margin-bottom:16px; font-family:'Outfit',sans-serif; }
+.vf-num { font-size:11px; font-weight:700; color:rgba(0,80,40,0.55); letter-spacing:2px; margin-bottom:16px; font-family:'Outfit',sans-serif; }
 
-.vf-icon { width:44px; height:44px; border-radius:10px; background:rgba(0,201,110,0.12); border:1px solid rgba(0,201,110,0.2); display:flex; align-items:center; justify-content:center; margin-bottom:18px; flex-shrink:0; }
-.vf-icon svg { width:20px; height:20px; stroke:#00c96e; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.vf-icon { width:44px; height:44px; border-radius:10px; background:rgba(0,100,50,0.12); border:1px solid rgba(0,100,50,0.18); display:flex; align-items:center; justify-content:center; margin-bottom:18px; flex-shrink:0; transition:background 0.25s, border-color 0.25s; }
+.vf-cell:hover .vf-icon { background:#007a40; border-color:#007a40; }
+.vf-icon svg { width:20px; height:20px; stroke:#007a40; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:stroke 0.25s; }
+.vf-cell:hover .vf-icon svg { stroke:#fff; }
 
-.vf-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:8px; letter-spacing:-0.2px; line-height:1.2; }
-.vf-desc { font-size:13px; color:rgba(255,255,255,0.45); line-height:1.7; }
+.vf-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:#0a2415; margin-bottom:8px; letter-spacing:-0.2px; line-height:1.2; }
+.vf-desc { font-size:13px; color:rgba(0,40,20,0.65); line-height:1.7; }
 
 /* PILL */
-.vf-pill { display:inline-flex; align-items:center; gap:5px; background:rgba(0,201,110,0.14); border:1px solid rgba(0,201,110,0.3); color:#00c96e; font-size:11px; font-weight:700; letter-spacing:0.8px; padding:4px 12px; border-radius:100px; margin-bottom:14px; }
+.vf-pill { display:inline-flex; align-items:center; gap:5px; background:rgba(0,100,50,0.12); border:1px solid rgba(0,100,50,0.22); color:#005c28; font-size:11px; font-weight:700; letter-spacing:0.8px; padding:4px 12px; border-radius:100px; margin-bottom:14px; }
 
-/* HORIZONTAL DIVIDER in wide cell */
-.wide-divider { width:1px; height:80px; background:rgba(255,255,255,0.08); flex-shrink:0; }
+/* Connectivity chips */
+.chip { background:rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.1); color:rgba(0,40,20,0.7); font-size:11px; font-weight:600; padding:4px 12px; border-radius:100px; }
+
+/* Wide divider */
+.wide-divider { width:1px; height:80px; background:rgba(0,60,30,0.15); flex-shrink:0; }
+
+/* Stat accent in tall card */
+.stat-accent-num { font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:#007a40; letter-spacing:-1px; }
+.stat-accent-label { font-size:12px; color:rgba(0,40,20,0.5); margin-top:2px; }
+
+/* Uptime number */
+.uptime-num { font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:#007a40; letter-spacing:-0.5px; }
 
 @media(max-width:860px){
   .c1,.c2,.c3,.c4,.c5,.c6 { grid-column:span 12; }
@@ -934,7 +978,7 @@
 
     <div class="vf-bento">
 
-      <!-- CELL 1 — Compact Footprint, tall -->
+      <!-- CELL 1 — Compact Footprint -->
       <div class="vf-cell c1 tall">
         <div>
           <div class="vf-num">01</div>
@@ -943,8 +987,8 @@
           <p class="vf-desc">Minimal space requirement without compromising charging performance — fits where larger units simply can't go.</p>
         </div>
         <div style="margin-top:24px;display:flex;align-items:center;gap:8px;">
-          <span style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#00c96e;letter-spacing:-1px;">750mm</span>
-          <span style="font-size:12px;color:rgba(255,255,255,0.3);line-height:1.4;">wide<br>footprint</span>
+          <span class="stat-accent-num">750mm</span>
+          <span class="stat-accent-label">wide<br>footprint</span>
         </div>
         <div class="vf-bg-num">01</div>
       </div>
@@ -952,18 +996,16 @@
       <!-- CELL 2 — Smart Connectivity -->
       <div class="vf-cell c2">
         <div class="vf-num">02</div>
-        <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1" fill="#00c96e"></circle></svg></div>
+        <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1" fill="#007a40"></circle></svg></div>
         <div class="vf-title">Smart Connectivity</div>
         <p class="vf-desc" style="max-width:320px;">Ethernet, Wi-Fi, and GSM/4G with intelligent quad-link failover — always online, always reporting, even when one channel drops.</p>
         <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
-          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;">Ethernet</span>
-          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;">Wi-Fi</span>
-          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;">GSM / 4G</span>
-          <span style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;">Bluetooth</span>
+          <span class="chip">Ethernet</span>
+          <span class="chip">Wi-Fi</span>
+          <span class="chip">GSM / 4G</span>
+          <span class="chip">Bluetooth</span>
         </div>
       </div>
-
-      <!-- ROW 2 -->
 
       <!-- CELL 3 — OCPP -->
       <div class="vf-cell c3">
@@ -971,7 +1013,7 @@
         <div class="vf-pill">OCPP 1.6J → 2.1</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
         <div class="vf-title">OCPP Compliant</div>
-        <p class="vf-desc">Integrates with any CMS or roaming platform. Upgradable to 2.1 via OTA.</p>
+        <p class="vf-desc">Integrates with any CMS or roaming platform. Upgradable to 2.1 via OTA — no hardware changes.</p>
       </div>
 
       <!-- CELL 4 — High Uptime -->
@@ -981,8 +1023,8 @@
         <div class="vf-title">High Operational Uptime</div>
         <p class="vf-desc">Industrial-grade architecture for dependable long-duration operations — 24/7, every day.</p>
         <div style="margin-top:20px;">
-          <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#00c96e;letter-spacing:-0.5px;">99.2%</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">Network uptime</div>
+          <div class="uptime-num">99.2%</div>
+          <div style="font-size:11px;color:rgba(0,40,20,0.5);margin-top:2px;">Network uptime</div>
         </div>
       </div>
 
@@ -991,7 +1033,7 @@
         <div class="vf-num">05</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
         <div class="vf-title">Remote Monitoring &amp; Diagnostics</div>
-        <p class="vf-desc">Live charger health, sessions, alerts, and firmware updates — all managed remotely.</p>
+        <p class="vf-desc">Live charger health, sessions, alerts, and firmware updates — all managed remotely with zero site visits.</p>
       </div>
 
       <!-- CELL 6 — India, wide full-bleed -->
@@ -1009,7 +1051,7 @@
               <div class="wide vf-stat-num">IP55</div>
               <div class="wide vf-stat-label">Weatherproof Rating</div>
             </div>
-            <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);"></div>
+            <div style="width:100%;height:1px;background:rgba(0,60,30,0.12);"></div>
             <div>
               <div class="wide vf-stat-num">50°C</div>
               <div class="wide vf-stat-label">Max Operating Temp</div>
@@ -1127,22 +1169,16 @@
     <h2 class="section-title">Ready to deploy<br/>fast charging?</h2>
     <p class="section-sub">Whether it's a single unit or a 100-charger network, our team will help you scope, install, and go live fast.</p>
 
-    <div class="cta-form">
-      <input
-        type="email"
-        id="cta-email"
-        class="cta-input"
-        placeholder="Enter your work email"
-      />
-      <button id="cta-btn" class="btn-primary" style="white-space:nowrap; border:none; cursor:pointer;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-          stroke-linecap="round" stroke-linejoin="round"
-          style="width:18px;height:18px;">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-        <span id="cta-btn-text">Get a Quote</span>
-      </button>
-    </div>
+   <div class="cta-form">
+  <a href="/get-in-touch#contact-us" class="btn-primary" style="white-space:nowrap; text-decoration:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round"
+      style="width:18px;height:18px;">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+    Get a Quote
+  </a>
+</div>
 
     <!-- Feedback messages -->
     <p id="cta-success" style="display:none; color:#22c55e; font-size:0.9rem; margin-top:0.75rem;">
@@ -1158,19 +1194,19 @@
     <div class="cta-tags">
       <span class="cta-tag">No commitment required</span>
       <span class="cta-tag">Site assessment included</span>
-      <span class="cta-tag">3-year warranty</span>
+      <span class="cta-tag">2-year warranty</span>
       <span class="cta-tag">48-hour response</span>
     </div>
 
     <div class="cta-stats">
       <div style="text-align:center;">
-        <div class="cta-stat-num">500+</div>
+        <div class="cta-stat-num">5000+</div>
         <div class="cta-stat-label">Chargers Deployed</div>
       </div>
       <div class="cta-divider"></div>
       <div style="text-align:center;">
         <div class="cta-stat-num">15+</div>
-        <div class="cta-stat-label">States Covered</div>
+        <div class="cta-stat-label">States Covered</di
       </div>
       <div class="cta-divider"></div>
       <div style="text-align:center;">
