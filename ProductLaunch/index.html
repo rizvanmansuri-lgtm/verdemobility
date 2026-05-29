@@ -287,6 +287,7 @@
   .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .feature-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 10px; }
   .feature-desc { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .features .section-sub{ margin-bottom: 28px;}
 
 
   /* ── SPECS ── */
@@ -684,11 +685,9 @@
     text-align: center; font-weight: 600; border-radius: 8px;
   }
   .mobile-menu .mobile-cta:hover { background: var(--green-bright) !important; }
-</style>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap');
+ 
 
-.vf { font-family:'Outfit',sans-serif; background:linear-gradient(-190deg, rgb(2,221,183) 15%, rgb(3,208,119) 50%); padding:80px 0; color:#0a2415; position:relative; overflow:hidden; }
+.vf { font-family:var(--font-display); background:linear-gradient(-190deg, rgb(2,221,183) 15%, rgb(3,208,119) 50%); padding:80px 0; color:#0a2415; position:relative; overflow:hidden; }
 
 /* decorative grid overlay */
 .vf::before {
@@ -792,8 +791,7 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <div class="nav-logo-mark">VM</div>
-      <span class="nav-logo-text">Verde<span>Mobility</span></span>
+      <img loading="lazy" src="https://www.verdemobility.com/static/media/logo.33ea012dec70e5ad4e172b81c8732799.svg" width="175" alt="Verdemobility">
     </a>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -835,7 +833,7 @@
       <div class="hero-actions">
         <a href="/get-in-touch#contact-us" class="btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Enquire Now
+          Contact Us
         </a>
         <a href="#specs" class="btn-outline-hero">View Specifications</a>
       </div>
@@ -864,7 +862,7 @@
         <div class="charger-glow"></div>
         <div class="spec-float f1"><span class="spec-float-val">IP55</span><span class="spec-float-label">Weatherproof</span></div>
         <div class="spec-float f2"><span class="spec-float-val">OCPP 1.6J</span><span class="spec-float-label">Protocol<bR>(upgradable to 2.1)</span></div>
-        <div class="spec-float f3"><span class="spec-float-val">7/10" </span><span class="spec-float-label">TFT LCD</span></div>
+        <div class="spec-float f3"><span class="spec-float-val">7/10" </span><span class="spec-float-label">TFT LCD (Touch Screen)</span></div>
         <img src="charger-120kw.png" alt=""  style=" height:100%;filter:drop-shadow(0 20px 40px rgba(0,80,40,0.20));">
       </div>
     </div>
@@ -1077,7 +1075,7 @@
         <div class="variant-img-wrap">
           <img src="charger-60kw.png" alt="VerdeMobility 60 kW Mini DC Standard EV Charger" />
         </div>
-        <a href="#contact" class="variant-cta secondary">Request Quote</a>
+        <a href="/get-in-touch#contact-us" class="variant-cta secondary">Request Quote</a>
       </div>
 
       <div class="variant-card featured reveal">
@@ -1087,7 +1085,7 @@
         <div class="variant-img-wrap">
           <img src="charger-120kw.png" alt="VerdeMobility 120 kW Mini DC Pro EV Charger" />
         </div>
-        <a href="#contact" class="variant-cta primary">Request Quote</a>
+        <a href="/get-in-touch#contact-us" class="variant-cta primary">Request Quote</a>
       </div>
 
     </div>
@@ -1206,7 +1204,7 @@
       <div class="cta-divider"></div>
       <div style="text-align:center;">
         <div class="cta-stat-num">15+</div>
-        <div class="cta-stat-label">States Covered</di
+        <div class="cta-stat-label">States Covered</div>
       </div>
       <div class="cta-divider"></div>
       <div style="text-align:center;">
