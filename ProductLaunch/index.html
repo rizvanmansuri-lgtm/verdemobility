@@ -196,6 +196,8 @@
   }
   .btn-primary:hover { background: var(--green-bright); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,168,90,0.45); }
   .btn-primary svg { width: 18px; height: 18px; }
+  .btn-outline-hero svg { width: 18px; height: 18px; }
+  
 
   .btn-outline-hero {
     display: inline-flex; align-items: center; gap: 8px;
@@ -311,7 +313,8 @@
     transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
     box-shadow: var(--shadow-sm);
   }
-  .variant-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .variant-card:hover { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow-md); }
+  
   .variant-card.featured { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow-md); }
   .variant-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-deep), var(--green-bright)); }
   .variant-badge { position: absolute; top: 20px; right: 20px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: 0.5px; text-transform: uppercase; }
@@ -703,7 +706,7 @@
 .vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
 .vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(0,60,30,0.7); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 .vf-eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:rgba(0,60,30,0.5); border-radius:2px; }
-.vf-h2 { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; line-height:1.05; letter-spacing:-1px; color:#0a2415; max-width:480px; }
+.vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415; max-width:480px; }
 .vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25); }
 .vf-sub { font-size:14px; color:rgba(0,40,20,0.6); max-width:260px; line-height:1.7; text-align:right; }
 
@@ -757,7 +760,7 @@
 .vf-icon svg { width:20px; height:20px; stroke:#007a40; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:stroke 0.25s; }
 .vf-cell:hover .vf-icon svg { stroke:#fff; }
 
-.vf-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:#0a2415; margin-bottom:8px; letter-spacing:-0.2px; line-height:1.2; }
+.vf-title {  font-size:17px; font-weight:700; color:#0a2415; margin-bottom:8px; letter-spacing:-0.2px; line-height:1.2; }
 .vf-desc { font-size:13px; color:rgba(0,40,20,0.65); line-height:1.7; }
 
 /* PILL */
@@ -821,18 +824,18 @@
   <div class="hero-stripe"></div>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">Now Launching · May 22, 2026</div>
+      <!-- <div class="hero-badge">Now Launching · May 22, 2026</div> -->
       <h1 class="hero-headline">Mini DC<br/><span>Fast Charger</span></h1>
       <p class="hero-subheadline">India's most compact DC fast charger — engineered for commercial density. Big power in a small footprint.</p>
       <div class="hero-power-display">
         <span class="hero-power-num">60</span>
         <span class="hero-power-unit">kW</span>
         <span class="hero-power-dash">&nbsp;–&nbsp;</span>
-        <span class="hero-power-num2">120</span>
-        <span class="hero-power-unit2">kW</span>
+        <span class="hero-power-num">120</span>
+        <span class="hero-power-unit">kW</span>
       </div>
       <div class="hero-actions">
-        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-primary">
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-outline-hero">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           Contact Us
         </a>
@@ -970,7 +973,7 @@
     <div class="vf-top">
       <div>
         <div class="vf-eyebrow">Feature Highlights</div>
-        <h2 class="vf-h2">Engineered for<br><span>Intelligent</span> EV Charging</h2>
+        <h2 class="vf-h2 section-title">Engineered for<br><span>Intelligent</span> EV Charging</h2>
       </div>
       <p class="vf-sub">Six reasons why the Mini DC outperforms larger chargers in every deployment scenario.</p>
     </div>
@@ -1072,17 +1075,17 @@
 
       <div class="variant-card reveal">
         <div class="variant-power">60<span> kW</span></div>
-        <div class="variant-name">Mini DC Standard</div>
+        <div class="variant-name">Mini DC </div>
         <div class="variant-img-wrap">
           <img src="charger-60kw.png" alt="VerdeMobility 60 kW Mini DC Standard EV Charger" />
         </div>
-        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="variant-cta secondary">Request Quote</a>
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="variant-cta primary">Request Quote</a>
       </div>
 
-      <div class="variant-card featured reveal">
+      <div class="variant-card  reveal">
         <div class="variant-badge">Most Popular</div>
         <div class="variant-power">120<span> kW</span></div>
-        <div class="variant-name">Mini DC Pro</div>
+        <div class="variant-name">Mini DC </div>
         <div class="variant-img-wrap">
           <img src="charger-120kw.png" alt="VerdeMobility 120 kW Mini DC Pro EV Charger" />
         </div>
@@ -1154,7 +1157,7 @@
         <div class="faq-a">Yes. The Mini DC Fast Charger is ARAI type-approved. All required certifications for DISCOM integration and government subsidy eligibility are provided with every unit.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">What does the 3-year warranty cover?<span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)">What does the 2-year warranty cover?<span class="faq-icon">+</span></button>
         <div class="faq-a">The warranty covers all hardware components and factory defects with on-site repair or replacement within 48 hours. The 120 kW Pro includes remote diagnostics to identify issues proactively before they cause downtime.</div>
       </div>
     </div>
