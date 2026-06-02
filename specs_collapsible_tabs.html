@@ -1,0 +1,140 @@
+<h2 class="sr-only">Technical Specifications — collapsible accordion tabs</h2>
+<style>
+.specs-wrap { padding: 1rem 0; }
+.acc-item { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 10px; overflow: hidden; background: var(--color-background-primary); }
+.acc-trigger { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; background: none; border: none; width: 100%; text-align: left; gap: 12px; }
+.acc-trigger:hover { background: var(--color-background-secondary); }
+.acc-label { display: flex; align-items: center; gap: 10px; }
+.acc-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.acc-icon.power { background: #EAF3DE; color: #3B6D11; }
+.acc-icon.connect { background: #E6F1FB; color: #185FA5; }
+.acc-icon.mech { background: #FAEEDA; color: #854F0B; }
+.acc-icon.ui { background: #FBEAF0; color: #993556; }
+.acc-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.acc-count { font-size: 12px; color: var(--color-text-secondary); }
+.acc-chevron { font-size: 16px; color: var(--color-text-secondary); transition: transform 0.25s ease; flex-shrink: 0; }
+.acc-item.open .acc-chevron { transform: rotate(180deg); }
+.acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.acc-item.open .acc-body { max-height: 2000px; }
+.acc-inner { border-top: 0.5px solid var(--color-border-tertiary); }
+.spec-row { display: flex; align-items: center; padding: 12px 20px; border-bottom: 0.5px solid var(--color-border-tertiary); gap: 12px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row:hover { background: var(--color-background-secondary); }
+.spec-key { flex: 1; font-size: 13px; color: var(--color-text-secondary); min-width: 0; }
+.spec-val { font-size: 13px; color: var(--color-text-primary); font-weight: 500; text-align: right; }
+.tag { display: inline-block; background: #EAF3DE; color: #3B6D11; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; margin-left: 6px; }
+</style>
+
+<div class="specs-wrap">
+
+  <div class="acc-item open">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-label">
+        <div class="acc-icon power"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+        <div>
+          <div class="acc-title">Power &amp; Electrical</div>
+          <div class="acc-count">8 specifications</div>
+        </div>
+      </div>
+      <i class="ti ti-chevron-down acc-chevron" aria-hidden="true"></i>
+    </button>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
+        <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">415 VAC (±15%), 3-phase 50 Hz</span></div>
+        <div class="spec-row"><span class="spec-key">Input Wires</span><span class="spec-val">L1, L2, L3, N, PE</span></div>
+        <div class="spec-row"><span class="spec-key">Output Interface</span><span class="spec-val">2 × CCS2 (IEC 62196.3-2014)</span></div>
+        <div class="spec-row"><span class="spec-key">Max Output Current</span><span class="spec-val">200A (120A per gun, dual)</span></div>
+        <div class="spec-row"><span class="spec-key">Efficiency</span><span class="spec-val">95% at nominal output</span></div>
+        <div class="spec-row"><span class="spec-key">Power Factor</span><span class="spec-val">0.99 at nominal output</span></div>
+        <div class="spec-row"><span class="spec-key">Current THD</span><span class="spec-val">5% at nominal output</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-label">
+        <div class="acc-icon connect"><i class="ti ti-wifi" aria-hidden="true"></i></div>
+        <div>
+          <div class="acc-title">Connectivity &amp; Communication</div>
+          <div class="acc-count">7 specifications</div>
+        </div>
+      </div>
+      <i class="ti ti-chevron-down acc-chevron" aria-hidden="true"></i>
+    </button>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="spec-row"><span class="spec-key">Network</span><span class="spec-val">GSM/3G/4G · Ethernet · Wi-Fi · Bluetooth</span></div>
+        <div class="spec-row"><span class="spec-key">OCPP Protocol</span><span class="spec-val">1.6J<span class="tag">Upgradable</span></span></div>
+        <div class="spec-row"><span class="spec-key">Vehicle Protocol</span><span class="spec-val">IEC 61851, ISO 15118, DIN 70121</span></div>
+        <div class="spec-row"><span class="spec-key">Vehicle Smart Charging</span><span class="spec-val">IEC 15118 EIM &amp; PNC</span></div>
+        <div class="spec-row"><span class="spec-key">Authentication</span><span class="spec-val">App, RFID Card, QR Code, Password</span></div>
+        <div class="spec-row"><span class="spec-key">RFID Standard</span><span class="spec-val">RC 522 ISO/IEC 14443A / MIFARE</span></div>
+        <div class="spec-row"><span class="spec-key">Configuration</span><span class="spec-val">App &amp; Web Portal</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-label">
+        <div class="acc-icon mech"><i class="ti ti-ruler-measure" aria-hidden="true"></i></div>
+        <div>
+          <div class="acc-title">Mechanical &amp; Environment</div>
+          <div class="acc-count">10 specifications</div>
+        </div>
+      </div>
+      <i class="ti ti-chevron-down acc-chevron" aria-hidden="true"></i>
+    </button>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
+        <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">200 kg (±5 kg)</span></div>
+        <div class="spec-row"><span class="spec-key">IP Rating</span><span class="spec-val">IP55<span class="tag">Weatherproof</span></span></div>
+        <div class="spec-row"><span class="spec-key">Cooling</span><span class="spec-val">Air Cooling</span></div>
+        <div class="spec-row"><span class="spec-key">Cable Length</span><span class="spec-val">15 ft. Standard</span></div>
+        <div class="spec-row"><span class="spec-key">Operating Temperature</span><span class="spec-val">-10°C to +55°C</span></div>
+        <div class="spec-row"><span class="spec-key">Storage Temperature</span><span class="spec-val">-10°C to +70°C (dry)</span></div>
+        <div class="spec-row"><span class="spec-key">Altitude</span><span class="spec-val">Up to 2000 m</span></div>
+        <div class="spec-row"><span class="spec-key">Humidity</span><span class="spec-val">5%–95%, non-condensing</span></div>
+        <div class="spec-row"><span class="spec-key">Noise Level</span><span class="spec-val">≤60 dB</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-label">
+        <div class="acc-icon ui"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+        <div>
+          <div class="acc-title">User Interface &amp; Safety</div>
+          <div class="acc-count">10 specifications</div>
+        </div>
+      </div>
+      <i class="ti ti-chevron-down acc-chevron" aria-hidden="true"></i>
+    </button>
+    <div class="acc-body">
+      <div class="acc-inner">
+        <div class="spec-row"><span class="spec-key">Display</span><span class="spec-val">7/10" TFT LCD Touch Screen</span></div>
+        <div class="spec-row"><span class="spec-key">Visual Indication</span><span class="spec-val">RGB LEDs</span></div>
+        <div class="spec-row"><span class="spec-key">Emergency Stop</span><span class="spec-val">Mushroom Type</span></div>
+        <div class="spec-row"><span class="spec-key">Over-Voltage / Under-Voltage</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Over-Current &amp; Surge</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Ground Fault &amp; Leakage</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Polarity Reverse Protection</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Insulation Monitoring</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Cable Temp Detection</span><span class="spec-val">✓ Built-in</span></div>
+        <div class="spec-row"><span class="spec-key">Earth Presence Detection</span><span class="spec-val">✓ Built-in</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(btn) {
+  const item = btn.closest('.acc-item');
+  item.classList.toggle('open');
+}
+</script>
