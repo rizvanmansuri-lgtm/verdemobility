@@ -502,9 +502,9 @@
   .cms-stat-val.green { color: var(--green); }
 
   /* ── WHY VERDE — social proof band ── */
-  .proof-band { background: var(--green-pale); border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); padding: 64px 0; }
+  .proof-band {     background-image: linear-gradient(-190deg, #fff0 30%, #06d7b01f 50%, #fff 70%); border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); padding: 64px 0; }
   .proof-grid { display: flex; flex-direction: row; gap: 1px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 12px; overflow: hidden; }
-  .proof-item { flex: 1; background: var(--green-pale); padding: 32px 28px; text-align: center; }
+  .proof-item { flex: 1; background: white; padding: 32px 28px; text-align: center; }
   .proof-num { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--green-deep); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
   .proof-label { font-size: 13px; color: var(--text-dim); font-weight: 500; }
 
@@ -835,7 +835,7 @@
   transition:background 0.3s, border-color 0.3s, transform 0.2s;
   backdrop-filter:blur(8px);
 }
-.vf-cell:hover { transform:translateY(-3px); }
+.vf-cell:hover { transform:translateY(-3px); background-color: white; }
 
 .vf-cell::after {
   content:''; position:absolute;
@@ -992,7 +992,7 @@
   <div class="container">
     <p class="section-label reveal">Fast Charging Built for Space-Constrained Deployments</p>
     <h2 class="section-title reveal">Why Mini DC?</h2>
-    <p class="section-sub reveal">The VerdeMobility Mini DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. Whether deployed for commercial fleets, retail parking, workplaces, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
+    <p class="section-sub reveal">VerdeMobility's Mini DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. Whether deployed for commercial fleets, retail parking, workplaces, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
     
 
     <div class="features-grid">
@@ -1021,7 +1021,7 @@
 <section class="specs" id="specs">
   <div class="container">
     <p class="section-label reveal">Technical Specifications</p>
-    <h2 class="section-title reveal">Every number<br/>that matters</h2>
+    <h2 class="section-title reveal">Every Number<br/>that Matters</h2>
     
     
 <div class="sw">
@@ -1073,7 +1073,7 @@
               <div class="preview-subtitle">Core power delivery parameters</div>
             </div>
           </div>
-          <span class="preview-badge">8 specs</span>
+          <!-- <span class="preview-badge">8 specs</span> -->
         </div>
         <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
         <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">415 VAC (±15%), 3-phase 50 Hz</span></div>
@@ -1094,7 +1094,7 @@
               <div class="preview-subtitle">Network, protocols &amp; authentication</div>
             </div>
           </div>
-          <span class="preview-badge">7 specs</span>
+          <!-- <span class="preview-badge">7 specs</span> -->
         </div>
         <div class="spec-row"><span class="spec-key">Network</span><span class="spec-val">GSM/3G/4G · Ethernet · Wi-Fi · Bluetooth</span></div>
         <div class="spec-row"><span class="spec-key">OCPP Protocol</span><span class="spec-val">1.6J (upgradable to 2.1)<span class="tag">Upgradable</span></span></div>
@@ -1114,7 +1114,7 @@
               <div class="preview-subtitle">Physical build &amp; operating conditions</div>
             </div>
           </div>
-          <span class="preview-badge">10 specs</span>
+          <!-- <span class="preview-badge">10 specs</span> -->
         </div>
         <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
         <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">200 kg (±5 kg)</span></div>
@@ -1137,7 +1137,7 @@
               <div class="preview-subtitle">Display, controls &amp; protection systems</div>
             </div>
           </div>
-          <span class="preview-badge">10 specs</span>
+          <!-- <span class="preview-badge">10 specs</span> -->
         </div>
         <div class="spec-row"><span class="spec-key">Display</span><span class="spec-val">7/10" TFT LCD Touch Screen</span></div>
         <div class="spec-row"><span class="spec-key">Visual Indication</span><span class="spec-val">RGB LEDs</span></div>
@@ -1262,16 +1262,15 @@
 <section class="variants-section" id="variants">
   <div class="container">
     <p class="section-label reveal">Choose Your Model</p>
-    <h2 class="section-title reveal">Two variants,<br/>One compact form</h2>
+    <h2 class="section-title reveal">Two Variants,<br/>One Compact Form</h2>
     <p class="section-sub reveal">Choose the power output that fits your needs, without changing the compact footprint.</p>
     <div class="variants-grid">
 
       <div class="variant-card reveal">
-        <div class="variant-header">
-
-        <div class="variant-power">60<span> kW</span>&nbsp;</div>
+        
+        <div class="variant-power">60<span> kW </span></div>
         <div class="variant-name">Mini  DC Charger</div>
-        </div>
+        
         <div class="variant-img-wrap">
           <img src="charger-60kw.png" alt="VerdeMobility 60 kW Mini DC Standard EV Charger" />
         </div>
@@ -1279,11 +1278,11 @@
       </div>
 
       <div class="variant-card  reveal">
-        <div class="variant-header">
+         
           <div class="variant-badge">Most Popular</div>
-          <div class="variant-power">120<span> kW</span>&nbsp;</div>
+          <div class="variant-power">120<span> kW </span></div>
           <div class="variant-name">Mini  DC Charger</div>
-        </div>
+        
         <div class="variant-img-wrap">
           <img src="charger-120kw.png" alt="VerdeMobility 120 kW Mini DC Pro EV Charger" />
         </div>
@@ -1295,18 +1294,7 @@
 </section>
 
 
-<!-- SOCIAL PROOF BAND — NEW -->
-<div class="proof-band">
-  <div class="container">
-    <p class="section-label reveal" style="text-align:center;margin-bottom:32px;">VerdeMobility in Numbers</p>
-    <div class="proof-grid">
-      <div class="proof-item reveal"><div class="proof-num">5000+</div><div class="proof-label">Chargers Deployed</div></div>
-      <div class="proof-item reveal"><div class="proof-num">15+</div><div class="proof-label">States Covered</div></div>
-      <div class="proof-item reveal"><div class="proof-num">24/7</div><div class="proof-label">Support &amp; Monitoring</div></div>
-      <div class="proof-item reveal"><div class="proof-num">99.2%</div><div class="proof-label">Network Uptime</div></div>
-    </div>
-  </div>
-</div>
+
 
 
 <!-- USE CASES -->
@@ -1329,7 +1317,18 @@
 </section>
 
   
-
+<!-- SOCIAL PROOF BAND — NEW -->
+<div class="proof-band">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center;margin-bottom:32px;">VerdeMobility in Numbers</p>
+    <div class="proof-grid">
+      <div class="proof-item reveal"><div class="proof-num">5000+</div><div class="proof-label">Chargers Deployed</div></div>
+      <div class="proof-item reveal"><div class="proof-num">15+</div><div class="proof-label">States Covered</div></div>
+      <div class="proof-item reveal"><div class="proof-num">24/7</div><div class="proof-label">Real Time Monitoring</div></div>
+      <div class="proof-item reveal"><div class="proof-num">99.2%</div><div class="proof-label">Network Uptime</div></div>
+    </div>
+  </div>
+</div>
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="cta-inner">
