@@ -201,35 +201,13 @@
 
   .btn-outline-hero {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,0,0); 
-    color: #fff;
+    background: rgba(255,255,255,0.35); color: #0a2415;
     padding: 14px 28px; border-radius: 8px;
     font-family: var(--font-body); font-weight: 600; font-size: 15px;
     text-decoration: none; border: 1px solid rgba(255,255,255,0.5); cursor: pointer;
     transition: background 0.2s, border-color 0.2s;
-    position: relative;
-    z-index: 9;
-    overflow: hidden;
   }
- 
-  .btn-outline-hero:after{
-        background-color: white;
-    content: "";
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transition: width .6s ease-in-out;
-    width: 0;
-    z-index: -1;
-    
-    
-  }
-  /* .btn-outline-hero:hover { background: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.8); } */
-    .btn-outline-hero:hover::after{
-        width: 100%; 
-    }
-     .btn-outline-hero:hover{color: var(--green);}
+  .btn-outline-hero:hover { background: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.8); }
 
   .btn-outline {
     display: inline-flex; align-items: center; gap: 8px;
@@ -315,101 +293,16 @@
 
 
   /* ── SPECS ── */
-.sw { padding: 1rem 0; }
-.specs-layout {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid var(--border-solid);
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--bg);
-}
-.specs-sidebar {
-  width: 210px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border-solid);
-  background: var(--bg2);
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0;
-}
-.tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  width: calc(100% - 16px);
-  text-align: left;
-  border-radius: 10px;
-  margin: 2px 8px;
-  position: relative;
-  transition: background 0.15s;
-}
-.tab-btn:hover { background: var(--bg); }
-.tab-btn.active { background: var(--green); }
-.tab-btn.active::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 20%; bottom: 20%;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
-  background: black;
-}
-.tab-icon {
-  width: 34px; height: 34px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  background: var(--bg);
-  border: 1px solid var(--border-solid);
-  transition: all 0.15s;
-}
-.tab-icon svg { width: 18px; height: 18px; stroke: var(--text-dim); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.15s; }
-.tab-btn.active .tab-icon { background: var(--green-deep); border-color: var(--green-deep); }
-.tab-btn.active .tab-icon svg { stroke: #fff; }
-.tab-meta { flex: 1; min-width: 0; }
-.tab-label { font-weight: 700; font-size: 11px; color: var(--text-dim); letter-spacing: 0.6px; text-transform: uppercase; display: block; line-height: 1.3; }
-.tab-btn.active .tab-label { color: white; }
-.tab-count { font-size: 11px; color: var(--text-dim); margin-top: 2px; display: block; }
-.tab-btn.active .tab-count { color: var(--green-accent); }
-.tab-divider { height: 1px; background: var(--border); margin: 4px 16px; }
-.specs-preview { flex: 1; min-width: 0; }
-.preview-header {
-  background: var(--green-pale);
-  padding: 18px 28px;
-  border-bottom: 1px solid var(--border-solid);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.preview-header-left { display: flex; align-items: center; gap: 12px; }
-.preview-header-icon {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  background: var(--green-deep);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.preview-header-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.preview-title { font-weight: 700; font-size: 13px; color: var(--green-deep); letter-spacing: 1px; text-transform: uppercase; }
-.preview-subtitle { font-size: 12px; color: var(--green-accent); margin-top: 2px; }
-.preview-badge { background: var(--green-deep); color: #fff; border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; }
-.spec-row { display: flex; align-items: center; padding: 15px 28px; border-bottom: 1px solid var(--border); transition: background 0.12s; }
-.spec-row:last-child { border-bottom: none; }
-.spec-row:hover { background: var(--green-pale); }
-.spec-row:hover .spec-key { color: var(--green-deep); }
-.spec-key { flex: 1; font-size: 14px; color: var(--text-dim); font-weight: 500; transition: color 0.12s; }
-.spec-val { font-size: 14px; color: var(--text); font-weight: 600; text-align: right; }
-.spec-check { display: inline-flex; align-items: center; gap: 5px; color: var(--green-deep); font-weight: 600; font-size: 14px; }
-.spec-check svg { width: 16px; height: 16px; stroke: var(--green-deep); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.tag { display: inline-block; background: var(--green-pale); color: var(--green-deep); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 6px; border: 1px solid var(--green-mid); }
-.panel { display: none; animation: fadeIn 0.2s ease; }
-.panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
+  .specs { background: var(--bg2); }
+  .specs-layout { display: flex; flex-direction: row; gap: 48px; align-items: flex-start; }
+  .specs-table { background: var(--bg); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+  .specs-table-header { background: var(--green-pale); padding: 16px 24px; border-bottom: 1px solid var(--border-solid); font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--green-deep); letter-spacing: 1px; text-transform: uppercase; }
+  .spec-row { display: flex; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--border); }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row:hover { background: var(--bg2); }
+  .spec-key { flex: 1; font-size: 14px; color: var(--text-dim); font-weight: 500; }
+  .spec-val { font-size: 14px; color: var(--text); font-weight: 500; text-align: right; }
+  .tag { display: inline-block; background: var(--green-pale); color: var(--green-deep); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 6px; }
 
   /* ── VARIANTS ── */
   .variants-section { background: var(--bg); }
@@ -421,24 +314,21 @@
     box-shadow: var(--shadow-sm);
   }
   .variant-card:hover { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow-md); }
-  .variant-header{display: flex;align-items: flex-end; gap: 12px; padding-bottom: 10px;}
+  
   .variant-card.featured { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow-md); }
   .variant-card.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green-deep), var(--green-bright)); }
   .variant-badge { position: absolute; top: 20px; right: 20px; background: var(--green); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: 0.5px; text-transform: uppercase; }
-  .variant-power { font-family: var(--font-display); font-weight: 800; font-size: 64px; line-height: 1; color: var(--text); letter-spacing: -2px;   }
+  .variant-power { font-family: var(--font-display); font-weight: 800; font-size: 64px; line-height: 1; color: var(--text); letter-spacing: -2px; margin-bottom: 4px; }
   .variant-power span { font-size: 28px; color: var(--text-dim); font-weight: 600; }
-  .variant-name { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--green); }
+  .variant-name { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--green); margin-bottom: 24px; }
   .variant-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .variant-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-dim); }
   .check { color: var(--green); font-size: 16px; flex-shrink: 0; }
-
-  .variant-cta { display: block; text-align: center; margin-top: 32px; padding: 13px 24px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: all 0.2s;  background-color: #000; color: #fff; position: relative;z-index: 9;}
-  .variant-cta:after {    background-color: #23b455;   content: "";    height: 100%;    left: 0;    position: absolute;    top: 0;    transition: width .6s ease-in-out;    width: 0;    z-index: -1;  border-radius: 8px;}
-  .variant-cta:hover:after { width: 100%; } 
-  /* .variant-cta.primary {     background-color: #000; color: #fff; box-shadow: 0 4px 16px rgba(0,168,90,0.3);  }
+  .variant-cta { display: block; text-align: center; margin-top: 32px; padding: 13px 24px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: all 0.2s; }
+  .variant-cta.primary { background: var(--green); color: #fff; box-shadow: 0 4px 16px rgba(0,168,90,0.3); }
   .variant-cta.primary:hover { background: var(--green-bright); }
   .variant-cta.secondary { border: 1px solid var(--border-solid); color: var(--text); }
-  .variant-cta.secondary:hover { border-color: var(--green); color: var(--green); } */
+  .variant-cta.secondary:hover { border-color: var(--green); color: var(--green); }
 
   .variant-img-wrap {
   width: 100%;
@@ -626,8 +516,8 @@
     :root { --container-pad: 24px; }
 
     /* Nav — hide links, show hamburger */
-    .nav-links { display: none !important; }
-  .nav-hamburger { display: flex !important; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
 
     /* Hero */
     .hero-inner {
@@ -816,7 +706,7 @@
 .vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
 .vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(0,60,30,0.7); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 .vf-eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:rgba(0,60,30,0.5); border-radius:2px; }
-.vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415; max-width:600px; }
+.vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415; max-width:480px; }
 .vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25); }
 .vf-sub { font-size:14px; color:rgba(0,40,20,0.6); max-width:260px; line-height:1.7; text-align:right; }
 
@@ -824,7 +714,7 @@
 .vf-bento { display:grid; grid-template-columns:repeat(12,1fr); gap:10px; }
 
 .vf-cell {
-   background:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.45);
   border:1px solid rgba(255,255,255,0.6);
   border-radius:16px;
   padding:32px 28px;
@@ -833,7 +723,7 @@
   transition:background 0.3s, border-color 0.3s, transform 0.2s;
   backdrop-filter:blur(8px);
 }
-.vf-cell:hover { transform:translateY(-3px); }
+.vf-cell:hover { background:rgba(255,255,255,0.7); border-color:rgba(255,255,255,0.9); transform:translateY(-3px); }
 
 .vf-cell::after {
   content:''; position:absolute;
@@ -936,7 +826,7 @@
     <div class="hero-content">
       <!-- <div class="hero-badge">Now Launching · May 22, 2026</div> -->
       <h1 class="hero-headline">Mini DC<br/><span>Fast Charger</span></h1>
-      <p class="hero-subheadline">India's compact DC fast charger — engineered for commercial density. Big power in a small footprint.</p>
+      <p class="hero-subheadline">India's most compact DC fast charger — engineered for commercial density. Big power in a small footprint.</p>
       <div class="hero-power-display">
         <span class="hero-power-num">60</span>
         <span class="hero-power-unit">kW</span>
@@ -988,10 +878,10 @@
 <!-- FEATURES -->
 <section class="features" id="features">
   <div class="container">
-    <p class="section-label reveal">Fast Charging Built for Space-Constrained Deployments</p>
-    <h2 class="section-title reveal">Why Mini DC?</h2>
-    <p class="section-sub reveal">The VerdeMobility Mini DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. Whether deployed for commercial fleets, retail parking, workplaces, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
-    
+    <p class="section-label reveal">Why Mini DC?</p>
+    <h2 class="section-title reveal">Fast Charging Built for Space-Constrained Deployments</h2>
+    <p class="section-sub reveal">The VerdeMobility Mini DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. </p>
+    <p class="section-sub reveal">Whether deployed for commercial fleets, retail parking, workplaces, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
 
     <div class="features-grid">
       <div class="feature-card reveal">
@@ -1020,140 +910,59 @@
   <div class="container">
     <p class="section-label reveal">Technical Specifications</p>
     <h2 class="section-title reveal">Every number<br/>that matters</h2>
-    
-    
-<div class="sw">
-  <div class="specs-layout">
-    <div class="specs-sidebar">
-
-      <button class="tab-btn active" onclick="switchTab(0,this)">
-        <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="tab-meta">
-          <span class="tab-label">Power &amp; Electrical</span>
-          <!-- <span class="tab-count">8 specs</span> -->
+    <div class="specs-layout reveal">
+      <div style="flex:1;min-width:0;">
+        <div class="specs-table">
+          <div class="specs-table-header">Power &amp; Electrical</div>
+          <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
+          <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">415 VAC (±15%), 3-phase 50 Hz</span></div>
+          <div class="spec-row"><span class="spec-key">Input Wires</span><span class="spec-val">L1, L2, L3, N, PE</span></div>
+          <div class="spec-row"><span class="spec-key">Output Interface</span><span class="spec-val">2 × CCS2 (IEC 62196.3-2014)</span></div>
+          <div class="spec-row"><span class="spec-key">Max Output Current</span><span class="spec-val">200A (120A per gun, dual)</span></div>
+          <div class="spec-row"><span class="spec-key">Efficiency</span><span class="spec-val">95% at nominal output</span></div>
+          <div class="spec-row"><span class="spec-key">Power Factor</span><span class="spec-val">0.99 at nominal output</span></div>
+          <div class="spec-row"><span class="spec-key">Current THD</span><span class="spec-val">5% at nominal output</span></div>
         </div>
-      </button>
-      <div class="tab-divider"></div>
-      <button class="tab-btn" onclick="switchTab(1,this)">
-        <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
-        <div class="tab-meta">
-          <span class="tab-label">Connectivity</span>
-          <!-- <span class="tab-count">7 specs</span> -->
+        <div class="specs-table">
+          <div class="specs-table-header">Connectivity &amp; Communication</div>
+          <div class="spec-row"><span class="spec-key">Network</span><span class="spec-val">GSM/3G/4G · Ethernet · Wi-Fi · Bluetooth</span></div>
+          <div class="spec-row"><span class="spec-key">OCPP Protocol</span><span class="spec-val">1.6J (upgradable to 2.1)<span class="tag">Upgradable</span></span></div>
+          <div class="spec-row"><span class="spec-key">Vehicle Protocol</span><span class="spec-val">IEC 61851, ISO 15118, DIN 70121</span></div>
+          <div class="spec-row"><span class="spec-key">Vehicle Smart Charging</span><span class="spec-val">IEC 15118 EIM &amp; PNC</span></div>
+          <div class="spec-row"><span class="spec-key">Authentication</span><span class="spec-val">App, RFID Card, QR Code, Password</span></div>
+          <div class="spec-row"><span class="spec-key">RFID Standard</span><span class="spec-val">RC 522 ISO/IEC 14443A / MIFARE</span></div>
+          <div class="spec-row"><span class="spec-key">Configuration</span><span class="spec-val">App &amp; Web Portal</span></div>
         </div>
-      </button>
-      <div class="tab-divider"></div>
-      <button class="tab-btn" onclick="switchTab(2,this)">
-        <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H3M21 18H3"/><path d="M16 3v6M8 3v6"/></svg></div>
-        <div class="tab-meta">
-          <span class="tab-label">Mechanical &amp; Env.</span>
-          <!-- <span class="tab-count">10 specs</span> -->
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div class="specs-table">
+          <div class="specs-table-header">Mechanical &amp; Environment</div>
+          <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
+          <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">200 kg (±5 kg)</span></div>
+          <div class="spec-row"><span class="spec-key">IP Rating</span><span class="spec-val">IP55<span class="tag">Weatherproof</span></span></div>
+          <div class="spec-row"><span class="spec-key">Cooling</span><span class="spec-val">Air Cooling</span></div>
+          <div class="spec-row"><span class="spec-key">Cable Length</span><span class="spec-val">15 ft. Standard</span></div>
+          <div class="spec-row"><span class="spec-key">Operating Temperature</span><span class="spec-val">-10°C to +55°C (derating at extremes)</span></div>
+          <div class="spec-row"><span class="spec-key">Storage Temperature</span><span class="spec-val">-10°C to +70°C (dry)</span></div>
+          <div class="spec-row"><span class="spec-key">Altitude</span><span class="spec-val">Up to 2000 m</span></div>
+          <div class="spec-row"><span class="spec-key">Humidity</span><span class="spec-val">5%–95%, non-condensing</span></div>
+          <div class="spec-row"><span class="spec-key">Noise Level</span><span class="spec-val">≤60 dB</span></div>
         </div>
-      </button>
-      <div class="tab-divider"></div>
-      <button class="tab-btn" onclick="switchTab(3,this)">
-        <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="tab-meta">
-          <span class="tab-label">UI &amp; Safety</span>
-          <!-- <span class="tab-count">10 specs</span> -->
+        <div class="specs-table">
+          <div class="specs-table-header">User Interface &amp; Safety</div>
+          <div class="spec-row"><span class="spec-key">Display</span><span class="spec-val">7/10" TFT LCD Touch Screen</span></div>
+          <div class="spec-row"><span class="spec-key">Visual Indication</span><span class="spec-val">RGB LEDs</span></div>
+          <div class="spec-row"><span class="spec-key">Emergency Stop</span><span class="spec-val">Mushroom Type</span></div>
+          <div class="spec-row"><span class="spec-key">Over-Voltage / Under-Voltage</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Over-Current &amp; Surge</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Ground Fault &amp; Leakage</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Polarity Reverse Protection</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Insulation Monitoring</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Cable Temp Detection</span><span class="spec-val">✓ Built-in</span></div>
+          <div class="spec-row"><span class="spec-key">Earth Presence Detection</span><span class="spec-val">✓ Built-in</span></div>
         </div>
-      </button>
-
+      </div>
     </div>
-
-    <div class="specs-preview">
-
-      <div id="panel-0" class="panel active">
-        <div class="preview-header">
-          <div class="preview-header-left">
-            <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <div>
-              <div class="preview-title">Power &amp; Electrical</div>
-              <div class="preview-subtitle">Core power delivery parameters</div>
-            </div>
-          </div>
-          <span class="preview-badge">8 specs</span>
-        </div>
-        <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
-        <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">415 VAC (±15%), 3-phase 50 Hz</span></div>
-        <div class="spec-row"><span class="spec-key">Input Wires</span><span class="spec-val">L1, L2, L3, N, PE</span></div>
-        <div class="spec-row"><span class="spec-key">Output Interface</span><span class="spec-val">2 × CCS2 (IEC 62196.3-2014)</span></div>
-        <div class="spec-row"><span class="spec-key">Max Output Current</span><span class="spec-val">200A (120A per gun, dual)</span></div>
-        <div class="spec-row"><span class="spec-key">Efficiency</span><span class="spec-val">95% at nominal output</span></div>
-        <div class="spec-row"><span class="spec-key">Power Factor</span><span class="spec-val">0.99 at nominal output</span></div>
-        <div class="spec-row"><span class="spec-key">Current THD</span><span class="spec-val">5% at nominal output</span></div>
-      </div>
-
-      <div id="panel-1" class="panel">
-        <div class="preview-header">
-          <div class="preview-header-left">
-            <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
-            <div>
-              <div class="preview-title">Connectivity &amp; Communication</div>
-              <div class="preview-subtitle">Network, protocols &amp; authentication</div>
-            </div>
-          </div>
-          <span class="preview-badge">7 specs</span>
-        </div>
-        <div class="spec-row"><span class="spec-key">Network</span><span class="spec-val">GSM/3G/4G · Ethernet · Wi-Fi · Bluetooth</span></div>
-        <div class="spec-row"><span class="spec-key">OCPP Protocol</span><span class="spec-val">1.6J (upgradable to 2.1)<span class="tag">Upgradable</span></span></div>
-        <div class="spec-row"><span class="spec-key">Vehicle Protocol</span><span class="spec-val">IEC 61851, ISO 15118, DIN 70121</span></div>
-        <div class="spec-row"><span class="spec-key">Vehicle Smart Charging</span><span class="spec-val">IEC 15118 EIM &amp; PNC</span></div>
-        <div class="spec-row"><span class="spec-key">Authentication</span><span class="spec-val">App, RFID Card, QR Code, Password</span></div>
-        <div class="spec-row"><span class="spec-key">RFID Standard</span><span class="spec-val">RC 522 ISO/IEC 14443A / MIFARE</span></div>
-        <div class="spec-row"><span class="spec-key">Configuration</span><span class="spec-val">App &amp; Web Portal</span></div>
-      </div>
-
-      <div id="panel-2" class="panel">
-        <div class="preview-header">
-          <div class="preview-header-left">
-            <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H3M21 18H3"/><path d="M16 3v6M8 3v6"/></svg></div>
-            <div>
-              <div class="preview-title">Mechanical &amp; Environment</div>
-              <div class="preview-subtitle">Physical build &amp; operating conditions</div>
-            </div>
-          </div>
-          <span class="preview-badge">10 specs</span>
-        </div>
-        <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
-        <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">200 kg (±5 kg)</span></div>
-        <div class="spec-row"><span class="spec-key">IP Rating</span><span class="spec-val">IP55 <span class="tag">Weatherproof</span></span></div>
-        <div class="spec-row"><span class="spec-key">Cooling</span><span class="spec-val">Air Cooling</span></div>
-        <div class="spec-row"><span class="spec-key">Cable Length</span><span class="spec-val">15 ft. Standard</span></div>
-        <div class="spec-row"><span class="spec-key">Operating Temperature</span><span class="spec-val">-10°C to +55°C (derating at extremes)</span></div>
-        <div class="spec-row"><span class="spec-key">Storage Temperature</span><span class="spec-val">-10°C to +70°C (dry)</span></div>
-        <div class="spec-row"><span class="spec-key">Altitude</span><span class="spec-val">Up to 2000 m</span></div>
-        <div class="spec-row"><span class="spec-key">Humidity</span><span class="spec-val">5%–95%, non-condensing</span></div>
-        <div class="spec-row"><span class="spec-key">Noise Level</span><span class="spec-val">≤60 dB</span></div>
-      </div>
-
-      <div id="panel-3" class="panel">
-        <div class="preview-header">
-          <div class="preview-header-left">
-            <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-            <div>
-              <div class="preview-title">User Interface &amp; Safety</div>
-              <div class="preview-subtitle">Display, controls &amp; protection systems</div>
-            </div>
-          </div>
-          <span class="preview-badge">10 specs</span>
-        </div>
-        <div class="spec-row"><span class="spec-key">Display</span><span class="spec-val">7/10" TFT LCD Touch Screen</span></div>
-        <div class="spec-row"><span class="spec-key">Visual Indication</span><span class="spec-val">RGB LEDs</span></div>
-        <div class="spec-row"><span class="spec-key">Emergency Stop</span><span class="spec-val">Mushroom Type</span></div>
-        <div class="spec-row"><span class="spec-key">Over-Voltage / Under-Voltage</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Over-Current &amp; Surge</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Ground Fault &amp; Leakage</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Polarity Reverse Protection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Insulation Monitoring</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Cable Temp Detection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-        <div class="spec-row"><span class="spec-key">Earth Presence Detection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-     
   </div>
 </section>
 
@@ -1164,9 +973,9 @@
     <div class="vf-top">
       <div>
         <div class="vf-eyebrow">Feature Highlights</div>
-        <h2 class="vf-h2 section-title">Everything You Need in a <span>DC Charger</span> - Without the Bulk</h2>
+        <h2 class="vf-h2 section-title">Engineered for<br><span>Intelligent</span> EV Charging</h2>
       </div>
-      <!-- <p class="vf-sub">Six reasons why the Mini DC outperforms larger chargers in every deployment scenario.</p> -->
+      <p class="vf-sub">Six reasons why the Mini DC outperforms larger chargers in every deployment scenario.</p>
     </div>
 
     <div class="vf-bento">
@@ -1174,7 +983,7 @@
       <!-- CELL 1 — Compact Footprint -->
       <div class="vf-cell c1 tall">
         <div>
-         
+          <div class="vf-num">01</div>
           <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg></div>
           <div class="vf-title">Compact Footprint</div>
           <p class="vf-desc">Minimal space requirement without compromising charging performance — fits where larger units simply can't go.</p>
@@ -1183,12 +992,12 @@
           <span class="stat-accent-num">750mm</span>
           <span class="stat-accent-label">wide<br>footprint</span>
         </div> -->
-        <!-- <div class="vf-bg-num">01</div> -->
+        <div class="vf-bg-num">01</div>
       </div>
 
       <!-- CELL 2 — Smart Connectivity -->
       <div class="vf-cell c2">
-       
+        <div class="vf-num">02</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1" fill="#007a40"></circle></svg></div>
         <div class="vf-title">Smart Connectivity</div>
         <p class="vf-desc" style="max-width:320px;">Ethernet, Wi-Fi, and GSM/4G with intelligent quad-link failover — always online, always reporting, even when one channel drops.</p>
@@ -1198,20 +1007,20 @@
           <span class="chip">GSM / 4G</span>
           <span class="chip">Bluetooth</span>
         </div>
-         
       </div>
 
       <!-- CELL 3 — OCPP -->
-      <div class="vf-cell c3"> 
+      <div class="vf-cell c3">
+        <div class="vf-num">03</div>
+        <div class="vf-pill">OCPP 1.6J → 2.1</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
         <div class="vf-title">OCPP Compliant</div>
         <p class="vf-desc">Integrates with any CMS or roaming platform. Upgradable to 2.1 via OTA — no hardware changes.</p>
-        <div class="vf-pill" style="margin-top: 20px;">OCPP 1.6J → 2.1</div>
       </div>
 
       <!-- CELL 4 — High Uptime -->
       <div class="vf-cell c4">
-       
+        <div class="vf-num">04</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
         <div class="vf-title">High Operational Uptime</div>
         <p class="vf-desc">Industrial-grade architecture for dependable long-duration operations — 24/7, every day.</p>
@@ -1223,7 +1032,7 @@
 
       <!-- CELL 5 — Remote Monitoring -->
       <div class="vf-cell c5">
-       
+        <div class="vf-num">05</div>
         <div class="vf-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
         <div class="vf-title">Remote Monitoring &amp; Diagnostics</div>
         <p class="vf-desc">Live charger health, sessions, alerts, and firmware updates — all managed remotely with zero site visits.</p>
@@ -1232,7 +1041,7 @@
       <!-- CELL 6 — India, wide full-bleed -->
       <div class="vf-cell c6 wide">
         <div class="vf-cell-body">
-         
+          <div class="vf-num">06</div>
           <div class="vf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path></svg></div>
           <div class="vf-title">Built for Indian Conditions</div>
           <p class="vf-desc" style="max-width:560px;">Reliable performance across heat, dust, humidity, and demanding outdoor environments. </p>
@@ -1261,15 +1070,12 @@
   <div class="container">
     <p class="section-label reveal">Choose Your Model</p>
     <h2 class="section-title reveal">Two variants,<br/>One compact form</h2>
-    <p class="section-sub reveal">Choose the power output that fits your needs, without changing the compact footprint.</p>
+    <p class="section-sub reveal">Both models share the same mini footprint — scale your power output to match your site's load and demand.</p>
     <div class="variants-grid">
 
       <div class="variant-card reveal">
-        <div class="variant-header">
-
         <div class="variant-power">60<span> kW</span></div>
-        <div class="variant-name">Mini  DC Charger</div>
-        </div>
+        <div class="variant-name">Mini DC </div>
         <div class="variant-img-wrap">
           <img src="charger-60kw.png" alt="VerdeMobility 60 kW Mini DC Standard EV Charger" />
         </div>
@@ -1277,11 +1083,9 @@
       </div>
 
       <div class="variant-card  reveal">
-        <div class="variant-header">
-          <div class="variant-badge">Most Popular</div>
-          <div class="variant-power">120<span> kW</span></div>
-          <div class="variant-name">Mini  DC Charger</div>
-        </div>
+        <div class="variant-badge">Most Popular</div>
+        <div class="variant-power">120<span> kW</span></div>
+        <div class="variant-name">Mini DC </div>
         <div class="variant-img-wrap">
           <img src="charger-120kw.png" alt="VerdeMobility 120 kW Mini DC Pro EV Charger" />
         </div>
@@ -1292,6 +1096,26 @@
   </div>
 </section>
 
+<!-- USE CASES -->
+<section class="usecases" id="usecases">
+  <div class="container">
+    <p class="section-label reveal">Where It Fits</p>
+    <h2 class="section-title reveal">Built for Every <br/>Charging Environment</h2>
+    <p class="section-sub reveal">The Mini DC Fast Charger's compact form opens up locations where larger units simply can't go.</p>
+    <div class="usecases-grid">
+        <div class="usecase-card reveal"><span class="usecase-icon">🏗️</span><div class="usecase-title">Residential Townships</div><p class="usecase-desc">Dedicated fast charging infrastructure for residential communities with centralized energy and billing management.</p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🏢</span><div class="usecase-title">Commercial Complexes</div><p class="usecase-desc">Ideal for malls, office parks, and commercial campuses where EV demand is growing but installation space is limited. </p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🚛</span><div class="usecase-title">Fleet &amp; Logistics Hubs</div><p class="usecase-desc">Dedicated fast charging for commercial fleets, delivery vehicles, trucks, and e-buses operating on demanding turnaround schedules. </p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🛣️</span><div class="usecase-title">Highway Corridors</div><p class="usecase-desc">High-speed corridor charging for highways and transit routes requiring rapid deployment and reliable uptime. </p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🏨</span><div class="usecase-title">Hotels &amp; Hospitality</div><p class="usecase-desc">Premium EV charging amenity for hotels, resorts, and hospitality environments with space-efficient deployment requirements. </p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🏭</span><div class="usecase-title">Industrial Campuses</div><p class="usecase-desc">Industrial and warehouse EV charging for employee fleets, commercial vehicles, and high-mileage operations.</p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">🏙️</span><div class="usecase-title">Smart City Nodes</div><p class="usecase-desc">Urban public charging hubs integrated with smart payment, monitoring, and city-level energy management ecosystems. </p></div>
+      <div class="usecase-card reveal"><span class="usecase-icon">⛽</span><div class="usecase-title">Fuel Station Retrofits</div><p class="usecase-desc">Seamless EV charging integration for existing fuel stations and forecourt infrastructure. </p></div>
+    </div>
+  </div>
+</section>
+
+ 
 
 <!-- SOCIAL PROOF BAND — NEW -->
 <div class="proof-band">
@@ -1306,34 +1130,46 @@
   </div>
 </div>
 
-
-<!-- USE CASES -->
-<section class="usecases" id="usecases">
+<!-- FAQ — NEW -->
+<section class="faq-section" id="faq">
   <div class="container">
-    <p class="section-label reveal">Where It Fits</p>
-    <h2 class="section-title reveal">Built for Every <br/>Charging Environment</h2>
-    <p class="section-sub reveal">VerdeMobility's Mini DC Charger's compact form opens up locations where larger units simply can't go.</p>
-    <div class="usecases-grid">
-        <div class="usecase-card reveal"><span class="usecase-icon">🏗️</span><div class="usecase-title">Residential Townships</div><p class="usecase-desc">Dedicated fast charging infrastructure for residential communities with centralized energy and billing management.</p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🏢</span><div class="usecase-title">Commercial Complexes</div><p class="usecase-desc">Ideal for malls, office parks, and commercial campuses where EV demand is growing but installation space is limited. </p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🚛</span><div class="usecase-title">Fleet &amp; Logistics Hubs</div><p class="usecase-desc">Dedicated fast charging for commercial fleets, delivery vehicles, trucks, and e-buses operating on demanding turnaround schedules. </p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🛣️</span><div class="usecase-title">Highway Corridors</div><p class="usecase-desc">High-speed corridor charging for highways and transit routes requiring rapid deployment and reliable uptime. </p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🏨</span><div class="usecase-title">Hotels &amp; Hospitality</div><p class="usecase-desc">Premium EV charging amenity for hotels, resorts, and hospitality environments with space-efficient deployment requirements. </p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🏭</span><div class="usecase-title">Industrial Campuses</div><p class="usecase-desc">Industrial and warehouse EV charging for employee fleets, commercial vehicles, and high-mileage operations.</p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">🏙️</span><div class="usecase-title">Smart City Nodes</div><p class="usecase-desc">Urban public charging hubs integrated with smart payment, monitoring, and city-level energy management ecosystems. </p></div>
-      <div class="usecase-card reveal"><span class="usecase-icon">⛽</span><div class="usecase-title">Fuel Station Retrofits</div><p class="usecase-desc">Seamless EV charging integration for existing fuel stations and forecourt infrastructure. </p></div>
+    <p class="section-label reveal">Common Questions</p>
+    <h2 class="section-title reveal">Everything you<br/>need to know</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What is the minimum power connection needed for the Mini DC?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Both models require a 3-phase 415V AC (±15%), 50 Hz supply — wired as L1, L2, L3, N, PE. The 120 kW Pro draws a maximum of 200A (120A per gun when both are in simultaneous operation). Our team will confirm your site's sanctioned load during the free site assessment.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can it charge two vehicles at the same time?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — the 120 kW Pro model supports simultaneous dual-vehicle charging. Power is intelligently split between both connectors, ensuring both EVs charge optimally based on demand.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Which EVs are compatible?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The Mini DC features 2 × CCS2 (IEC 62196.3-2014) connectors, supporting IEC 61851, ISO 15118, and DIN 70121 vehicle protocols — compatible with Tata Nexon EV, Tata Punch EV, MG ZS EV, Kia EV6, BYD Atto 3, and all major CCS2-capable EVs in India.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens if internet connectivity goes down?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The charger has quad-connectivity failover: GSM/3G/4G, Wi-Fi, Ethernet, and Bluetooth. If all network connections are lost, it operates in offline mode — local RFID/card authentication continues and sessions are queued and synced automatically when connectivity resumes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is ARAI certification included?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. The Mini DC Fast Charger is ARAI type-approved. All required certifications for DISCOM integration and government subsidy eligibility are provided with every unit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What does the 2-year warranty cover?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The warranty covers all hardware components and factory defects with on-site repair or replacement within 48 hours. The 120 kW Pro includes remote diagnostics to identify issues proactively before they cause downtime.</div>
+      </div>
     </div>
   </div>
 </section>
-
-  
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="cta-inner">
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Ready to deploy<br/>fast charging?</h2>
-    <p class="section-sub">Whether it's a single unit or a large-scale charging network, our team will help you scope, install, and go live fast.</p>
+    <p class="section-sub">Whether it's a single unit or a 100-charger network, our team will help you scope, install, and go live fast.</p>
 
    <div class="cta-form">
   <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-primary" style="white-space:nowrap; text-decoration:none;">
@@ -1358,8 +1194,8 @@
     </p>
 
     <div class="cta-tags">
-      <span class="cta-tag">Tailored Charging Solutions</span>
-      <span class="cta-tag">Hassle-Free Installation</span>
+      <span class="cta-tag">No commitment required</span>
+      <span class="cta-tag">Site assessment included</span>
       <span class="cta-tag">2-year warranty</span>
       <span class="cta-tag">48-hour response</span>
     </div>
@@ -1377,7 +1213,7 @@
       <div class="cta-divider"></div>
       <div style="text-align:center;">
         <div class="cta-stat-num">24/7</div>
-        <div class="cta-stat-label">Real time  Monitoring</div>
+        <div class="cta-stat-label">Support &amp; Monitoring</div>
       </div>
     </div>
   </div>
@@ -1458,16 +1294,10 @@
       answer.classList.add('open');
     }
   }
-function switchTab(idx, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panel-' + idx).classList.add('active');
-}
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<!-- <script>
+<script>
     /*email js */
   emailjs.init("aNA95KuGQLa0gK375");
   const btn       = document.getElementById('cta-btn');
@@ -1533,8 +1363,6 @@ function switchTab(idx, btn) {
   emailInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') btn.click();
   });
-
-
-</script> -->
+</script>
 </body>
 </html>
