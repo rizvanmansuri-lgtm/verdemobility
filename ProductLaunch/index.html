@@ -275,7 +275,10 @@
   .spec-float.f1 { top: 60px; left: -80px; animation: floatA 4s ease-in-out infinite; }
   .spec-float.f2 { top: 200px; right: -60px; animation: floatB 4.5s ease-in-out infinite 0.5s; }
   .spec-float.f3 { bottom: 80px; left: -30px; animation: floatA 3.8s ease-in-out infinite 1s; }
-  .spec-float.f4 { top: 0px; right: -10px; animation: floatB 4.2s ease-in-out infinite 0.8s; }
+   .f4 {     position: absolute;
+    right: 100px;
+    top: -10px;
+ }
   @keyframes floatA { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
   @keyframes floatB { 0%,100% { transform:translateY(0); } 50% { transform:translateY(6px); } }
   @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -819,8 +822,8 @@
 .vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
 .vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(0,60,30,0.7); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 .vf-eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:rgba(0,60,30,0.5); border-radius:2px; }
-.vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415; max-width:600px; }
-.vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25); }
+.vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415;   }
+.vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25);  }
 .vf-sub { font-size:14px; color:rgba(0,40,20,0.6); max-width:260px; line-height:1.7; text-align:right; }
 
 /* BENTO GRID */
@@ -981,7 +984,7 @@
         <div class="spec-float f3"><span class="spec-float-val">IP55</span><span class="spec-float-label">Weatherproof</span></div>
         <div class="spec-float f2"><span class="spec-float-val">OCPP 1.6J</span><span class="spec-float-label">Protocol<bR>(upgradable to 2.1)</span></div>
         <img src="charger-120kw.png" alt=""  style=" height:100%;filter:drop-shadow(0 20px 40px rgba(0,80,40,0.20));">
-        <img src="arailogo.png" alt="" class="spec-float f4">
+        <img src="arailogo.png" alt="" class="  f4">
       </div>
     </div>
   </div>
@@ -1168,7 +1171,7 @@
     <div class="vf-top">
       <div>
         <div class="vf-eyebrow">Feature Highlights</div>
-        <h2 class="vf-h2 section-title">Everything You Need in a <span>DC Charger</span> - Without the Bulk</h2>
+        <h2 class="vf-h2 section-title">Everything You Need in a <br><span>DC Charger</span> - Without the Bulk</h2>
       </div>
       <!-- <p class="vf-sub">Six reasons why the Mini DC outperforms larger chargers in every deployment scenario.</p> -->
     </div>
