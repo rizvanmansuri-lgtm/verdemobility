@@ -57,15 +57,17 @@
 
   /* Buttons */
   .btn-brand{
-    background-color:var(--vm-green);
-    border:1px solid var(--vm-green);
+    /* VerdeMobility brand gradient, used site-wide on primary CTAs */
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
+    background-color:var(--vm-green); /* fallback if gradients are unsupported */
+    border:1px solid transparent;
     color:#06140d;
     border-radius:var(--vm-radius-pill);
     font-weight:600;
     padding:.7rem 1.6rem;
     transition:all .2s ease;
   }
-  .btn-brand:hover{ background-color:var(--vm-green-dark); border-color:var(--vm-green-dark); color:#06140d; }
+  .btn-brand:hover{ filter:brightness(.94); color:#06140d; }
   .btn-outline-brand{
     background-color:transparent;
     border:1px solid var(--vm-border);
@@ -165,34 +167,21 @@
 
   /* Hero */
   .hero-careers{
-    background:radial-gradient(circle at 20% 20%, #10221a 0%, var(--vm-dark) 55%);
+    /* TEMP STOCK PHOTO (free-to-use, from Pexels) as a full banner background —
+       swap the image URL for real VerdeMobility photography before launch.
+       The dark gradient overlay stays either way, it's what keeps the white
+       text readable on top of any photo. */
+    background-image:
+      linear-gradient(180deg, rgba(8,14,23,.88) 0%, rgba(8,14,23,.80) 55%, rgba(8,14,23,.92) 100%),
+      url('https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
     padding-top:7rem;
     padding-bottom:6rem;
     color:#fff;
   }
   .hero-careers p.lead{ color:var(--vm-text-light-gray); }
-
-  /* Hero team visual — TEMP placeholder until a real team photo is added.
-     Swap the markup for an <img class="hero-team-photo"> and this whole
-     block can be deleted; keep hero-team-photo below if you do that, it
-     just constrains size/rounding for a real photo the same way. */
-  .hero-team-visual{
-    background:linear-gradient(135deg, rgba(46,204,143,.16), rgba(46,204,143,.03));
-    border:1px dashed rgba(255,255,255,.35);
-    border-radius:var(--vm-radius-lg);
-    min-height:280px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-  }
-  .hero-team-visual-icon{ font-size:4rem; color:var(--vm-green); margin-bottom:.75rem; }
-  .hero-team-visual-caption{ color:var(--vm-text-light-gray); font-size:.85rem; }
-  .hero-team-photo{
-    width:100%;
-    border-radius:var(--vm-radius-lg);
-    box-shadow:var(--vm-shadow-sm);
-  }
 
   /* Generic content card */
   .info-card{
@@ -281,12 +270,13 @@
   .process-step .step-num{
     width:56px; height:56px;
     border-radius:50%;
-    background:var(--vm-dark);
-    color:var(--vm-green);
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
+    color:#06140d;
     display:flex; align-items:center; justify-content:center;
     font-weight:700; font-size:1.2rem;
     margin:0 auto 1rem;
-    border:2px solid var(--vm-green);
+    border:none;
+    box-shadow:var(--vm-shadow-sm);
   }
   .process-step h3{ font-size:1.05rem; }
   .process-step p{ color:var(--vm-text-gray); font-size:.9rem; }
@@ -402,35 +392,18 @@
 <!-- ============================== 1. HERO BANNER ============================== -->
 <section class="hero-careers text-center">
   <div class="container">
-    <div class="row align-items-center gy-5">
-      <div class="col-lg-7 text-center text-lg-start">
-        <span class="badge-pill-brand mb-4"><i class="bi bi-lightning-charge-fill"></i> We're Hiring</span>
-        <h1 class="display-3 mb-3">Careers at VerdeMobility</h1>
-        <p class="lead mx-auto mx-lg-0 mb-4" style="max-width:640px;">
-          We're building India's next-generation EV charging ecosystem — reliable, safe,
-          and sustainable. Come build the future of electric mobility with us.
-        </p>
-        <div class="d-flex justify-content-center justify-content-lg-start gap-2 flex-wrap">
-          <a href="#openings" class="btn btn-brand">View Open Roles</a>
-          <a href="#resume-cta" class="btn-vm-morph btn-vm-morph-light">
-            <span class="morph-icon"><i class="bi bi-arrow-right"></i></span>
-            <span>Submit Your Resume</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- TEMP PLACEHOLDER — swap this whole .hero-team-visual block for a real
-           team photo when available, e.g.:
-           <img src="images/team-photo.jpg" alt="The VerdeMobility team" class="hero-team-photo">
-           Recommended size: roughly 800x600 or larger, landscape. Until then this
-           icon-based placeholder keeps the layout/spacing correct so swapping in
-           the real photo later is a one-line change. -->
-      <div class="col-lg-5">
-        <div class="hero-team-visual">
-          <i class="bi bi-people-fill hero-team-visual-icon"></i>
-          <p class="hero-team-visual-caption mb-0">Team photo coming soon</p>
-        </div>
-      </div>
+    <span class="badge-pill-brand mb-4"><i class="bi bi-lightning-charge-fill"></i> We're Hiring</span>
+    <h1 class="display-3 mb-3">Careers at VerdeMobility</h1>
+    <p class="lead mx-auto mb-4" style="max-width:640px;">
+      We're building India's next-generation EV charging ecosystem — reliable, safe,
+      and sustainable. Come build the future of electric mobility with us.
+    </p>
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <a href="#openings" class="btn btn-brand">View Open Roles</a>
+      <a href="#resume-cta" class="btn-vm-morph btn-vm-morph-light">
+        <span class="morph-icon"><i class="bi bi-arrow-right"></i></span>
+        <span>Submit Your Resume</span>
+      </a>
     </div>
   </div>
 </section>
@@ -491,24 +464,30 @@
         in the field, and around the office.
       </p>
     </div>
+    <!-- TEMP STOCK PHOTOS (free-to-use, from Pexels) — replace each background-image
+         with real team/office/field photography before launch. Only the URL needs
+         to change; .life-photo already handles sizing/cropping. Captions below were
+         written to match what's actually in each stock photo (laptops/meetings, not
+         literal charger installs or parties) — update captions too if you swap in
+         photos that show something different. -->
     <div class="row g-3">
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#0d2a1f;">
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=800');">
           <div class="life-caption">Engineering &amp; product huddles</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#123320;">
-          <div class="life-caption">On-site charger installations</div>
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3184323/pexels-photo-3184323.jpeg?auto=compress&cs=tinysrgb&w=800');">
+          <div class="life-caption">Cross-team strategy sessions</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#0a1f17;">
-          <div class="life-caption">Team celebrations &amp; milestones</div>
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800');">
+          <div class="life-caption">Collaboration &amp; teamwork</div>
         </div>
       </div>
     </div>
-    <p class="text-center text-muted small mt-3 mb-0"><em>Placeholder image blocks — replace with real team photography.</em></p>
+    <p class="text-center text-muted small mt-3 mb-0"><em>Temporary stock photography — replace with real team photos before launch.</em></p>
   </div>
 </section>
 

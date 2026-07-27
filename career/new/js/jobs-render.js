@@ -75,6 +75,37 @@ function vmEscape(str) {
     .replace(/>/g, "&gt;");
 }
 
+// Finds a <meta> tag by name or property attribute, creating it in <head>
+// if it doesn't exist yet, then sets its content. Used by vmUpdateMetaTags.
+function vmSetMetaTag(attr, key, content) {
+  var selector = 'meta[' + attr + '="' + key + '"]';
+  var tag = document.querySelector(selector);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute(attr, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+// Updates the page <title> and meta description / Open Graph tags to
+// match the job currently being viewed on career-details.html. See the
+// caveat comment where this is called from vmRenderJobDetail() — this
+// covers the browser tab + any crawler that executes JS, but true
+// WhatsApp/LinkedIn link previews need server-rendered or per-job static
+// HTML (a follow-up project, not something client-side JS can fully do).
+function vmUpdateMetaTags(job) {
+  var title = job.title + " | Careers at VerdeMobility";
+  var description = job.teaser || ("Apply for " + job.title + " at VerdeMobility — " + job.location + ".");
+
+  document.title = title;
+  vmSetMetaTag("name", "description", description);
+  vmSetMetaTag("property", "og:title", title);
+  vmSetMetaTag("property", "og:description", description);
+  vmSetMetaTag("property", "og:url", window.location.href);
+  vmSetMetaTag("property", "og:type", "website");
+}
+
 /* ---------------------------------------------------------------------
    CARD BUILDERS (used by index.html + careers.html)
    --------------------------------------------------------------------- */
@@ -362,10 +393,20 @@ function vmRenderJobDetail() {
   // ---- Header (badges, title, meta chips, apply button) ----
   var header = document.getElementById("job-header-root");
   if (header) {
+    var shareUrl = window.location.href;
+    var shareText = encodeURIComponent(job.title + " at VerdeMobility — " + shareUrl);
+    var whatsappUrl = "https://wa.me/?text=" + shareText;
+    var linkedinUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(shareUrl);
+
     header.innerHTML =
       '<div class="d-flex gap-2 mb-3 flex-wrap">' + vmBadgesHTML(job) + '</div>' +
       '<h1 class="h2 mb-1">' + vmEscape(job.title) + '</h1>' +
-      '<p class="text-muted small mb-3">Job ID: ' + vmEscape(job.id) + '</p>' +
+      '<p class="text-muted small mb-3 d-flex align-items-center flex-wrap gap-2">' +
+        '<span>Job ID: <strong>' + vmEscape(job.id) + '</strong></span>' +
+        '<button type="button" id="copy-job-id-btn" class="copy-job-id-btn" title="Copy Job ID" data-job-id="' + vmEscape(job.id) + '">' +
+          '<i class="bi bi-clipboard"></i> Copy' +
+        '</button>' +
+      '</p>' +
       '<div class="row gy-2 mb-4">' +
         '<div class="col-6 col-md-3"><div class="meta-chip"><i class="bi bi-geo-alt"></i> ' + vmEscape(job.location) + '</div></div>' +
         '<div class="col-6 col-md-3"><div class="meta-chip"><i class="bi bi-briefcase"></i> ' + vmEscape(job.employmentTypeShort) + '</div></div>' +
@@ -378,11 +419,59 @@ function vmRenderJobDetail() {
           '<span class="morph-icon"><i class="bi bi-arrow-left"></i></span>' +
           '<span>Back to Careers</span>' +
         '</a>' +
+        '<span class="d-flex align-items-center gap-2 ms-lg-2">' +
+          '<span class="text-muted small d-none d-sm-inline">Share:</span>' +
+          '<a href="' + whatsappUrl + '" target="_blank" rel="noopener" class="share-btn share-btn-whatsapp" aria-label="Share this job on WhatsApp"><i class="bi bi-whatsapp"></i></a>' +
+          '<a href="' + linkedinUrl + '" target="_blank" rel="noopener" class="share-btn share-btn-linkedin" aria-label="Share this job on LinkedIn"><i class="bi bi-linkedin"></i></a>' +
+        '</span>' +
       '</div>';
       // Note: the applicationNote line that used to sit here was moved into
       // the "Application Guidelines" content section below (see
       // vmAutoSections), so it isn't repeated twice on the page.
+
+    // Wire up the Copy Job ID button. Kept as a plain click handler (not
+    // inline onclick) so this file stays the only place with behavior logic.
+    var copyBtn = document.getElementById("copy-job-id-btn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var idToCopy = copyBtn.getAttribute("data-job-id");
+        var showCopied = function () {
+          copyBtn.innerHTML = '<i class="bi bi-check2"></i> Copied';
+          copyBtn.classList.add("copied");
+          setTimeout(function () {
+            copyBtn.innerHTML = '<i class="bi bi-clipboard"></i> Copy';
+            copyBtn.classList.remove("copied");
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(idToCopy).then(showCopied);
+        } else {
+          // Fallback for older browsers without the Clipboard API
+          var tempInput = document.createElement("input");
+          tempInput.value = idToCopy;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+          showCopied();
+        }
+      });
+    }
   }
+
+  // ---- Meta tags (document title, description, Open Graph) ----
+  // IMPORTANT CAVEAT: this updates tags client-side, after the page has
+  // already loaded. It's correct for anyone who opens the page in a
+  // browser (accurate tab title, and correct content if they view-source
+  // after JS runs). BUT most link-preview crawlers (WhatsApp, LinkedIn,
+  // Facebook) fetch the raw HTML and do NOT execute JavaScript — so a
+  // shared link may still show generic/blank preview text rather than
+  // this job's title. Getting real per-job previews needs either a
+  // small static-page generator (one HTML file per job, similar to how
+  // product pages were generated from PDFs) or server-side rendering.
+  // This is still worth doing now for tab titles and any crawler that
+  // does render JS, and it's the correct foundation to build on later.
+  vmUpdateMetaTags(job);
 
   // ---- Main content sections (Job Description / Skills / etc.) ----
   // Order: this job's own custom sections first (from jobs-data.js), then

@@ -58,8 +58,10 @@
 
   /* Buttons */
   .btn-brand{
+    /* VerdeMobility brand gradient, used site-wide on primary CTAs */
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
     background-color:var(--vm-green);
-    border:1px solid var(--vm-green);
+    border:1px solid transparent;
     color:#06140d;
     border-radius:var(--vm-radius-pill);
     font-weight:600;
@@ -67,8 +69,7 @@
     transition:all .2s ease;
   }
   .btn-brand:hover{
-    background-color:var(--vm-green-dark);
-    border-color:var(--vm-green-dark);
+    filter:brightness(.94);
     color:#06140d;
   }
   .btn-outline-brand{
@@ -198,7 +199,15 @@
 
   /* Hero */
   .hero-careers{
-    background:radial-gradient(circle at 20% 20%, #10221a 0%, var(--vm-dark) 55%);
+    /* TEMP STOCK PHOTO (free-to-use, from Pexels) as a full banner background —
+       swap the image URL for real VerdeMobility photography before launch.
+       Same treatment as index.html's hero, for a consistent look across pages. */
+    background-image:
+      linear-gradient(180deg, rgba(8,14,23,.88) 0%, rgba(8,14,23,.80) 55%, rgba(8,14,23,.92) 100%),
+      url('https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
     padding-top:7rem;
     padding-bottom:6rem;
     color:#fff;

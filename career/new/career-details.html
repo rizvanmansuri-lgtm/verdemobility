@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Embedded Firmware Engineer | Careers | VerdeMobility</title>
-<meta name="description" content="Apply for the Embedded Firmware Engineer role at VerdeMobility — build firmware for next-generation AC/DC EV chargers.">
+<!-- These tags are the STATIC fallback seen by anyone/anything that doesn't
+     run JavaScript (e.g. WhatsApp/LinkedIn link-preview crawlers). Once the
+     page loads in an actual browser, js/jobs-render.js (vmUpdateMetaTags)
+     overwrites these with the specific job's title/description — but that
+     JS-driven update is invisible to non-JS crawlers. For a fully accurate
+     per-job social preview, this page would need to be pre-rendered per job
+     (a small static-page generator, similar to how product pages were
+     generated from PDFs) — flagged here as a known follow-up, not done yet. -->
+<title>Careers | VerdeMobility</title>
+<meta name="description" content="Explore open roles at VerdeMobility and help power India's next-generation EV charging ecosystem.">
+<meta property="og:title" content="Careers | VerdeMobility">
+<meta property="og:description" content="Explore open roles at VerdeMobility and help power India's next-generation EV charging ecosystem.">
+<meta property="og:type" content="website">
 
 <!-- Bootstrap 5 CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,15 +56,17 @@
   .bg-light-brand{ background-color:var(--vm-light-bg); }
 
   .btn-brand{
+    /* VerdeMobility brand gradient, used site-wide on primary CTAs */
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
     background-color:var(--vm-green);
-    border:1px solid var(--vm-green);
+    border:1px solid transparent;
     color:#06140d;
     border-radius:var(--vm-radius-pill);
     font-weight:600;
     padding:.7rem 1.6rem;
     transition:all .2s ease;
   }
-  .btn-brand:hover{ background-color:var(--vm-green-dark); border-color:var(--vm-green-dark); color:#06140d; }
+  .btn-brand:hover{ filter:brightness(.94); color:#06140d; }
   .btn-outline-brand{
     background-color:transparent;
     border:1px solid var(--vm-border);
@@ -141,6 +154,34 @@
     font-size:.9rem; color:var(--vm-text-gray);
   }
   .meta-chip i{ color:var(--vm-green); }
+
+  /* Copy Job ID button — small inline button next to the Job ID text */
+  .copy-job-id-btn{
+    background:var(--vm-light-bg);
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-gray);
+    border-radius:var(--vm-radius-pill);
+    font-size:.78rem;
+    font-weight:600;
+    padding:.2rem .65rem;
+    line-height:1.6;
+    transition:all .15s ease;
+  }
+  .copy-job-id-btn:hover{ border-color:var(--vm-green); color:var(--vm-green-dark); }
+  .copy-job-id-btn.copied{ background:var(--vm-green-soft); border-color:var(--vm-green); color:var(--vm-green-dark); }
+
+  /* Social share icon buttons (LinkedIn / WhatsApp) on the job detail header */
+  .share-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    color:#fff;
+    font-size:1rem;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .share-btn:hover{ transform:translateY(-2px); opacity:.9; }
+  .share-btn-whatsapp{ background-color:#25D366; }
+  .share-btn-linkedin{ background-color:#0A66C2; }
 
   .content-section h2{ font-size:1.3rem; margin-bottom:1rem; }
   .content-section ul{ padding-left:1.2rem; }
