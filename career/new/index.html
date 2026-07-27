@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers | VerdeMobility</title>
+<meta name="description" content="Join VerdeMobility — explore why our team joins, what life here looks like, our values, benefits, open roles, hiring process, and more.">
+
+<!-- Bootstrap 5 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================
+     BRAND VARIABLES — keep in sync with careers.html /
+     career-details.html. Edit --vm-green + --vm-font-*
+     once the exact brand spec is confirmed.
+     ===================================================== */
+  :root{
+    --vm-dark:#0a0e17;
+    --vm-dark-alt:#10151f;
+    --vm-green:#2ecc8f;           /* CHANGE HERE if brand green differs */
+    --vm-green-dark:#22a374;
+    --vm-green-soft:#e6f9f1;
+    --vm-light-bg:#f7f9f8;
+    --vm-white:#ffffff;
+    --vm-text-dark:#12161f;
+    --vm-text-gray:#6b7280;
+    --vm-text-light-gray:#a9b1bd;
+    --vm-border:#e7eaee;
+    --vm-radius-lg:20px;
+    --vm-radius-md:14px;
+    --vm-radius-pill:50px;
+    --vm-font-heading:'Poppins', 'Inter', sans-serif;  /* CHANGE HERE if brand font differs */
+    --vm-font-body:'Inter', 'Poppins', sans-serif;
+    --vm-shadow-sm:0 4px 14px rgba(18,22,31,0.06);
+    --vm-shadow-md:0 10px 30px rgba(18,22,31,0.10);
+  }
+
+  body{ font-family:var(--vm-font-body); color:var(--vm-text-dark); background:var(--vm-light-bg); }
+  h1,h2,h3,h4,h5,.brand-font{ font-family:var(--vm-font-heading); font-weight:700; }
+  a{ text-decoration:none; }
+  .text-accent{ color:var(--vm-green); }
+  .bg-dark-brand{ background-color:var(--vm-dark); }
+  .bg-dark-alt{ background-color:var(--vm-dark-alt); }
+  .bg-light-brand{ background-color:var(--vm-light-bg); }
+  .section-eyebrow{
+    color:var(--vm-green);
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    font-size:.8rem;
+  }
+
+  /* Buttons */
+  .btn-brand{
+    background-color:var(--vm-green);
+    border:1px solid var(--vm-green);
+    color:#06140d;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-brand:hover{ background-color:var(--vm-green-dark); border-color:var(--vm-green-dark); color:#06140d; }
+  .btn-outline-brand{
+    background-color:transparent;
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-outline-brand:hover{ border-color:var(--vm-green); color:var(--vm-green-dark); }
+  .btn-outline-light-pill{
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.65rem 1.4rem;
+  }
+  .btn-outline-light-pill:hover{ border-color:var(--vm-green); color:var(--vm-green); }
+
+  /* Morphing "Learn More" style button — matches brand reference screenshots:
+     default = outline circle icon + text; hover = fills into solid pill. */
+  .btn-vm-morph{
+    display:inline-flex;
+    align-items:center;
+    gap:1rem;
+    background:transparent;
+    border:none;
+    padding:.25rem 1.5rem .25rem .25rem;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    color:var(--vm-text-dark);
+    transition:background-color .35s ease, color .35s ease;
+  }
+  .btn-vm-morph .morph-icon{
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:50%;
+    border:2px solid var(--vm-text-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--vm-text-dark);
+    transition:all .35s ease;
+  }
+  .btn-vm-morph:hover{
+    background-color:var(--vm-text-dark);
+    color:#fff;
+  }
+  .btn-vm-morph:hover .morph-icon{
+    border-color:#fff;
+    color:#fff;
+    transform:translateX(3px);
+  }
+  .btn-vm-morph-light{ color:#fff; }
+  .btn-vm-morph-light .morph-icon{ border-color:#fff; color:#fff; }
+  .btn-vm-morph-light:hover{ background-color:#fff; color:var(--vm-text-dark); }
+  .btn-vm-morph-light:hover .morph-icon{ border-color:var(--vm-text-dark); color:var(--vm-text-dark); }
+
+  /* Badges */
+  .badge-pill-brand{
+    display:inline-flex; align-items:center; gap:.4rem;
+    background-color:rgba(46,204,143,0.12);
+    color:var(--vm-green);
+    border:1px solid rgba(46,204,143,0.3);
+    border-radius:var(--vm-radius-pill);
+    padding:.4rem 1rem; font-size:.8rem; font-weight:600;
+  }
+  .badge-dept{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+  .badge-type{
+    background-color:var(--vm-light-bg);
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-gray);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+  /* "New" badge — added automatically to jobs posted within the last
+     N days (see NEW_BADGE_DAYS in js/jobs-render.js). Do not add this
+     by hand in jobs-data.js — it's computed from postedDate. */
+  .badge-new{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+
+  /* Navbar */
+  .navbar-brand-vm{ font-family:var(--vm-font-heading); font-weight:800; font-size:1.35rem; color:#fff !important; }
+  .navbar-brand-vm .brand-accent{ color:var(--vm-green); }
+  .navbar-vm .nav-link{ color:rgba(255,255,255,.8); font-weight:500; margin:0 .5rem; }
+  .navbar-vm .nav-link:hover, .navbar-vm .nav-link.active{ color:var(--vm-green); }
+
+  /* Hero */
+  .hero-careers{
+    background:radial-gradient(circle at 20% 20%, #10221a 0%, var(--vm-dark) 55%);
+    padding-top:7rem;
+    padding-bottom:6rem;
+    color:#fff;
+  }
+  .hero-careers p.lead{ color:var(--vm-text-light-gray); }
+
+  /* Hero team visual — TEMP placeholder until a real team photo is added.
+     Swap the markup for an <img class="hero-team-photo"> and this whole
+     block can be deleted; keep hero-team-photo below if you do that, it
+     just constrains size/rounding for a real photo the same way. */
+  .hero-team-visual{
+    background:linear-gradient(135deg, rgba(46,204,143,.16), rgba(46,204,143,.03));
+    border:1px dashed rgba(255,255,255,.35);
+    border-radius:var(--vm-radius-lg);
+    min-height:280px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-team-visual-icon{ font-size:4rem; color:var(--vm-green); margin-bottom:.75rem; }
+  .hero-team-visual-caption{ color:var(--vm-text-light-gray); font-size:.85rem; }
+  .hero-team-photo{
+    width:100%;
+    border-radius:var(--vm-radius-lg);
+    box-shadow:var(--vm-shadow-sm);
+  }
+
+  /* Generic content card */
+  .info-card{
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    padding:1.75rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .info-card:hover{ transform:translateY(-4px); box-shadow:var(--vm-shadow-md); }
+  .icon-chip{
+    width:52px; height:52px;
+    border-radius:var(--vm-radius-md);
+    background:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem;
+    margin-bottom:1rem;
+  }
+
+  /* Life at VerdeMobility gallery */
+  .life-photo{
+    border-radius:var(--vm-radius-lg);
+    overflow:hidden;
+    height:100%;
+    min-height:220px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+  }
+  .life-photo .life-caption{
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(to top, rgba(10,14,23,.85), transparent);
+    color:#fff;
+    padding:1rem 1.25rem;
+    font-weight:600;
+    font-size:.95rem;
+  }
+
+  /* Values */
+  .value-card{
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    padding:2rem 1.5rem;
+    text-align:center;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+  }
+  .value-card .icon-chip{ margin:0 auto 1rem; }
+
+  /* Benefits */
+  .benefit-item{
+    display:flex; gap:1rem; align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    padding:1.5rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+  }
+  .benefit-item .icon-chip{ margin-bottom:0; flex-shrink:0; }
+
+  /* Job card (Current Openings) */
+  .job-card{
+    background:#fff;
+    border:1px solid #d5dbe2; /* darkened from --vm-border so cards read clearly against the white/light-gray page background */
+    border-radius:var(--vm-radius-lg);
+    padding:1.75rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .job-card:hover{ transform:translateY(-4px); box-shadow:var(--vm-shadow-md); }
+  .job-card .job-meta{ color:var(--vm-text-gray); font-size:.9rem; }
+  .job-card .job-desc{ color:var(--vm-text-gray); font-size:.92rem; }
+
+  /* Hiring process timeline */
+  .process-step{
+    text-align:center;
+    position:relative;
+    padding-top:1rem;
+  }
+  .process-step .step-num{
+    width:56px; height:56px;
+    border-radius:50%;
+    background:var(--vm-dark);
+    color:var(--vm-green);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:1.2rem;
+    margin:0 auto 1rem;
+    border:2px solid var(--vm-green);
+  }
+  .process-step h3{ font-size:1.05rem; }
+  .process-step p{ color:var(--vm-text-gray); font-size:.9rem; }
+  .process-line{
+    display:none;
+  }
+  @media (min-width:992px){
+    .process-line{
+      display:block;
+      position:absolute;
+      top:28px;
+      left:calc(50% + 28px);
+      width:calc(100% - 56px);
+      height:2px;
+      background:var(--vm-border);
+      z-index:0;
+    }
+  }
+
+  /* Testimonials */
+  .testimonial-card{
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    padding:2rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+  }
+  .testimonial-card .quote-icon{ color:var(--vm-green); font-size:1.6rem; }
+  .testimonial-avatar{
+    width:48px; height:48px;
+    border-radius:50%;
+    background:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+  }
+
+  /* FAQ */
+  .accordion-button{
+    font-weight:600;
+    border-radius:var(--vm-radius-md) !important;
+  }
+  .accordion-button:not(.collapsed){
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    box-shadow:none;
+  }
+  .accordion-button:focus{ box-shadow:0 0 0 .2rem rgba(46,204,143,.15); }
+  .accordion-item{
+    border:1px solid var(--vm-border) !important;
+    border-radius:var(--vm-radius-md) !important;
+    overflow:hidden;
+    margin-bottom:.75rem;
+  }
+
+  /* CTA */
+  .cta-dark{ background:var(--vm-dark); color:#fff; border-radius:var(--vm-radius-lg); }
+  .cta-dark p{ color:var(--vm-text-light-gray); }
+  .cta-dark .form-control{
+    border-radius:var(--vm-radius-pill);
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    padding:.7rem 1.2rem;
+  }
+  .cta-dark .form-control::placeholder{ color:var(--vm-text-light-gray); }
+  .cta-dark .form-control:focus{
+    background:rgba(255,255,255,.08);
+    border-color:var(--vm-green);
+    box-shadow:0 0 0 .2rem rgba(46,204,143,.15);
+    color:#fff;
+  }
+
+  /* Footer */
+  .footer-vm{ background:var(--vm-dark); color:var(--vm-text-light-gray); }
+  .footer-vm h6{ color:#fff; font-weight:700; margin-bottom:1rem; }
+  .footer-vm a{ color:var(--vm-text-light-gray); }
+  .footer-vm a:hover{ color:var(--vm-green); }
+  .footer-social a{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.15); color:#fff; margin-right:.5rem;
+  }
+  .footer-social a:hover{ background:var(--vm-green); border-color:var(--vm-green); color:#06140d; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,.08); }
+</style>
+</head>
+<body>
+
+<!-- ============================== HEADER / NAVBAR ============================== -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-vm bg-dark-brand fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-vm" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#" aria-current="page">Careers</a></li>
+          <li class="nav-item mt-2 mt-lg-0"><a href="#" class="btn btn-brand btn-sm">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============================== 1. HERO BANNER ============================== -->
+<section class="hero-careers text-center">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="badge-pill-brand mb-4"><i class="bi bi-lightning-charge-fill"></i> We're Hiring</span>
+        <h1 class="display-3 mb-3">Careers at VerdeMobility</h1>
+        <p class="lead mx-auto mx-lg-0 mb-4" style="max-width:640px;">
+          We're building India's next-generation EV charging ecosystem — reliable, safe,
+          and sustainable. Come build the future of electric mobility with us.
+        </p>
+        <div class="d-flex justify-content-center justify-content-lg-start gap-2 flex-wrap">
+          <a href="#openings" class="btn btn-brand">View Open Roles</a>
+          <a href="#resume-cta" class="btn-vm-morph btn-vm-morph-light">
+            <span class="morph-icon"><i class="bi bi-arrow-right"></i></span>
+            <span>Submit Your Resume</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- TEMP PLACEHOLDER — swap this whole .hero-team-visual block for a real
+           team photo when available, e.g.:
+           <img src="images/team-photo.jpg" alt="The VerdeMobility team" class="hero-team-photo">
+           Recommended size: roughly 800x600 or larger, landscape. Until then this
+           icon-based placeholder keeps the layout/spacing correct so swapping in
+           the real photo later is a one-line change. -->
+      <div class="col-lg-5">
+        <div class="hero-team-visual">
+          <i class="bi bi-people-fill hero-team-visual-icon"></i>
+          <p class="hero-team-visual-caption mb-0">Team photo coming soon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 2. WHY JOIN VERDEMOBILITY ============================== -->
+<section class="py-5 py-lg-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">Why Join Us</p>
+      <h2 class="h2 mb-3">Why Join VerdeMobility</h2>
+      <p class="text-muted mx-auto" style="max-width:620px;">
+        We're a fast-growing EV charging company solving real infrastructure problems for
+        homes, businesses, and public spaces across India — and we want people who care about
+        the mission as much as the craft.
+      </p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="info-card text-center">
+          <div class="icon-chip mx-auto"><i class="bi bi-rocket-takeoff"></i></div>
+          <h3 class="h6 mb-2">Real Impact</h3>
+          <p class="text-muted small mb-0">Your work directly accelerates India's shift to electric mobility.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="info-card text-center">
+          <div class="icon-chip mx-auto"><i class="bi bi-graph-up-arrow"></i></div>
+          <h3 class="h6 mb-2">Fast Growth</h3>
+          <p class="text-muted small mb-0">Join early and grow alongside a scaling product and team.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="info-card text-center">
+          <div class="icon-chip mx-auto"><i class="bi bi-people"></i></div>
+          <h3 class="h6 mb-2">Collaborative Culture</h3>
+          <p class="text-muted small mb-0">Flat structure, open communication, and ownership from day one.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="info-card text-center">
+          <div class="icon-chip mx-auto"><i class="bi bi-mortarboard"></i></div>
+          <h3 class="h6 mb-2">Learning-First</h3>
+          <p class="text-muted small mb-0">Hands-on exposure to hardware, IoT, and cloud in one product.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 3. LIFE AT VERDEMOBILITY ============================== -->
+<section class="py-5 py-lg-6 bg-light-brand">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">Inside VerdeMobility</p>
+      <h2 class="h2 mb-3">Life at VerdeMobility</h2>
+      <p class="text-muted mx-auto" style="max-width:620px;">
+        A look at how our team works, builds, and celebrates together — on the factory floor,
+        in the field, and around the office.
+      </p>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4">
+        <div class="life-photo" style="background-color:#0d2a1f;">
+          <div class="life-caption">Engineering &amp; product huddles</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="life-photo" style="background-color:#123320;">
+          <div class="life-caption">On-site charger installations</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="life-photo" style="background-color:#0a1f17;">
+          <div class="life-caption">Team celebrations &amp; milestones</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-muted small mt-3 mb-0"><em>Placeholder image blocks — replace with real team photography.</em></p>
+  </div>
+</section>
+
+<!-- ============================== 4. OUR VALUES ============================== -->
+<section class="py-5 py-lg-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">What Drives Us</p>
+      <h2 class="h2 mb-3">Our Values</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="value-card">
+          <div class="icon-chip"><i class="bi bi-shield-check"></i></div>
+          <h3 class="h6 mb-2">Safety First</h3>
+          <p class="text-muted small mb-0">Every product decision starts with user and grid safety.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="value-card">
+          <div class="icon-chip"><i class="bi bi-lightbulb"></i></div>
+          <h3 class="h6 mb-2">Innovate Boldly</h3>
+          <p class="text-muted small mb-0">We challenge assumptions to build smarter charging solutions.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="value-card">
+          <div class="icon-chip"><i class="bi bi-hand-thumbs-up"></i></div>
+          <h3 class="h6 mb-2">Own the Outcome</h3>
+          <p class="text-muted small mb-0">We take responsibility from idea through to installation.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="value-card">
+          <div class="icon-chip"><i class="bi bi-globe-asia-australia"></i></div>
+          <h3 class="h6 mb-2">Sustainability</h3>
+          <p class="text-muted small mb-0">Every charger deployed moves India closer to clean mobility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 5. BENEFITS & PERKS ============================== -->
+<section class="py-5 py-lg-6 bg-light-brand">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">Perks</p>
+      <h2 class="h2 mb-3">Benefits &amp; Perks</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-heart-pulse"></i></div>
+          <div>
+            <h3 class="h6 mb-1">Health Insurance</h3>
+            <p class="text-muted small mb-0">Comprehensive medical coverage for you and your family.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-clock-history"></i></div>
+          <div>
+            <h3 class="h6 mb-1">Flexible Hours</h3>
+            <p class="text-muted small mb-0">Hybrid work options with flexible daily schedules.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-cash-coin"></i></div>
+          <div>
+            <h3 class="h6 mb-1">Performance Bonuses</h3>
+            <p class="text-muted small mb-0">Rewarding impact with competitive incentive structures.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-book"></i></div>
+          <div>
+            <h3 class="h6 mb-1">Learning &amp; Development</h3>
+            <p class="text-muted small mb-0">Budget and time for courses, certifications, and conferences.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-ev-station"></i></div>
+          <div>
+            <h3 class="h6 mb-1">EV Charging Perks</h3>
+            <p class="text-muted small mb-0">Discounted or free charging access at VerdeMobility stations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="benefit-item">
+          <div class="icon-chip"><i class="bi bi-people-fill"></i></div>
+          <div>
+            <h3 class="h6 mb-1">Team Events</h3>
+            <p class="text-muted small mb-0">Regular offsites, celebrations, and milestone recognitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 6. CURRENT OPENINGS ============================== -->
+<section id="openings" class="py-5 py-lg-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">Join The Team</p>
+      <h2 class="h2 mb-3">Current Openings</h2>
+      <p class="text-muted mx-auto" style="max-width:620px;">Explore our open roles across engineering, sales, and operations.</p>
+    </div>
+    <!-- Job cards are injected here by js/jobs-render.js, reading js/jobs-data.js.
+         To change which jobs appear, edit js/jobs-data.js (do not edit here). -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="openings-grid"></div>
+
+    <!-- Empty state: shown automatically when no jobs are marked featured+active -->
+    <div class="text-center py-4 d-none" id="openings-empty">
+      <p class="text-muted mb-3">We don't have any open roles matching this view right now — but new positions go up often.</p>
+      <a href="careers.html" class="btn btn-outline-brand btn-sm">Browse All Departments</a>
+    </div>
+    <div class="text-center mt-5">
+      <a href="careers.html" class="btn-vm-morph">
+        <span class="morph-icon"><i class="bi bi-arrow-right"></i></span>
+        <span>View All Openings</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 7. HIRING PROCESS ============================== -->
+<section class="py-5 py-lg-6 bg-light-brand">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">How It Works</p>
+      <h2 class="h2 mb-3">Hiring Process</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-lg-3">
+        <div class="process-step">
+          <div class="process-line"></div>
+          <div class="step-num">1</div>
+          <h3>Apply</h3>
+          <p>Submit your application and resume online.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="process-step">
+          <div class="process-line"></div>
+          <div class="step-num">2</div>
+          <h3>Screening Call</h3>
+          <p>A short call with our talent team to learn more about you.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="process-step">
+          <div class="process-line"></div>
+          <div class="step-num">3</div>
+          <h3>Interviews</h3>
+          <p>Meet the team and walk through role-specific rounds.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h3>Offer &amp; Onboarding</h3>
+          <p>Receive your offer and join the VerdeMobility team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 8. EMPLOYEE TESTIMONIALS ============================== -->
+<section class="py-5 py-lg-6">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">In Their Words</p>
+      <h2 class="h2 mb-3">Employee Testimonials</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon mb-3 d-block"></i>
+          <p class="text-muted mb-4">Placeholder quote: working here means seeing real chargers go live because of the firmware I shipped last week.</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testimonial-avatar">AK</div>
+            <div>
+              <p class="mb-0 fw-semibold small">Placeholder Name</p>
+              <p class="mb-0 text-muted small">Firmware Engineer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon mb-3 d-block"></i>
+          <p class="text-muted mb-4">Placeholder quote: the pace is fast, but the team always makes time to help each other grow.</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testimonial-avatar">PS</div>
+            <div>
+              <p class="mb-0 fw-semibold small">Placeholder Name</p>
+              <p class="mb-0 text-muted small">Business Development Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon mb-3 d-block"></i>
+          <p class="text-muted mb-4">Placeholder quote: I get to design for real people installing chargers in their homes — that's rare.</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testimonial-avatar">RM</div>
+            <div>
+              <p class="mb-0 fw-semibold small">Placeholder Name</p>
+              <p class="mb-0 text-muted small">UI/UX Designer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 9. FAQ ============================== -->
+<section class="py-5 py-lg-6 bg-light-brand">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-eyebrow mb-2">Got Questions?</p>
+      <h2 class="h2 mb-3">Frequently Asked Questions</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="accordion" id="careersFaq">
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                How do I apply for a role at VerdeMobility?
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#careersFaq">
+              <div class="accordion-body text-muted">
+                Click "Apply Now" on any listing in Current Openings, or submit your resume through the CTA form below and our talent team will reach out.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Do you offer remote or hybrid roles?
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#careersFaq">
+              <div class="accordion-body text-muted">
+                Yes — several roles, especially in Product, Design, and Support, offer remote or hybrid flexibility. This is noted on each job listing.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                How long does the hiring process take?
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#careersFaq">
+              <div class="accordion-body text-muted">
+                On average, our process takes 2–3 weeks from application to offer, depending on the role and interview scheduling.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Do you offer internships?
+              </button>
+            </h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#careersFaq">
+              <div class="accordion-body text-muted">
+                Yes, we regularly open internships in Engineering and Product. Check Current Openings or submit your resume to be considered for future intern roles.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 10. SUBMIT RESUME CTA ============================== -->
+<section id="resume-cta" class="container py-5">
+  <div class="cta-dark text-center p-5 py-md-5">
+    <h2 class="h2 mb-3">Don't See the Right Role?</h2>
+    <p class="mb-4 mx-auto" style="max-width:520px;">
+      We're always looking for talented people who care about EV charging and sustainable
+      mobility. Email us your resume and we'll reach out when a fit opens up.
+    </p>
+    <!-- No embedded form here (there's no backend to receive submissions) — this
+         opens the visitor's email app with our address and a ready-made subject
+         line, same pattern used for job "Apply Now" buttons. -->
+    <a href="mailto:career@slscorp.com?subject=Resume%20Submission%20-%20General%20Interest" class="btn btn-brand">
+      <i class="bi bi-envelope me-2"></i>Email Us Your Resume
+    </a>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer-vm pt-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-lg-4">
+        <a class="navbar-brand-vm d-inline-block mb-3" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+        <p class="mb-3">A division of System Level Solutions building next-generation, connected EV charging infrastructure for homes, businesses, and public spaces.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/verdemobility" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.facebook.com/verdemobility/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/verdemobility/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@verdemobility4532" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">About Us</a></li>
+          <li class="mb-2"><a href="#">Careers</a></li>
+          <li class="mb-2"><a href="#">Blog</a></li>
+          <li class="mb-2"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Solutions</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">AC Chargers</a></li>
+          <li class="mb-2"><a href="#">DC Chargers</a></li>
+          <li class="mb-2"><a href="#">CMS Platform</a></li>
+          <li class="mb-2"><a href="#">Fleet Solutions</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h6>Get in Touch</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@verdemobility.com</li>
+          <li class="mb-2"><i class="bi bi-telephone me-2"></i>+91-74860-31235</li>
+          <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Anand, Gujarat, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom text-center py-4 mt-4 small">
+      &copy; 2026 VerdeMobility India Pvt. Ltd. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Careers data + render engine — single source of truth for all job listings.
+     Edit js/jobs-data.js to add/close jobs; do not edit job HTML by hand. -->
+<script src="js/jobs-data.js"></script>
+<script src="js/jobs-render.js"></script>
+</body>
+</html>

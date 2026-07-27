@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers | VerdeMobility</title>
+<meta name="description" content="Join VerdeMobility and help build the future of EV charging infrastructure. Explore open roles across engineering, sales, and operations.">
+
+<!-- Bootstrap 5 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Google Font placeholder — CHANGE if brand uses a different typeface -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* =====================================================
+     BRAND VARIABLES — edit these to exactly match the live
+     VerdeMobility site once confirmed. Every color/radius/
+     font used below pulls from these variables only.
+     ===================================================== */
+  :root{
+    --vm-dark:#0a0e17;            /* primary dark/navy background (header, hero, dark sections) */
+    --vm-dark-alt:#10151f;        /* secondary dark surface (cards on dark bg) */
+    --vm-green:#2ecc8f;           /* primary brand accent green — CHANGE HERE if needed */
+    --vm-green-dark:#22a374;      /* hover / pressed state for green */
+    --vm-green-soft:#e6f9f1;      /* light tint of green for badges/icon chips */
+    --vm-light-bg:#f7f9f8;        /* light section background */
+    --vm-white:#ffffff;
+    --vm-text-dark:#12161f;
+    --vm-text-gray:#6b7280;
+    --vm-text-light-gray:#a9b1bd;
+    --vm-border:#e7eaee;
+    --vm-radius-lg:20px;
+    --vm-radius-md:14px;
+    --vm-radius-pill:50px;
+    --vm-font-heading:'Poppins', 'Inter', sans-serif;  /* CHANGE HERE if brand font differs */
+    --vm-font-body:'Inter', 'Poppins', sans-serif;
+    --vm-shadow-sm:0 4px 14px rgba(18,22,31,0.06);
+    --vm-shadow-md:0 10px 30px rgba(18,22,31,0.10);
+  }
+
+  body{
+    font-family:var(--vm-font-body);
+    color:var(--vm-text-dark);
+    background:var(--vm-light-bg);
+  }
+  h1,h2,h3,h4,h5,.brand-font{
+    font-family:var(--vm-font-heading);
+    font-weight:700;
+  }
+  a{ text-decoration:none; }
+  .text-accent{ color:var(--vm-green); }
+  .bg-dark-brand{ background-color:var(--vm-dark); }
+  .bg-dark-alt{ background-color:var(--vm-dark-alt); }
+  .bg-light-brand{ background-color:var(--vm-light-bg); }
+
+  /* Buttons */
+  .btn-brand{
+    background-color:var(--vm-green);
+    border:1px solid var(--vm-green);
+    color:#06140d;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-brand:hover{
+    background-color:var(--vm-green-dark);
+    border-color:var(--vm-green-dark);
+    color:#06140d;
+  }
+  .btn-outline-brand{
+    background-color:transparent;
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-outline-brand:hover{
+    border-color:var(--vm-green);
+    color:var(--vm-green-dark);
+  }
+  .btn-outline-light-pill{
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.65rem 1.4rem;
+  }
+  .btn-outline-light-pill:hover{
+    border-color:var(--vm-green);
+    color:var(--vm-green);
+  }
+
+  /* Morphing "Learn More" style button — matches brand reference screenshots:
+     default = outline circle icon + text; hover = fills into solid pill. */
+  .btn-vm-morph{
+    display:inline-flex;
+    align-items:center;
+    gap:1rem;
+    background:transparent;
+    border:none;
+    padding:.25rem 1.5rem .25rem .25rem;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    color:var(--vm-text-dark);
+    transition:background-color .35s ease, color .35s ease;
+  }
+  .btn-vm-morph .morph-icon{
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:50%;
+    border:2px solid var(--vm-text-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--vm-text-dark);
+    transition:all .35s ease;
+  }
+  .btn-vm-morph:hover{
+    background-color:var(--vm-text-dark);
+    color:#fff;
+  }
+  .btn-vm-morph:hover .morph-icon{
+    border-color:#fff;
+    color:#fff;
+    transform:translateX(3px);
+  }
+  /* Light variant — for use on dark backgrounds (hero, CTA sections) */
+  .btn-vm-morph-light{ color:#fff; }
+  .btn-vm-morph-light .morph-icon{ border-color:#fff; color:#fff; }
+  .btn-vm-morph-light:hover{ background-color:#fff; color:var(--vm-text-dark); }
+  .btn-vm-morph-light:hover .morph-icon{ border-color:var(--vm-text-dark); color:var(--vm-text-dark); }
+
+  /* Badge pill (e.g. "Now Hiring") */
+  .badge-pill-brand{
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    background-color:rgba(46,204,143,0.12);
+    color:var(--vm-green);
+    border:1px solid rgba(46,204,143,0.3);
+    border-radius:var(--vm-radius-pill);
+    padding:.4rem 1rem;
+    font-size:.8rem;
+    font-weight:600;
+  }
+  .badge-dept{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    font-size:.75rem;
+    padding:.35rem .75rem;
+  }
+  .badge-type{
+    background-color:var(--vm-light-bg);
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-gray);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    font-size:.75rem;
+    padding:.35rem .75rem;
+  }
+
+  /* Navbar */
+  .navbar-brand-vm{
+    font-family:var(--vm-font-heading);
+    font-weight:800;
+    font-size:1.35rem;
+    color:#fff !important;
+  }
+  .navbar-brand-vm .brand-accent{ color:var(--vm-green); }
+  .navbar-vm .nav-link{
+    color:rgba(255,255,255,.8);
+    font-weight:500;
+    margin:0 .5rem;
+  }
+  .navbar-vm .nav-link:hover,
+  .navbar-vm .nav-link.active{
+    color:var(--vm-green);
+  }
+
+  /* Hero */
+  .hero-careers{
+    background:radial-gradient(circle at 20% 20%, #10221a 0%, var(--vm-dark) 55%);
+    padding-top:7rem;
+    padding-bottom:6rem;
+    color:#fff;
+  }
+  .hero-careers p.lead{
+    color:var(--vm-text-light-gray);
+  }
+
+  /* Search / filter card */
+  .search-card{
+    background:#fff;
+    border-radius:var(--vm-radius-lg);
+    box-shadow:var(--vm-shadow-md);
+    margin-top:-4.5rem;
+    position:relative;
+    z-index:5;
+  }
+  .search-card .form-control,
+  .search-card .form-select{
+    border-radius:var(--vm-radius-pill);
+    border:1px solid var(--vm-border);
+    padding:.7rem 1.1rem;
+  }
+  .search-card .form-control:focus,
+  .search-card .form-select:focus{
+    border-color:var(--vm-green);
+    box-shadow:0 0 0 .2rem rgba(46,204,143,.15);
+  }
+
+  /* Job card */
+  .job-card{
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    padding:1.75rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .job-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--vm-shadow-md);
+  }
+  .job-card .job-meta{
+    color:var(--vm-text-gray);
+    font-size:.9rem;
+  }
+  .job-card .job-desc{
+    color:var(--vm-text-gray);
+    font-size:.92rem;
+  }
+
+  /* Pagination */
+  .pagination .page-link{
+    border-radius:var(--vm-radius-pill) !important;
+    margin:0 .25rem;
+    color:var(--vm-text-dark);
+    border:1px solid var(--vm-border);
+  }
+  .pagination .page-item.active .page-link{
+    background-color:var(--vm-green);
+    border-color:var(--vm-green);
+    color:#06140d;
+  }
+  .pagination .page-link:hover{
+    color:var(--vm-green-dark);
+  }
+
+  /* CTA section */
+  .cta-dark{
+    background:var(--vm-dark);
+    color:#fff;
+    border-radius:var(--vm-radius-lg);
+  }
+  .cta-dark p{ color:var(--vm-text-light-gray); }
+
+  /* Footer */
+  .footer-vm{
+    background:var(--vm-dark);
+    color:var(--vm-text-light-gray);
+  }
+  .footer-vm h6{
+    color:#fff;
+    font-weight:700;
+    margin-bottom:1rem;
+  }
+  .footer-vm a{
+    color:var(--vm-text-light-gray);
+  }
+  .footer-vm a:hover{
+    color:var(--vm-green);
+  }
+  .footer-social a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.15);
+    color:#fff;
+    margin-right:.5rem;
+  }
+  .footer-social a:hover{
+    background:var(--vm-green);
+    border-color:var(--vm-green);
+    color:#06140d;
+  }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================== HEADER / NAVBAR ============================== -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-vm bg-dark-brand fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-vm" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#" aria-current="page">Careers</a></li>
+          <li class="nav-item mt-2 mt-lg-0">
+            <a href="#" class="btn btn-brand btn-sm">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============================== HERO BANNER ============================== -->
+<section class="hero-careers text-center">
+  <div class="container">
+    <span class="badge-pill-brand mb-4"><i class="bi bi-lightning-charge-fill"></i> We're Hiring</span>
+    <h1 class="display-3 mb-3">Careers</h1>
+    <p class="lead mx-auto" style="max-width:640px;">
+      Join VerdeMobility and help power the electric mobility revolution. We're building
+      next-generation EV charging infrastructure for homes, businesses, and public spaces —
+      and we're looking for people who want to build the future with us.
+    </p>
+  </div>
+</section>
+
+<!-- ============================== SEARCH & FILTER BAR ============================== -->
+<section class="container">
+  <div class="search-card p-4 p-md-5">
+    <form role="search" aria-label="Job search">
+      <div class="row g-3 align-items-center">
+        <div class="col-12 col-lg-5">
+          <label for="jobSearch" class="visually-hidden">Search jobs</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white border-0" style="border-radius:var(--vm-radius-pill) 0 0 var(--vm-radius-pill);"><i class="bi bi-search"></i></span>
+            <input type="search" class="form-control border-start-0 ps-0" id="jobSearch" placeholder="Search job title or keyword">
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <label for="deptFilter" class="visually-hidden">Department</label>
+          <select class="form-select" id="deptFilter">
+            <option selected>All Departments</option>
+            <option>Engineering</option>
+            <option>Sales &amp; Marketing</option>
+            <option>Operations</option>
+            <option>Customer Support</option>
+            <option>Product &amp; Design</option>
+          </select>
+        </div>
+        <div class="col-6 col-lg-3">
+          <label for="locationFilter" class="visually-hidden">Location</label>
+          <select class="form-select" id="locationFilter">
+            <option selected>All Locations</option>
+            <option>Anand, Gujarat</option>
+            <option>Ahmedabad, Gujarat</option>
+            <option>Remote</option>
+            <option>USA</option>
+          </select>
+        </div>
+        <div class="col-12 col-lg-1 d-grid">
+          <button type="submit" class="btn btn-brand" aria-label="Search jobs"><i class="bi bi-search d-lg-none"></i><span class="d-none d-lg-inline">Go</span></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================== JOB LISTINGS ============================== -->
+<section class="py-5 mt-4">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+      <div>
+        <h2 class="h3 mb-1">Open Positions</h2>
+        <p class="text-muted mb-0">Showing 1–6 of 14 roles</p>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+      <!-- Job Card (repeatable component) -->
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Engineering</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+          <h3 class="h5 mb-2">Embedded Firmware Engineer</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Anand, Gujarat</p>
+          <p class="job-desc mb-4">Design and develop firmware for AC/DC EV charger controllers, ensuring reliability, safety, and OCPP compliance.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Sales &amp; Marketing</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+          <h3 class="h5 mb-2">Business Development Manager</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Ahmedabad, Gujarat</p>
+          <p class="job-desc mb-4">Drive B2B partnerships across fleets, real estate, and hospitality to expand VerdeMobility's charging network.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Product &amp; Design</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+          <h3 class="h5 mb-2">UI/UX Designer</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Remote</p>
+          <p class="job-desc mb-4">Shape the user experience of our charging app and CMS dashboard used by fleets, homeowners, and CPOs.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Operations</span>
+            <span class="badge-type">Full-Time</span>
+          </div>
+          <h3 class="h5 mb-2">Installation &amp; Field Service Engineer</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Anand, Gujarat</p>
+          <p class="job-desc mb-4">Handle on-site installation, commissioning, and troubleshooting of AC/DC chargers for commercial clients.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Customer Support</span>
+            <span class="badge-type">Part-Time</span>
+          </div>
+          <h3 class="h5 mb-2">Technical Support Specialist</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Remote</p>
+          <p class="job-desc mb-4">Support charge point operators and end-users with troubleshooting, OTA updates, and app-related queries.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="job-card">
+          <div class="d-flex gap-2 mb-3 flex-wrap">
+            <span class="badge-dept">Engineering</span>
+            <span class="badge-type">Internship</span>
+          </div>
+          <h3 class="h5 mb-2">IoT Software Engineering Intern</h3>
+          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Anand, Gujarat</p>
+          <p class="job-desc mb-4">Assist in building cloud-connected features for our Central Management System using OCPP/OCPI protocols.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
+            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+    <!-- ============================== PAGINATION ============================== -->
+    <nav class="d-flex justify-content-center mt-5" aria-label="Job listings pagination">
+      <ul class="pagination">
+        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><i class="bi bi-chevron-left"></i></a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><i class="bi bi-chevron-right"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<!-- ============================== CTA SECTION ============================== -->
+<section class="container pb-5">
+  <div class="cta-dark text-center p-5 py-md-5">
+    <h2 class="h2 mb-3">Don't see the right role?</h2>
+    <p class="mb-4 mx-auto" style="max-width:520px;">
+      We're always looking for talented people who are passionate about EV charging
+      and sustainable mobility. Send us your resume and we'll reach out when a fit opens up.
+    </p>
+    <a href="#" class="btn-vm-morph btn-vm-morph-light">
+      <span class="morph-icon"><i class="bi bi-arrow-right"></i></span>
+      <span>Get in Touch</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer-vm pt-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-lg-4">
+        <a class="navbar-brand-vm d-inline-block mb-3" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+        <p class="mb-3">A division of System Level Solutions building next-generation, connected EV charging infrastructure for homes, businesses, and public spaces.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/verdemobility" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.facebook.com/verdemobility/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/verdemobility/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@verdemobility4532" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">About Us</a></li>
+          <li class="mb-2"><a href="#">Careers</a></li>
+          <li class="mb-2"><a href="#">Blog</a></li>
+          <li class="mb-2"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Solutions</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">AC Chargers</a></li>
+          <li class="mb-2"><a href="#">DC Chargers</a></li>
+          <li class="mb-2"><a href="#">CMS Platform</a></li>
+          <li class="mb-2"><a href="#">Fleet Solutions</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h6>Get in Touch</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@verdemobility.com</li>
+          <li class="mb-2"><i class="bi bi-telephone me-2"></i>+91-74860-31235</li>
+          <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Anand, Gujarat, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom text-center py-4 mt-4 small">
+      &copy; 2026 VerdeMobility India Pvt. Ltd. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

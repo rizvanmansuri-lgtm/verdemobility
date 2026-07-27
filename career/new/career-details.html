@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embedded Firmware Engineer | Careers | VerdeMobility</title>
+<meta name="description" content="Apply for the Embedded Firmware Engineer role at VerdeMobility — build firmware for next-generation AC/DC EV chargers.">
+
+<!-- Bootstrap 5 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* Same brand variable block as Page 1 — keep both files in sync,
+     or move this into a shared verde-brand.css when converting to React. */
+  :root{
+    --vm-dark:#0a0e17;
+    --vm-dark-alt:#10151f;
+    --vm-green:#2ecc8f;           /* CHANGE HERE if brand green differs */
+    --vm-green-dark:#22a374;
+    --vm-green-soft:#e6f9f1;
+    --vm-light-bg:#f7f9f8;
+    --vm-white:#ffffff;
+    --vm-text-dark:#12161f;
+    --vm-text-gray:#6b7280;
+    --vm-text-light-gray:#a9b1bd;
+    --vm-border:#e7eaee;
+    --vm-radius-lg:20px;
+    --vm-radius-md:14px;
+    --vm-radius-pill:50px;
+    --vm-font-heading:'Poppins', 'Inter', sans-serif;  /* CHANGE HERE if brand font differs */
+    --vm-font-body:'Inter', 'Poppins', sans-serif;
+    --vm-shadow-sm:0 4px 14px rgba(18,22,31,0.06);
+    --vm-shadow-md:0 10px 30px rgba(18,22,31,0.10);
+  }
+
+  body{ font-family:var(--vm-font-body); color:var(--vm-text-dark); background:var(--vm-white); }
+  h1,h2,h3,h4,h5,.brand-font{ font-family:var(--vm-font-heading); font-weight:700; }
+  a{ text-decoration:none; }
+  .text-accent{ color:var(--vm-green); }
+  .bg-dark-brand{ background-color:var(--vm-dark); }
+  .bg-light-brand{ background-color:var(--vm-light-bg); }
+
+  .btn-brand{
+    background-color:var(--vm-green);
+    border:1px solid var(--vm-green);
+    color:#06140d;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-brand:hover{ background-color:var(--vm-green-dark); border-color:var(--vm-green-dark); color:#06140d; }
+  .btn-outline-brand{
+    background-color:transparent;
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    padding:.7rem 1.6rem;
+    transition:all .2s ease;
+  }
+  .btn-outline-brand:hover{ border-color:var(--vm-green); color:var(--vm-green-dark); }
+
+  /* Morphing "Learn More" style button — matches brand reference screenshots:
+     default = outline circle icon + text; hover = fills into solid pill. */
+  .btn-vm-morph{
+    display:inline-flex;
+    align-items:center;
+    gap:1rem;
+    background:transparent;
+    border:none;
+    padding:.25rem 1.5rem .25rem .25rem;
+    border-radius:var(--vm-radius-pill);
+    font-weight:600;
+    color:var(--vm-text-dark);
+    transition:background-color .35s ease, color .35s ease;
+  }
+  .btn-vm-morph .morph-icon{
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border-radius:50%;
+    border:2px solid var(--vm-text-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--vm-text-dark);
+    transition:all .35s ease;
+  }
+  .btn-vm-morph:hover{
+    background-color:var(--vm-text-dark);
+    color:#fff;
+  }
+  .btn-vm-morph:hover .morph-icon{
+    border-color:#fff;
+    color:#fff;
+    transform:translateX(3px);
+  }
+  .btn-vm-morph-light{ color:#fff; }
+  .btn-vm-morph-light .morph-icon{ border-color:#fff; color:#fff; }
+  .btn-vm-morph-light:hover{ background-color:#fff; color:var(--vm-text-dark); }
+  .btn-vm-morph-light:hover .morph-icon{ border-color:var(--vm-text-dark); color:var(--vm-text-dark); }
+
+  .navbar-brand-vm{ font-family:var(--vm-font-heading); font-weight:800; font-size:1.35rem; color:#fff !important; }
+  .navbar-brand-vm .brand-accent{ color:var(--vm-green); }
+  .navbar-vm .nav-link{ color:rgba(255,255,255,.8); font-weight:500; margin:0 .5rem; }
+  .navbar-vm .nav-link:hover, .navbar-vm .nav-link.active{ color:var(--vm-green); }
+
+  .breadcrumb-bar{ background:var(--vm-light-bg); padding-top:6.5rem; }
+  .breadcrumb-item a{ color:var(--vm-text-gray); }
+  .breadcrumb-item.active{ color:var(--vm-text-dark); font-weight:600; }
+
+  .job-header{ border-bottom:1px solid var(--vm-border); }
+  .badge-dept{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+  .badge-type{
+    background-color:var(--vm-light-bg);
+    border:1px solid var(--vm-border);
+    color:var(--vm-text-gray);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+  /* "New" badge — added automatically for jobs posted within the last
+     N days (see NEW_BADGE_DAYS in js/jobs-render.js). Don't set by hand. */
+  .badge-new{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
+  .meta-chip{
+    display:flex; align-items:center; gap:.5rem;
+    font-size:.9rem; color:var(--vm-text-gray);
+  }
+  .meta-chip i{ color:var(--vm-green); }
+
+  .content-section h2{ font-size:1.3rem; margin-bottom:1rem; }
+  .content-section ul{ padding-left:1.2rem; }
+  .content-section ul li{ margin-bottom:.5rem; color:var(--vm-text-gray); }
+
+  .sidebar-card{
+    background:#fff;
+    border:1px solid var(--vm-border);
+    border-radius:var(--vm-radius-lg);
+    box-shadow:var(--vm-shadow-sm);
+    padding:1.75rem;
+    position:sticky;
+    top:6.5rem;
+  }
+  .sidebar-card .row-line{
+    display:flex; justify-content:space-between;
+    padding:.6rem 0;
+    border-bottom:1px solid var(--vm-border);
+    font-size:.9rem;
+  }
+  .sidebar-card .row-line:last-of-type{ border-bottom:none; }
+  .sidebar-card .row-line span:first-child{ color:var(--vm-text-gray); }
+  .sidebar-card .row-line span:last-child{ font-weight:600; }
+
+  .related-job-card{
+    background:#fff;
+    border:1px solid #d5dbe2; /* darkened from --vm-border so cards read clearly against the light-gray section background */
+    border-radius:var(--vm-radius-lg);
+    padding:1.5rem;
+    height:100%;
+    box-shadow:var(--vm-shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .related-job-card:hover{ transform:translateY(-4px); box-shadow:var(--vm-shadow-md); }
+
+  .footer-vm{ background:var(--vm-dark); color:var(--vm-text-light-gray); }
+  .footer-vm h6{ color:#fff; font-weight:700; margin-bottom:1rem; }
+  .footer-vm a{ color:var(--vm-text-light-gray); }
+  .footer-vm a:hover{ color:var(--vm-green); }
+  .footer-social a{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.15); color:#fff; margin-right:.5rem;
+  }
+  .footer-social a:hover{ background:var(--vm-green); border-color:var(--vm-green); color:#06140d; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,.08); }
+</style>
+</head>
+<body>
+
+<!-- ============================== HEADER / NAVBAR ============================== -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-vm bg-dark-brand fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-vm" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Solutions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+          <li class="nav-item"><a class="nav-link active" href="careers.html" aria-current="page">Careers</a></li>
+          <li class="nav-item mt-2 mt-lg-0"><a href="#" class="btn btn-brand btn-sm">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ============================== BREADCRUMB ============================== -->
+<div class="breadcrumb-bar pb-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0 pt-4">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="careers.html">Careers</a></li>
+        <li class="breadcrumb-item active" aria-current="page" id="job-breadcrumb-current">Loading…</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- ============================== JOB HEADER ==============================
+     Everything inside #job-header-root is written by js/jobs-render.js
+     (badges, title, meta chips, Apply Now mailto link). Do not hand-edit
+     this — change the job's data in js/jobs-data.js instead.
+     If there are no jobs at all, or the job is closed, jobs-render.js
+     replaces the ENTIRE #job-detail-root wrapper below with a friendly
+     message instead — so this header section is always inside that
+     wrapper, never edited outside of it. -->
+<div id="job-detail-root">
+<section class="job-header bg-light-brand pb-5">
+  <div class="container" id="job-header-root">
+    <!-- placeholder shown only until jobs-render.js runs -->
+    <p class="text-muted mb-0">Loading job details…</p>
+  </div>
+</section>
+
+<!-- ============================== MAIN CONTENT ============================== -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Job Details Column — sections (Job Description, Skills, etc.)
+           are written by js/jobs-render.js from the job's "sections"
+           array in js/jobs-data.js. Different job types can have
+           different sections (e.g. Education/Skills for a solar role vs
+           Responsibilities/Benefits for an engineering role) without any
+           changes needed here. -->
+      <div class="col-lg-8" id="job-content-root"></div>
+
+      <!-- Sidebar Column — "Job Overview" rows come from the job's
+           "overview" array in js/jobs-data.js. -->
+      <div class="col-lg-4">
+        <aside class="sidebar-card" id="job-sidebar-root"></aside>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RELATED JOBS ==============================
+     Auto-filled with other ACTIVE jobs from the same department (see
+     vmRenderJobDetail() in js/jobs-render.js). Hidden automatically via
+     the d-none class if there are no related jobs to show. -->
+<section class="bg-light-brand py-5" id="related-jobs-section">
+  <div class="container">
+    <h2 class="h3 mb-4">Related Jobs</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="related-jobs-grid"></div>
+  </div>
+</section>
+</div><!-- /#job-detail-root -->
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="footer-vm pt-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-12 col-lg-4">
+        <a class="navbar-brand-vm d-inline-block mb-3" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+        <p class="mb-3">A division of System Level Solutions building next-generation, connected EV charging infrastructure for homes, businesses, and public spaces.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/verdemobility" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.facebook.com/verdemobility/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/verdemobility/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@verdemobility4532" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">About Us</a></li>
+          <li class="mb-2"><a href="careers.html">Careers</a></li>
+          <li class="mb-2"><a href="#">Blog</a></li>
+          <li class="mb-2"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Solutions</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">AC Chargers</a></li>
+          <li class="mb-2"><a href="#">DC Chargers</a></li>
+          <li class="mb-2"><a href="#">CMS Platform</a></li>
+          <li class="mb-2"><a href="#">Fleet Solutions</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h6>Get in Touch</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@verdemobility.com</li>
+          <li class="mb-2"><i class="bi bi-telephone me-2"></i>+91-74860-31235</li>
+          <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Anand, Gujarat, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom text-center py-4 mt-4 small">
+      &copy; 2026 VerdeMobility India Pvt. Ltd. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Careers data + render engine — single source of truth for all job listings.
+     Edit js/jobs-data.js to add/close jobs; do not edit job HTML by hand. -->
+<script src="js/jobs-data.js"></script>
+<script src="js/jobs-render.js"></script>
+</body>
+</html>
