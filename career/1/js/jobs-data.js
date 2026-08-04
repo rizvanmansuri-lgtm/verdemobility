@@ -107,7 +107,7 @@ const VM_JOBS = [
 
     sortOrder: 10,
     status: "active",        // active | discontinued | draft
-    postedDate: "2026-07-15", // YYYY-MM-DD — drives the automatic "New" badge
+    postedDate: "2026-08-03", // YYYY-MM-DD — drives the automatic "New" badge
     featured: true,           // eligible to appear on index.html homepage
 
     // Short one-line teaser used on job-card previews (index.html / careers.html)
@@ -125,6 +125,7 @@ const VM_JOBS = [
       { label: "Experience", value: "3-4 Years" },
       { label: "Vacancies", value: "1" },
       { label: "Salary", value: "Not Disclosed" }
+      
     ],
 
     sections: [

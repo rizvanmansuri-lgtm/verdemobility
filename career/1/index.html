@@ -57,15 +57,17 @@
 
   /* Buttons */
   .btn-brand{
-    background-color:var(--vm-green);
-    border:1px solid var(--vm-green);
+    /* VerdeMobility brand gradient, used site-wide on primary CTAs */
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
+    background-color:var(--vm-green); /* fallback if gradients are unsupported */
+    border:1px solid transparent;
     color:#06140d;
     border-radius:var(--vm-radius-pill);
     font-weight:600;
     padding:.7rem 1.6rem;
     transition:all .2s ease;
   }
-  .btn-brand:hover{ background-color:var(--vm-green-dark); border-color:var(--vm-green-dark); color:#06140d; }
+  .btn-brand:hover{ filter:brightness(.94); color:#06140d; }
   .btn-outline-brand{
     background-color:transparent;
     border:1px solid var(--vm-border);
@@ -147,6 +149,15 @@
     border-radius:var(--vm-radius-pill);
     font-weight:600; font-size:.75rem; padding:.35rem .75rem;
   }
+  /* "New" badge — added automatically to jobs posted within the last
+     N days (see NEW_BADGE_DAYS in js/jobs-render.js). Do not add this
+     by hand in jobs-data.js — it's computed from postedDate. */
+  .badge-new{
+    background-color:var(--vm-green-soft);
+    color:var(--vm-green-dark);
+    border-radius:var(--vm-radius-pill);
+    font-weight:600; font-size:.75rem; padding:.35rem .75rem;
+  }
 
   /* Navbar */
   .navbar-brand-vm{ font-family:var(--vm-font-heading); font-weight:800; font-size:1.35rem; color:#fff !important; }
@@ -156,7 +167,16 @@
 
   /* Hero */
   .hero-careers{
-    background:radial-gradient(circle at 20% 20%, #10221a 0%, var(--vm-dark) 55%);
+    /* TEMP STOCK PHOTO (free-to-use, from Pexels) as a full banner background —
+       swap the image URL for real VerdeMobility photography before launch.
+       The dark gradient overlay stays either way, it's what keeps the white
+       text readable on top of any photo. */
+    background-image:
+      linear-gradient(180deg, rgba(8,14,23,.88) 0%, rgba(8,14,23,.80) 55%, rgba(8,14,23,.92) 100%),
+      url('https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
     padding-top:7rem;
     padding-bottom:6rem;
     color:#fff;
@@ -230,7 +250,7 @@
   /* Job card (Current Openings) */
   .job-card{
     background:#fff;
-    border:1px solid var(--vm-border);
+    border:1px solid #d5dbe2; /* darkened from --vm-border so cards read clearly against the white/light-gray page background */
     border-radius:var(--vm-radius-lg);
     padding:1.75rem;
     height:100%;
@@ -250,12 +270,13 @@
   .process-step .step-num{
     width:56px; height:56px;
     border-radius:50%;
-    background:var(--vm-dark);
-    color:var(--vm-green);
+    background-image:linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%);
+    color:#06140d;
     display:flex; align-items:center; justify-content:center;
     font-weight:700; font-size:1.2rem;
     margin:0 auto 1rem;
-    border:2px solid var(--vm-green);
+    border:none;
+    box-shadow:var(--vm-shadow-sm);
   }
   .process-step h3{ font-size:1.05rem; }
   .process-step p{ color:var(--vm-text-gray); font-size:.9rem; }
@@ -266,11 +287,11 @@
     .process-line{
       display:block;
       position:absolute;
-      top:28px;
-      left:calc(50% + 28px);
+      top:43px;
+      left:calc(50% + 43px);
       width:calc(100% - 56px);
       height:2px;
-      background:var(--vm-border);
+      background:var(--vm-text-gray);
       z-index:0;
     }
   }
@@ -350,7 +371,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-vm bg-dark-brand fixed-top py-3">
     <div class="container">
-      <a class="navbar-brand navbar-brand-vm" href="index.html">Verde<span class="brand-accent">Mobility</span></a>
+      <a class="navbar-brand navbar-brand-vm" href="index.html"><img src="vmlogo.svg" alt="VerdeMobility" width="175"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -392,7 +413,7 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">Why Join Us</p>
-      <h2 class="h2 mb-3">Why Join VerdeMobility</h2>
+      <h2 class=" mb-3">Why Join VerdeMobility</h2>
       <p class="text-muted mx-auto" style="max-width:620px;">
         We're a fast-growing EV charging company solving real infrastructure problems for
         homes, businesses, and public spaces across India — and we want people who care about
@@ -403,29 +424,29 @@
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-rocket-takeoff"></i></div>
-          <h3 class="h6 mb-2">Real Impact</h3>
-          <p class="text-muted small mb-0">Your work directly accelerates India's shift to electric mobility.</p>
+          <h3 class="h4 mb-2">Real Impact</h3>
+          <p class="text-muted mb-0">Your work directly accelerates India's shift to electric mobility.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-graph-up-arrow"></i></div>
-          <h3 class="h6 mb-2">Fast Growth</h3>
-          <p class="text-muted small mb-0">Join early and grow alongside a scaling product and team.</p>
+          <h3 class="h4 mb-2">Fast Growth</h3>
+          <p class="text-muted mb-0">Join early and grow alongside a scaling product and team.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-people"></i></div>
-          <h3 class="h6 mb-2">Collaborative Culture</h3>
-          <p class="text-muted small mb-0">Flat structure, open communication, and ownership from day one.</p>
+          <h3 class="h4 mb-2">Collaborative Culture</h3>
+          <p class="text-muted mb-0">Flat structure, open communication, and ownership from day one.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-mortarboard"></i></div>
-          <h3 class="h6 mb-2">Learning-First</h3>
-          <p class="text-muted small mb-0">Hands-on exposure to hardware, IoT, and cloud in one product.</p>
+          <h3 class="h4 mb-2">Learning-First</h3>
+          <p class="text-muted mb-0">Hands-on exposure to hardware, IoT, and cloud in one product.</p>
         </div>
       </div>
     </div>
@@ -437,30 +458,36 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">Inside VerdeMobility</p>
-      <h2 class="h2 mb-3">Life at VerdeMobility</h2>
+      <h2 class=" mb-3">Life at VerdeMobility</h2>
       <p class="text-muted mx-auto" style="max-width:620px;">
         A look at how our team works, builds, and celebrates together — on the factory floor,
         in the field, and around the office.
       </p>
     </div>
+    <!-- TEMP STOCK PHOTOS (free-to-use, from Pexels) — replace each background-image
+         with real team/office/field photography before launch. Only the URL needs
+         to change; .life-photo already handles sizing/cropping. Captions below were
+         written to match what's actually in each stock photo (laptops/meetings, not
+         literal charger installs or parties) — update captions too if you swap in
+         photos that show something different. -->
     <div class="row g-3">
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#0d2a1f;">
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3182822/pexels-photo-3182822.jpeg?auto=compress&cs=tinysrgb&w=800');">
           <div class="life-caption">Engineering &amp; product huddles</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#123320;">
-          <div class="life-caption">On-site charger installations</div>
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3184323/pexels-photo-3184323.jpeg?auto=compress&cs=tinysrgb&w=800');">
+          <div class="life-caption">Cross-team strategy sessions</div>
         </div>
       </div>
       <div class="col-md-6 col-lg-4">
-        <div class="life-photo" style="background-color:#0a1f17;">
-          <div class="life-caption">Team celebrations &amp; milestones</div>
+        <div class="life-photo" style="background-image:url('https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800');">
+          <div class="life-caption">Collaboration &amp; teamwork</div>
         </div>
       </div>
     </div>
-    <p class="text-center text-muted small mt-3 mb-0"><em>Placeholder image blocks — replace with real team photography.</em></p>
+   
   </div>
 </section>
 
@@ -469,35 +496,35 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">What Drives Us</p>
-      <h2 class="h2 mb-3">Our Values</h2>
+      <h2 class=" mb-3">Our Values</h2>
     </div>
     <div class="row g-4">
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-shield-check"></i></div>
-          <h3 class="h6 mb-2">Safety First</h3>
-          <p class="text-muted small mb-0">Every product decision starts with user and grid safety.</p>
+          <h3 class="h4 mb-2">Safety First</h3>
+          <p class="text-muted mb-0">Every product decision starts with user and grid safety.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-lightbulb"></i></div>
-          <h3 class="h6 mb-2">Innovate Boldly</h3>
-          <p class="text-muted small mb-0">We challenge assumptions to build smarter charging solutions.</p>
+          <h3 class="h4 mb-2">Innovate Boldly</h3>
+          <p class="text-muted mb-0">We challenge assumptions to build smarter charging solutions.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-hand-thumbs-up"></i></div>
-          <h3 class="h6 mb-2">Own the Outcome</h3>
-          <p class="text-muted small mb-0">We take responsibility from idea through to installation.</p>
+          <h3 class="h4 mb-2">Own the Outcome</h3>
+          <p class="text-muted mb-0">We take responsibility from idea through to installation.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-globe-asia-australia"></i></div>
-          <h3 class="h6 mb-2">Sustainability</h3>
-          <p class="text-muted small mb-0">Every charger deployed moves India closer to clean mobility.</p>
+          <h3 class="h4 mb-2">Sustainability</h3>
+          <p class="text-muted mb-0">Every charger deployed moves India closer to clean mobility.</p>
         </div>
       </div>
     </div>
@@ -509,15 +536,15 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">Perks</p>
-      <h2 class="h2 mb-3">Benefits &amp; Perks</h2>
+      <h2 class=" mb-3">Benefits &amp; Perks</h2>
     </div>
     <div class="row g-4">
       <div class="col-md-6 col-lg-4">
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-heart-pulse"></i></div>
           <div>
-            <h3 class="h6 mb-1">Health Insurance</h3>
-            <p class="text-muted small mb-0">Comprehensive medical coverage for you and your family.</p>
+            <h3 class="h4 mb-1">Health Insurance</h3>
+            <p class="text-muted mb-0">Comprehensive medical coverage for you and your family.</p>
           </div>
         </div>
       </div>
@@ -525,8 +552,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-clock-history"></i></div>
           <div>
-            <h3 class="h6 mb-1">Flexible Hours</h3>
-            <p class="text-muted small mb-0">Hybrid work options with flexible daily schedules.</p>
+            <h3 class="h4 mb-1">Flexible Hours</h3>
+            <p class="text-muted mb-0">Hybrid work options with flexible daily schedules.</p>
           </div>
         </div>
       </div>
@@ -534,8 +561,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-cash-coin"></i></div>
           <div>
-            <h3 class="h6 mb-1">Performance Bonuses</h3>
-            <p class="text-muted small mb-0">Rewarding impact with competitive incentive structures.</p>
+            <h3 class="h4 mb-1">Performance Bonuses</h3>
+            <p class="text-muted mb-0">Rewarding impact with competitive incentive structures.</p>
           </div>
         </div>
       </div>
@@ -543,8 +570,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-book"></i></div>
           <div>
-            <h3 class="h6 mb-1">Learning &amp; Development</h3>
-            <p class="text-muted small mb-0">Budget and time for courses, certifications, and conferences.</p>
+            <h3 class="h4 mb-1">Learning &amp; Development</h3>
+            <p class="text-muted mb-0">Budget and time for courses, certifications, and conferences.</p>
           </div>
         </div>
       </div>
@@ -552,8 +579,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-ev-station"></i></div>
           <div>
-            <h3 class="h6 mb-1">EV Charging Perks</h3>
-            <p class="text-muted small mb-0">Discounted or free charging access at VerdeMobility stations.</p>
+            <h3 class="h4 mb-1">EV Charging Perks</h3>
+            <p class="text-muted mb-0">Discounted or free charging access at VerdeMobility stations.</p>
           </div>
         </div>
       </div>
@@ -561,8 +588,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-people-fill"></i></div>
           <div>
-            <h3 class="h6 mb-1">Team Events</h3>
-            <p class="text-muted small mb-0">Regular offsites, celebrations, and milestone recognitions.</p>
+            <h3 class="h4 mb-1">Team Events</h3>
+            <p class="text-muted mb-0">Regular offsites, celebrations, and milestone recognitions.</p>
           </div>
         </div>
       </div>
@@ -575,59 +602,17 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">Join The Team</p>
-      <h2 class="h2 mb-3">Current Openings</h2>
+      <h2 class=" mb-3">Current Openings</h2>
       <p class="text-muted mx-auto" style="max-width:620px;">Explore our open roles across engineering, sales, and operations.</p>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <!-- Job cards are injected here by js/jobs-render.js, reading js/jobs-data.js.
+         To change which jobs appear, edit js/jobs-data.js (do not edit here). -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="openings-grid"></div>
 
-      <div class="col">
-        <article class="job-card">
-          <div class="d-flex gap-2 mb-3 flex-wrap">
-            <span class="badge-dept">Engineering</span>
-            <span class="badge-type">Full-Time</span>
-          </div>
-          <h3 class="h5 mb-2">Embedded Firmware Engineer</h3>
-          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Anand, Gujarat</p>
-          <p class="job-desc mb-4">Design and develop firmware for AC/DC EV charger controllers, ensuring reliability and OCPP compliance.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
-            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="col">
-        <article class="job-card">
-          <div class="d-flex gap-2 mb-3 flex-wrap">
-            <span class="badge-dept">Sales &amp; Marketing</span>
-            <span class="badge-type">Full-Time</span>
-          </div>
-          <h3 class="h5 mb-2">Business Development Manager</h3>
-          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Ahmedabad, Gujarat</p>
-          <p class="job-desc mb-4">Drive B2B partnerships across fleets, real estate, and hospitality to expand our charging network.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
-            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="col">
-        <article class="job-card">
-          <div class="d-flex gap-2 mb-3 flex-wrap">
-            <span class="badge-dept">Product &amp; Design</span>
-            <span class="badge-type">Full-Time</span>
-          </div>
-          <h3 class="h5 mb-2">UI/UX Designer</h3>
-          <p class="job-meta mb-2"><i class="bi bi-geo-alt me-1"></i>Remote</p>
-          <p class="job-desc mb-4">Shape the user experience of our charging app and CMS dashboard used by fleets and homeowners.</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <a href="#" class="btn btn-brand btn-sm">Apply Now</a>
-            <a href="career-details.html" class="btn btn-outline-brand btn-sm">View Details</a>
-          </div>
-        </article>
-      </div>
-
+    <!-- Empty state: shown automatically when no jobs are marked featured+active -->
+    <div class="text-center py-4 d-none" id="openings-empty">
+      <p class="text-muted mb-3">We don't have any open roles matching this view right now — but new positions go up often.</p>
+      <a href="careers.html" class="btn btn-outline-brand btn-sm">Browse All Departments</a>
     </div>
     <div class="text-center mt-5">
       <a href="careers.html" class="btn-vm-morph">
@@ -643,7 +628,7 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">How It Works</p>
-      <h2 class="h2 mb-3">Hiring Process</h2>
+      <h2 class=" mb-3">Hiring Process</h2>
     </div>
     <div class="row g-4">
       <div class="col-6 col-lg-3">
@@ -686,7 +671,7 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">In Their Words</p>
-      <h2 class="h2 mb-3">Employee Testimonials</h2>
+      <h2 class=" mb-3">Employee Testimonials</h2>
     </div>
     <div class="row g-4">
       <div class="col-md-4">
@@ -737,7 +722,7 @@
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-eyebrow mb-2">Got Questions?</p>
-      <h2 class="h2 mb-3">Frequently Asked Questions</h2>
+      <h2 class=" mb-3">Frequently Asked Questions</h2>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-8">
@@ -804,24 +789,17 @@
 <!-- ============================== 10. SUBMIT RESUME CTA ============================== -->
 <section id="resume-cta" class="container py-5">
   <div class="cta-dark text-center p-5 py-md-5">
-    <h2 class="h2 mb-3">Don't See the Right Role?</h2>
+    <h2 class=" mb-3">Don't See the Right Role?</h2>
     <p class="mb-4 mx-auto" style="max-width:520px;">
       We're always looking for talented people who care about EV charging and sustainable
-      mobility. Submit your resume and we'll reach out when a fit opens up.
+      mobility. Email us your resume and we'll reach out when a fit opens up.
     </p>
-    <form class="row g-2 justify-content-center mx-auto" style="max-width:560px;">
-      <div class="col-12 col-sm-5">
-        <label for="ctaName" class="visually-hidden">Full name</label>
-        <input type="text" class="form-control" id="ctaName" placeholder="Your full name">
-      </div>
-      <div class="col-12 col-sm-5">
-        <label for="ctaEmail" class="visually-hidden">Email</label>
-        <input type="email" class="form-control" id="ctaEmail" placeholder="Your email">
-      </div>
-      <div class="col-12 col-sm-2 d-grid">
-        <button type="submit" class="btn btn-brand">Submit</button>
-      </div>
-    </form>
+    <!-- No embedded form here (there's no backend to receive submissions) — this
+         opens the visitor's email app with our address and a ready-made subject
+         line, same pattern used for job "Apply Now" buttons. -->
+    <a href="mailto:career@slscorp.com?subject=Resume%20Submission%20-%20General%20Interest" class="btn btn-brand">
+      <i class="bi bi-envelope me-2"></i>Email Us Your Resume
+    </a>
   </div>
 </section>
 
@@ -873,5 +851,9 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Careers data + render engine — single source of truth for all job listings.
+     Edit js/jobs-data.js to add/close jobs; do not edit job HTML by hand. -->
+<script src="js/jobs-data.js"></script>
+<script src="js/jobs-render.js"></script>
 </body>
 </html>

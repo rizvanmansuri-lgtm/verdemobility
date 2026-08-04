@@ -34,14 +34,31 @@
     --vm-radius-lg:20px;
     --vm-radius-md:14px;
     --vm-radius-pill:50px;
-    --vm-font-heading:'Poppins', 'Inter', sans-serif;  /* CHANGE HERE if brand font differs */
-    --vm-font-body:'Inter', 'Poppins', sans-serif;
+    
+    --vm-font-heading:'Outfit', 'sans-serif';  /* CHANGE HERE if brand font differs */
+    --vm-font-body:'Outfit', 'sans-serif';
     --vm-shadow-sm:0 4px 14px rgba(18,22,31,0.06);
     --vm-shadow-md:0 10px 30px rgba(18,22,31,0.10);
   }
 
   body{ font-family:var(--vm-font-body); color:var(--vm-text-dark); background:var(--vm-light-bg); }
+
   h1,h2,h3,h4,h5,.brand-font{ font-family:var(--vm-font-heading); font-weight:700; }
+
+  .vm-title,h1,.h2{
+    font-size: 65px;
+    line-height: 1.25;
+    font-weight: 300;
+  }
+  p{
+    font-size: 24px;
+    line-height: 1.5;
+  }
+  .btn{
+    font-size: 16px;
+    font-family: Poppins;
+    font-weight: 500;
+  }
   a{ text-decoration:none; }
   .text-accent{ color:var(--vm-green); }
   .bg-dark-brand{ background-color:var(--vm-dark); }
@@ -363,6 +380,16 @@
   }
   .footer-social a:hover{ background:var(--vm-green); border-color:var(--vm-green); color:#06140d; }
   .footer-bottom{ border-top:1px solid rgba(255,255,255,.08); }
+
+
+  .card-title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .card-text{
+    font-size: 20px;
+    line-height: 28px;  
+  }
 </style>
 </head>
 <body>
@@ -393,7 +420,7 @@
 <section class="hero-careers text-center">
   <div class="container">
     <span class="badge-pill-brand mb-4"><i class="bi bi-lightning-charge-fill"></i> We're Hiring</span>
-    <h1 class="display-3 mb-3">Careers at VerdeMobility</h1>
+    <h1 class=" mb-3">Careers at VerdeMobility</h1>
     <p class="lead mx-auto mb-4" style="max-width:640px;">
       We're building India's next-generation EV charging ecosystem — reliable, safe,
       and sustainable. Come build the future of electric mobility with us.
@@ -424,28 +451,28 @@
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-rocket-takeoff"></i></div>
-          <h3 class="h6 mb-2">Real Impact</h3>
+          <h3 class="card-title ">Real Impact</h3>
           <p class="text-muted small mb-0">Your work directly accelerates India's shift to electric mobility.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-graph-up-arrow"></i></div>
-          <h3 class="h6 mb-2">Fast Growth</h3>
+          <h3 class="card-title ">Fast Growth</h3>
           <p class="text-muted small mb-0">Join early and grow alongside a scaling product and team.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-people"></i></div>
-          <h3 class="h6 mb-2">Collaborative Culture</h3>
+          <h3 class="card-title ">Collaborative Culture</h3>
           <p class="text-muted small mb-0">Flat structure, open communication, and ownership from day one.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-3">
         <div class="info-card text-center">
           <div class="icon-chip mx-auto"><i class="bi bi-mortarboard"></i></div>
-          <h3 class="h6 mb-2">Learning-First</h3>
+          <h3 class="card-title ">Learning-First</h3>
           <p class="text-muted small mb-0">Hands-on exposure to hardware, IoT, and cloud in one product.</p>
         </div>
       </div>
@@ -502,29 +529,29 @@
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-shield-check"></i></div>
-          <h3 class="h6 mb-2">Safety First</h3>
-          <p class="text-muted small mb-0">Every product decision starts with user and grid safety.</p>
+          <h3 class="card-title ">Safety First</h3>
+          <p class="card-text mb-0">Every product decision starts with user and grid safety.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-lightbulb"></i></div>
-          <h3 class="h6 mb-2">Innovate Boldly</h3>
-          <p class="text-muted small mb-0">We challenge assumptions to build smarter charging solutions.</p>
+          <h3 class="card-title ">Innovate Boldly</h3>
+          <p class="card-text mb-0">We challenge assumptions to build smarter charging solutions.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-hand-thumbs-up"></i></div>
-          <h3 class="h6 mb-2">Own the Outcome</h3>
-          <p class="text-muted small mb-0">We take responsibility from idea through to installation.</p>
+          <h3 class="card-title ">Own the Outcome</h3>
+          <p class="card-text mb-0">We take responsibility from idea through to installation.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3">
         <div class="value-card">
           <div class="icon-chip"><i class="bi bi-globe-asia-australia"></i></div>
-          <h3 class="h6 mb-2">Sustainability</h3>
-          <p class="text-muted small mb-0">Every charger deployed moves India closer to clean mobility.</p>
+          <h3 class="card-title ">Sustainability</h3>
+          <p class="card-text mb-0">Every charger deployed moves India closer to clean mobility.</p>
         </div>
       </div>
     </div>
@@ -543,8 +570,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-heart-pulse"></i></div>
           <div>
-            <h3 class="h6 mb-1">Health Insurance</h3>
-            <p class="text-muted small mb-0">Comprehensive medical coverage for you and your family.</p>
+            <h3 class="card-title ">Health Insurance</h3>
+            <p class="card-text mb-0">Comprehensive medical coverage for you and your family.</p>
           </div>
         </div>
       </div>
@@ -552,8 +579,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-clock-history"></i></div>
           <div>
-            <h3 class="h6 mb-1">Flexible Hours</h3>
-            <p class="text-muted small mb-0">Hybrid work options with flexible daily schedules.</p>
+            <h3 class="card-title ">Flexible Hours</h3>
+            <p class="card-text mb-0">Hybrid work options with flexible daily schedules.</p>
           </div>
         </div>
       </div>
@@ -561,8 +588,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-cash-coin"></i></div>
           <div>
-            <h3 class="h6 mb-1">Performance Bonuses</h3>
-            <p class="text-muted small mb-0">Rewarding impact with competitive incentive structures.</p>
+            <h3 class="card-title ">Performance Bonuses</h3>
+            <p class="card-text mb-0">Rewarding impact with competitive incentive structures.</p>
           </div>
         </div>
       </div>
@@ -570,8 +597,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-book"></i></div>
           <div>
-            <h3 class="h6 mb-1">Learning &amp; Development</h3>
-            <p class="text-muted small mb-0">Budget and time for courses, certifications, and conferences.</p>
+            <h3 class="card-title ">Learning &amp; Development</h3>
+            <p class="card-text mb-0">Budget and time for courses, certifications, and conferences.</p>
           </div>
         </div>
       </div>
@@ -579,8 +606,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-ev-station"></i></div>
           <div>
-            <h3 class="h6 mb-1">EV Charging Perks</h3>
-            <p class="text-muted small mb-0">Discounted or free charging access at VerdeMobility stations.</p>
+            <h3 class="card-title ">EV Charging Perks</h3>
+            <p class="card-text mb-0">Discounted or free charging access at VerdeMobility stations.</p>
           </div>
         </div>
       </div>
@@ -588,8 +615,8 @@
         <div class="benefit-item">
           <div class="icon-chip"><i class="bi bi-people-fill"></i></div>
           <div>
-            <h3 class="h6 mb-1">Team Events</h3>
-            <p class="text-muted small mb-0">Regular offsites, celebrations, and milestone recognitions.</p>
+            <h3 class="card-title ">Team Events</h3>
+            <p class="card-text mb-0">Regular offsites, celebrations, and milestone recognitions.</p>
           </div>
         </div>
       </div>

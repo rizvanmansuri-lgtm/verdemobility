@@ -28,7 +28,7 @@
 
 const VM_CAREERS_CONFIG = {
   NEW_BADGE_DAYS: 14,        // a job shows a "New" badge for this many days after postedDate
-  HOMEPAGE_JOB_COUNT: 3,     // how many jobs show in index.html "Current Openings"
+  HOMEPAGE_JOB_COUNT: 6,     // how many jobs show in index.html "Current Openings"
   RELATED_JOB_COUNT: 3       // how many "Related Jobs" show on career-details.html
 };
 
@@ -73,6 +73,37 @@ function vmEscape(str) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+// Finds a <meta> tag by name or property attribute, creating it in <head>
+// if it doesn't exist yet, then sets its content. Used by vmUpdateMetaTags.
+function vmSetMetaTag(attr, key, content) {
+  var selector = 'meta[' + attr + '="' + key + '"]';
+  var tag = document.querySelector(selector);
+  if (!tag) {
+    tag = document.createElement("meta");
+    tag.setAttribute(attr, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute("content", content);
+}
+
+// Updates the page <title> and meta description / Open Graph tags to
+// match the job currently being viewed on career-details.html. See the
+// caveat comment where this is called from vmRenderJobDetail() — this
+// covers the browser tab + any crawler that executes JS, but true
+// WhatsApp/LinkedIn link previews need server-rendered or per-job static
+// HTML (a follow-up project, not something client-side JS can fully do).
+function vmUpdateMetaTags(job) {
+  var title = job.title + " | Careers at VerdeMobility";
+  var description = job.teaser || ("Apply for " + job.title + " at VerdeMobility — " + job.location + ".");
+
+  document.title = title;
+  vmSetMetaTag("name", "description", description);
+  vmSetMetaTag("property", "og:title", title);
+  vmSetMetaTag("property", "og:description", description);
+  vmSetMetaTag("property", "og:url", window.location.href);
+  vmSetMetaTag("property", "og:type", "website");
 }
 
 /* ---------------------------------------------------------------------
@@ -148,28 +179,119 @@ function vmRenderHomepageOpenings() {
    PAGE: careers.html — full "Open Positions" listing
    --------------------------------------------------------------------- */
 
-function vmRenderCareersList() {
+// jobs = active jobs, optionally narrowed by the search bar. Total is the
+// unfiltered count, used in the "Showing X of Y roles" label so it's clear
+// when a search/filter has narrowed the list vs. there just being no jobs.
+function vmRenderCareersList(filters) {
   var grid = document.getElementById("careers-grid");
   var emptyState = document.getElementById("careers-empty");
   var countLabel = document.getElementById("careers-count");
   if (!grid) return;
 
-  var jobs = vmGetActiveJobs();
+  var allActive = vmGetActiveJobs();
+  var jobs = vmFilterJobs(allActive, filters);
 
   if (countLabel) {
-    countLabel.textContent = jobs.length === 0
-      ? "No open positions at the moment"
-      : "Showing " + jobs.length + " of " + jobs.length + " roles";
+    if (allActive.length === 0) {
+      countLabel.textContent = "No open positions at the moment";
+    } else if (jobs.length === allActive.length) {
+      countLabel.textContent = "Showing " + jobs.length + " of " + allActive.length + " roles";
+    } else {
+      countLabel.textContent = "Showing " + jobs.length + " of " + allActive.length + " roles matching your search";
+    }
   }
 
   if (jobs.length === 0) {
     grid.innerHTML = "";
-    if (emptyState) emptyState.classList.remove("d-none");
+    if (emptyState) {
+      emptyState.classList.remove("d-none");
+      emptyState.querySelector("p") && (emptyState.querySelector("p").textContent =
+        allActive.length === 0
+          ? "No open positions at the moment — please check back soon."
+          : "No roles match your search. Try a different keyword or clear the filters.");
+    }
     return;
   }
 
   if (emptyState) emptyState.classList.add("d-none");
   grid.innerHTML = jobs.map(vmJobCardHTML).join("");
+}
+
+// Narrows a list of jobs by keyword (matched against title + teaser +
+// department), department (exact match, "All Departments" = no filter),
+// and location (exact match, "All Locations" = no filter).
+function vmFilterJobs(jobs, filters) {
+  if (!filters) return jobs;
+  var keyword = (filters.keyword || "").trim().toLowerCase();
+  var department = filters.department || "";
+  var location = filters.location || "";
+
+  return jobs.filter(function (job) {
+    var matchesKeyword = !keyword ||
+      (job.title + " " + (job.teaser || "") + " " + job.department).toLowerCase().indexOf(keyword) !== -1;
+    var matchesDept = !department || department.indexOf("All") === 0 || job.department === department;
+    var matchesLocation = !location || location.indexOf("All") === 0 || job.location === location;
+    return matchesKeyword && matchesDept && matchesLocation;
+  });
+}
+
+// The <select> filter options used to be a fixed, hand-typed list in
+// careers.html — which meant they could silently go stale (e.g. an "USA"
+// option with no matching job, or a missing department for a new job).
+// This rebuilds both dropdowns from whatever departments/locations
+// actually exist among ACTIVE jobs right now, so they always stay in
+// sync with js/jobs-data.js with zero manual upkeep.
+function vmPopulateCareersFilters() {
+  var deptSelect = document.getElementById("deptFilter");
+  var locationSelect = document.getElementById("locationFilter");
+  if (!deptSelect && !locationSelect) return;
+
+  var activeJobs = vmGetActiveJobs();
+
+  if (deptSelect) {
+    var departments = activeJobs
+      .map(function (j) { return j.department; })
+      .filter(function (value, index, arr) { return arr.indexOf(value) === index; });
+    deptSelect.innerHTML = '<option selected>All Departments</option>' +
+      departments.map(function (d) { return '<option>' + vmEscape(d) + '</option>'; }).join("");
+  }
+
+  if (locationSelect) {
+    var locations = activeJobs
+      .map(function (j) { return j.location; })
+      .filter(function (value, index, arr) { return arr.indexOf(value) === index; });
+    locationSelect.innerHTML = '<option selected>All Locations</option>' +
+      locations.map(function (l) { return '<option>' + vmEscape(l) + '</option>'; }).join("");
+  }
+}
+
+// Wires the search input + two <select> filters + submit button on
+// careers.html to actually filter the job grid, instead of doing nothing
+// (or reloading the page) on submit.
+function vmInitCareersSearch() {
+  var form = document.querySelector('form[role="search"][aria-label="Job search"]');
+  var searchInput = document.getElementById("jobSearch");
+  var deptSelect = document.getElementById("deptFilter");
+  var locationSelect = document.getElementById("locationFilter");
+  if (!form) return; // not on this page
+
+  function runFilter() {
+    vmRenderCareersList({
+      keyword: searchInput ? searchInput.value : "",
+      department: deptSelect ? deptSelect.value : "",
+      location: locationSelect ? locationSelect.value : ""
+    });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // no backend to submit to — filter in place instead
+    runFilter();
+  });
+
+  // Live filtering as you type/select, so hitting "Go" isn't required.
+  if (searchInput) searchInput.addEventListener("input", runFilter);
+  if (deptSelect) deptSelect.addEventListener("change", runFilter);
+  if (locationSelect) locationSelect.addEventListener("change", runFilter);
 }
 
 /* ---------------------------------------------------------------------
@@ -271,10 +393,20 @@ function vmRenderJobDetail() {
   // ---- Header (badges, title, meta chips, apply button) ----
   var header = document.getElementById("job-header-root");
   if (header) {
+    var shareUrl = window.location.href;
+    var shareText = encodeURIComponent(job.title + " at VerdeMobility — " + shareUrl);
+    var whatsappUrl = "https://wa.me/?text=" + shareText;
+    var linkedinUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(shareUrl);
+
     header.innerHTML =
       '<div class="d-flex gap-2 mb-3 flex-wrap">' + vmBadgesHTML(job) + '</div>' +
       '<h1 class="h2 mb-1">' + vmEscape(job.title) + '</h1>' +
-      '<p class="text-muted small mb-3">Job ID: ' + vmEscape(job.id) + '</p>' +
+      '<p class="text-muted small mb-3 d-flex align-items-center flex-wrap gap-2">' +
+        '<span>Job ID: <strong>' + vmEscape(job.id) + '</strong></span>' +
+        '<button type="button" id="copy-job-id-btn" class="copy-job-id-btn" title="Copy Job ID" data-job-id="' + vmEscape(job.id) + '">' +
+          '<i class="bi bi-clipboard"></i> Copy' +
+        '</button>' +
+      '</p>' +
       '<div class="row gy-2 mb-4">' +
         '<div class="col-6 col-md-3"><div class="meta-chip"><i class="bi bi-geo-alt"></i> ' + vmEscape(job.location) + '</div></div>' +
         '<div class="col-6 col-md-3"><div class="meta-chip"><i class="bi bi-briefcase"></i> ' + vmEscape(job.employmentTypeShort) + '</div></div>' +
@@ -287,11 +419,59 @@ function vmRenderJobDetail() {
           '<span class="morph-icon"><i class="bi bi-arrow-left"></i></span>' +
           '<span>Back to Careers</span>' +
         '</a>' +
+        '<span class="d-flex align-items-center gap-2 ms-lg-2">' +
+          '<span class="text-muted small d-none d-sm-inline">Share:</span>' +
+          '<a href="' + whatsappUrl + '" target="_blank" rel="noopener" class="share-btn share-btn-whatsapp" aria-label="Share this job on WhatsApp"><i class="bi bi-whatsapp"></i></a>' +
+          '<a href="' + linkedinUrl + '" target="_blank" rel="noopener" class="share-btn share-btn-linkedin" aria-label="Share this job on LinkedIn"><i class="bi bi-linkedin"></i></a>' +
+        '</span>' +
       '</div>';
       // Note: the applicationNote line that used to sit here was moved into
       // the "Application Guidelines" content section below (see
       // vmAutoSections), so it isn't repeated twice on the page.
+
+    // Wire up the Copy Job ID button. Kept as a plain click handler (not
+    // inline onclick) so this file stays the only place with behavior logic.
+    var copyBtn = document.getElementById("copy-job-id-btn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var idToCopy = copyBtn.getAttribute("data-job-id");
+        var showCopied = function () {
+          copyBtn.innerHTML = '<i class="bi bi-check2"></i> Copied';
+          copyBtn.classList.add("copied");
+          setTimeout(function () {
+            copyBtn.innerHTML = '<i class="bi bi-clipboard"></i> Copy';
+            copyBtn.classList.remove("copied");
+          }, 1500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(idToCopy).then(showCopied);
+        } else {
+          // Fallback for older browsers without the Clipboard API
+          var tempInput = document.createElement("input");
+          tempInput.value = idToCopy;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+          showCopied();
+        }
+      });
+    }
   }
+
+  // ---- Meta tags (document title, description, Open Graph) ----
+  // IMPORTANT CAVEAT: this updates tags client-side, after the page has
+  // already loaded. It's correct for anyone who opens the page in a
+  // browser (accurate tab title, and correct content if they view-source
+  // after JS runs). BUT most link-preview crawlers (WhatsApp, LinkedIn,
+  // Facebook) fetch the raw HTML and do NOT execute JavaScript — so a
+  // shared link may still show generic/blank preview text rather than
+  // this job's title. Getting real per-job previews needs either a
+  // small static-page generator (one HTML file per job, similar to how
+  // product pages were generated from PDFs) or server-side rendering.
+  // This is still worth doing now for tab titles and any crawler that
+  // does render JS, and it's the correct foundation to build on later.
+  vmUpdateMetaTags(job);
 
   // ---- Main content sections (Job Description / Skills / etc.) ----
   // Order: this job's own custom sections first (from jobs-data.js), then
@@ -344,6 +524,8 @@ function vmRenderJobDetail() {
    --------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", function () {
   vmRenderHomepageOpenings();
+  vmPopulateCareersFilters(); // must run before the first render so options exist
   vmRenderCareersList();
+  vmInitCareersSearch();
   vmRenderJobDetail();
 });
