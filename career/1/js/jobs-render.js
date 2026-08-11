@@ -28,7 +28,7 @@
 
 const VM_CAREERS_CONFIG = {
   NEW_BADGE_DAYS: 14,        // a job shows a "New" badge for this many days after postedDate
-  HOMEPAGE_JOB_COUNT: 6,     // how many jobs show in index.html "Current Openings"
+  HOMEPAGE_JOB_COUNT: 3,     // how many jobs show in index.html "Current Openings"
   RELATED_JOB_COUNT: 3       // how many "Related Jobs" show on career-details.html
 };
 
