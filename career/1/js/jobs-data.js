@@ -320,7 +320,7 @@ const VM_JOBS = [
     sortOrder: 40,
     status: "active",
     postedDate: "2026-04-02",
-    featured: false, // shows on careers.html, but not in the homepage top-3
+    featured: true, // shows on careers.html, but not in the homepage top-3
 
     teaser: "Handle on-site installation, commissioning, and troubleshooting of AC/DC chargers for commercial clients.",
 
@@ -363,7 +363,7 @@ const VM_JOBS = [
     sortOrder: 50,
     status: "active",
     postedDate: "2026-03-18",
-    featured: false,
+    featured: true,
 
     teaser: "Support charge point operators and end-users with troubleshooting, OTA updates, and app-related queries.",
 
@@ -410,7 +410,7 @@ const VM_JOBS = [
     sortOrder: 60,
     status: "discontinued", // <-- this is the only thing that changed to close it
     postedDate: "2026-02-01",
-    featured: false,
+    featured: true,
 
     teaser: "Assist in building cloud-connected features for our Central Management System using OCPP/OCPI protocols.",
 

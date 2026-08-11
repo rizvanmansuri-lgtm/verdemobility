@@ -172,7 +172,7 @@
      N days (see NEW_BADGE_DAYS in js/jobs-render.js). Don't set by hand. */
   .badge-new{
     background-color:var(--vm-green-soft);
-    color:var(--vm-green-dark);
+    color:red;
     border-radius:var(--vm-radius-pill);
     font-weight:600;
     font-size:.75rem;
@@ -217,25 +217,29 @@
   }
 
   /* Search / filter card */
-  .search-card{
-    background:#fff;
-    border-radius:var(--vm-radius-lg);
-    box-shadow:var(--vm-shadow-md);
-    margin-top:-4.5rem;
-    position:relative;
-    z-index:5;
-  }
-  .search-card .form-control,
-  .search-card .form-select{
-    border-radius:var(--vm-radius-pill);
-    border:1px solid var(--vm-border);
-    padding:.7rem 1.1rem;
-  }
-  .search-card .form-control:focus,
-  .search-card .form-select:focus{
-    border-color:var(--vm-green);
-    box-shadow:0 0 0 .2rem rgba(46,204,143,.15);
-  }
+.search-wrap{
+  position:relative;
+}
+.search-wrap .search-icon{
+  position:absolute;
+  left:1.1rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:#6c757d; /* adjust to taste */
+  pointer-events:none;
+  z-index:2;
+}
+.search-card .form-control{
+  border-radius:var(--vm-radius-pill);
+  border:1px solid var(--vm-border);
+  padding:.7rem 1.1rem .7rem 2.6rem; /* extra left padding for the icon */
+  width:100%;
+}
+.search-card .form-control:focus{
+  border-color:var(--vm-green);
+  box-shadow:0 0 0 .2rem rgba(46,204,143,.15);
+  outline:none;
+}
 
   /* Job card */
   .job-card{
@@ -367,10 +371,10 @@
       <div class="row g-3 align-items-center">
         <div class="col-12 col-lg-5">
           <label for="jobSearch" class="visually-hidden">Search jobs</label>
-          <div class="input-group">
-            <span class="input-group-text bg-white border-0" style="border-radius:var(--vm-radius-pill) 0 0 var(--vm-radius-pill);"><i class="bi bi-search"></i></span>
-            <input type="search" class="form-control border-start-0 ps-0" id="jobSearch" placeholder="Search job title or keyword">
-          </div>
+          <div class="search-wrap">
+  <i class="bi bi-search search-icon"></i>
+  <input type="search" class="form-control" id="jobSearch" placeholder="Search job title or keyword">
+</div>
         </div>
         <div class="col-6 col-lg-3">
           <label for="deptFilter" class="visually-hidden">Department</label>
