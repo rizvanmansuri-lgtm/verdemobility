@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LEV DC Charger | VerdeMobility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Syne+Mono&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* VerdeMobility Light Theme */
+    --green: #00a85a;
+    --green-bright: #00c96e;
+    --green-deep: #007a40;
+    --green-pale: #e6f9ef;
+    --green-pale2: #d0f2e2;
+
+    --bg: #ffffff;
+    --bg2: #f6faf8;
+    --bg3: #eef7f2;
+    --surface: #ffffff;
+    --surface2: #f0f7f3;
+
+    --border: rgba(0,168,90,0.12);
+    --border-strong: rgba(0,168,90,0.28);
+    --border-solid: #d4eddf;
+
+    --text: #0f1f15;
+    --text-dim: #4a7060;
+    --text-dimmer: #8aaa92;
+    --white: #ffffff;
+
+    --shadow-sm: 0 1px 4px rgba(0,100,50,0.08);
+    --shadow-md: 0 4px 20px rgba(0,100,50,0.10);
+    --shadow-lg: 0 12px 48px rgba(0,100,50,0.14);
+
+    --font-display: 'Outfit-bold', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'Syne Mono', monospace;
+
+    --container: 1240px;
+    --container-pad: 48px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--container-pad); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-solid);
+    box-shadow: 0 1px 12px rgba(0,100,50,0.07);
+  }
+  .nav-inner {
+    max-width: var(--container); margin: 0 auto; padding: 0 var(--container-pad);
+    display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green) !important; color: #fff !important; padding: 8px 20px; border-radius: 6px; font-weight: 600 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--green-bright) !important; }
+
+  /* Hamburger */
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; border-radius: 6px; transition: background 0.2s; }
+  .nav-hamburger:hover { background: var(--green-pale); }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99; background: #fff; border-bottom: 1px solid var(--border-solid); box-shadow: var(--shadow-lg); flex-direction: column; padding: 16px; animation: slideDown 0.2s ease; }
+  .mobile-menu.open { display: flex; }
+  @keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+  .mobile-menu a { display: block; padding: 14px 16px; font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; border-radius: 8px; transition: background 0.2s, color 0.2s; }
+  .mobile-menu a:hover { background: var(--green-pale); color: var(--green); }
+  .mobile-menu .mobile-cta { margin-top: 8px; background: var(--green); color: #fff !important; text-align: center; font-weight: 600; border-radius: 8px; }
+  .mobile-menu .mobile-cta:hover { background: var(--green-bright) !important; }
+
+  /* ── HERO SLIDER ── */
+  .hero-slider { position: relative; width: 100%; height: 100vh; min-height: 620px; overflow: hidden; margin-top: 64px; background: #061a10; }
+  .slide {
+    position: absolute; inset: 0; opacity: 0; visibility: hidden;
+    transition: opacity 1s ease; background-size: cover; background-position: center;
+    display: flex; align-items: center;
+  }
+  .slide.active { opacity: 1; visibility: visible; z-index: 1; }
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(4,18,11,0.82) 0%, rgba(4,18,11,0.5) 50%, rgba(4,18,11,0.2) 100%);
+  }
+  .slide-content { position: relative; z-index: 2; width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--container-pad); color: #fff; }
+  .slide-eyebrow { display:inline-flex; align-items:center; gap:8px; background: rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); padding:6px 14px; border-radius:100px; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; }
+  .slide-eyebrow::before { content:''; width:6px; height:6px; background:var(--green-bright); border-radius:50%; }
+  .slide-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(38px, 5.5vw, 74px); line-height: 1.05; letter-spacing:-1.5px; margin-bottom: 18px; }
+  .slide-title span { color: var(--green-bright); }
+  .slide-sub { font-size: clamp(15px, 1.6vw, 18px); max-width: 480px; color: rgba(255,255,255,0.82); margin-bottom: 36px; line-height: 1.65; }
+  .slide-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff;
+    padding: 14px 28px; border-radius: 8px; font-family: var(--font-body); font-weight: 600; font-size: 15px;
+    text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,168,90,0.35);
+  }
+  .btn-primary:hover { background: var(--green-bright); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,168,90,0.45); }
+  .btn-primary svg { width: 18px; height: 18px; }
+
+  .btn-outline-hero {
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.25); color: #fff;
+    padding: 14px 28px; border-radius: 8px; font-family: var(--font-body); font-weight: 600; font-size: 15px;
+    text-decoration: none; border: 1px solid rgba(255,255,255,0.5); cursor: pointer;
+    transition: background 0.2s, border-color 0.2s; position: relative; z-index: 9; overflow: hidden;
+  }
+  .btn-outline-hero:after { background-color: #fff; content: ""; height: 100%; left: 0; position: absolute; top: 0; transition: width .6s ease-in-out; width: 0; z-index: -1; }
+  .btn-outline-hero:hover::after { width: 100%; }
+  .btn-outline-hero:hover { color: var(--green-deep); }
+  .btn-outline-hero svg { width: 18px; height: 18px; }
+
+  .slider-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 3; }
+  .slider-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background .2s, transform .2s; border: none; padding: 0; }
+  .slider-dot.active { background: #fff; transform: scale(1.35); }
+
+  .slider-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35); color: #fff; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; backdrop-filter: blur(6px); transition: background .2s;
+  }
+  .slider-arrow:hover { background: rgba(255,255,255,0.28); }
+  .slider-arrow svg { width: 18px; height: 18px; }
+  .slider-arrow.prev { left: 24px; }
+  .slider-arrow.next { right: 24px; }
+
+  .trust-strip { background: var(--bg2); border-bottom: 1px solid var(--border-solid); padding: 16px 0; }
+  .trust-strip-inner { max-width: var(--container); margin: 0 auto; padding: 0 var(--container-pad); display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+  .trust-badge { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-dim); font-weight: 600; }
+  .trust-badge svg { width: 18px; height: 18px; stroke: var(--green-deep); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 96px 0; }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+  .section-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(32px, 4vw, 64px); line-height: 1.05; letter-spacing: -1px; color: var(--text); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--text-dim); max-width:100%; line-height: 1.65; margin-bottom: 56px; }
+
+  /* ── VEHICLE COMPATIBILITY ── */
+  .compat { background: var(--bg); }
+  .compat-grid { display: flex; gap: 64px; align-items: center; }
+  .compat-left { flex: 1; min-width: 0; }
+  .compat-right { flex: 1; min-width: 0; }
+  .compat-desc { font-size: 16px; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; max-width: 480px; }
+  .compat-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; max-width: 480px; }
+  .compat-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: var(--bg2); border: 1px dashed var(--border-strong); border-radius: 12px; padding: 20px 10px; text-align: center; }
+  .compat-logo svg { width: 26px; height: 26px; stroke: var(--green-deep); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .compat-logo span { font-size: 10.5px; font-weight: 600; color: var(--text-dim); letter-spacing: 0.2px; }
+  .compat-note { margin-top: 20px; font-size: 12.5px; color: var(--text-dimmer); }
+  .compat-img { width: 100%; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4/5; }
+  .compat-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ── FEATURES / WHY LEV DC ── */
+  .features { background: var(--bg2); }
+  .features-grid { display: flex; flex-wrap: wrap; gap: 2px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; }
+  .feature-card { flex: 1 1 calc(33.333% - 2px); min-width: 260px; background: var(--bg); padding: 36px 32px; transition: background 0.3s, box-shadow 0.3s; }
+  .feature-card:hover { background: var(--green); color: white; }
+  .feature-card:hover * { color: white; }
+  .feature-icon { width: 48px; height: 48px; background: var(--green-pale); border: 1px solid var(--border-strong); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 10px; }
+  .feature-desc { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .features .section-sub { margin-bottom: 28px; }
+
+  /* ── SPECS ── */
+  .sw { padding: 1rem 0; }
+  .specs { background: var(--bg); }
+  .specs-layout { display: flex; flex-direction: row; border: 1px solid var(--border-solid); border-radius: 16px; overflow: hidden; background: var(--bg); }
+  .specs-sidebar { width: 210px; flex-shrink: 0; border-right: 1px solid var(--border-solid); background: var(--bg2); display: flex; flex-direction: column; padding: 8px 0; }
+  .tab-btn { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; border: none; background: none; width: calc(100% - 16px); text-align: left; border-radius: 10px; margin: 2px 8px; position: relative; transition: background 0.15s; }
+  .tab-btn:hover { background: var(--bg); }
+  .tab-btn.active { background: var(--green); }
+  .tab-btn.active::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 3px; border-radius: 0 3px 3px 0; background: black; }
+  .tab-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bg); border: 1px solid var(--border-solid); transition: all 0.15s; }
+  .tab-icon svg { width: 18px; height: 18px; stroke: var(--text-dim); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.15s; }
+  .tab-btn.active .tab-icon { background: var(--green-deep); border-color: var(--green-deep); }
+  .tab-btn.active .tab-icon svg { stroke: #fff; }
+  .tab-meta { flex: 1; min-width: 0; }
+  .tab-label { font-weight: 700; font-size: 11px; color: var(--text-dim); letter-spacing: 0.6px; text-transform: uppercase; display: block; line-height: 1.3; }
+  .tab-btn.active .tab-label { color: white; }
+  .tab-divider { height: 1px; background: var(--border); margin: 4px 16px; }
+  .specs-preview { flex: 1; min-width: 0; }
+  .preview-header { background: var(--green-pale); padding: 18px 28px; border-bottom: 1px solid var(--border-solid); display: flex; align-items: center; justify-content: space-between; }
+  .preview-header-left { display: flex; align-items: center; gap: 12px; }
+  .preview-header-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--green-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .preview-header-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .preview-title { font-weight: 700; font-size: 13px; color: var(--green-deep); letter-spacing: 1px; text-transform: uppercase; }
+  .preview-subtitle { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .spec-row { display: flex; align-items: center; padding: 15px 28px; border-bottom: 1px solid var(--border); transition: background 0.12s; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row:hover { background: var(--green-pale); }
+  .spec-row:hover .spec-key { color: var(--green-deep); }
+  .spec-key { flex: 1; font-size: 14px; color: var(--text-dim); font-weight: 500; transition: color 0.12s; }
+  .spec-val { font-size: 14px; color: var(--text); font-weight: 600; text-align: right; }
+  .spec-check { display: inline-flex; align-items: center; gap: 5px; color: var(--green-deep); font-weight: 600; font-size: 14px; }
+  .spec-check svg { width: 16px; height: 16px; stroke: var(--green-deep); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tag { display: inline-block; background: var(--green-pale); color: var(--green-deep); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 6px; border: 1px solid var(--green-mid); }
+  .panel { display: none; animation: fadeIn 0.2s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── FEATURE HIGHLIGHTS (vf) ── */
+  .vf { font-family:var(--font-display); background:linear-gradient(-190deg, rgb(2,221,183) 15%, rgb(3,208,119) 50%); padding:80px 0; color:#0a2415; position:relative; overflow:hidden; }
+  .vf::before { content:''; position:absolute; inset:0; background-image: linear-gradient(rgba(0,80,50,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,80,50,0.07) 1px, transparent 1px); background-size:56px 56px; pointer-events:none; }
+  .vf-wrap { max-width:1140px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
+  .vf-top { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; gap:24px; flex-wrap:wrap; }
+  .vf-eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(0,60,30,0.7); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .vf-eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:rgba(0,60,30,0.5); border-radius:2px; }
+  .vf-h2 { font-family: var(--font-display); font-size: 54px; color:#0a2415; }
+  .vf-h2 span { color:#fff; text-shadow:0 2px 12px rgba(0,100,60,0.25); }
+  .vf-bento { display:grid; grid-template-columns:repeat(12,1fr); gap:10px; }
+  .vf-cell { background:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.9); border:1px solid rgba(255,255,255,0.6); border-radius:16px; padding:32px 28px; position:relative; overflow:hidden; transition:background 0.3s, border-color 0.3s, transform 0.2s; backdrop-filter:blur(8px); }
+  .vf-cell:hover { transform:translateY(-3px); background-color: white; }
+  .vf-cell::after { content:''; position:absolute; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); top:-70px; right:-70px; opacity:0; transition:opacity 0.4s; pointer-events:none; }
+  .vf-cell:hover::after { opacity:1; }
+  .c1 { grid-column:span 5; } .c2 { grid-column:span 7; } .c3 { grid-column:span 4; } .c4 { grid-column:span 4; } .c5 { grid-column:span 4; } .c6 { grid-column:span 12; }
+  .vf-cell.wide { display:flex; align-items:center; gap:40px; }
+  .wide .vf-cell-body { flex:1; }
+  .wide .vf-cell-stat { flex-shrink:0; text-align:right; }
+  .wide .vf-stat-num { font-size:56px; font-weight:800; color:#007a40; letter-spacing:-2px; line-height:1; }
+  .wide .vf-stat-label { font-size:12px; color:rgba(0,40,20,0.5); letter-spacing:0.5px; margin-top:4px; }
+  .vf-cell.tall { display:flex; flex-direction:column; justify-content:space-between; min-height:220px; }
+  .vf-icon { width:44px; height:44px; border-radius:10px; background:rgba(0,100,50,0.12); border:1px solid rgba(0,100,50,0.18); display:flex; align-items:center; justify-content:center; margin-bottom:18px; flex-shrink:0; transition:background 0.25s, border-color 0.25s; }
+  .vf-cell:hover .vf-icon { background:#007a40; border-color:#007a40; }
+  .vf-icon svg { width:20px; height:20px; stroke:#007a40; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:stroke 0.25s; }
+  .vf-cell:hover .vf-icon svg { stroke:#fff; }
+  .vf-title { font-size:17px; font-weight:700; color:#0a2415; margin-bottom:8px; letter-spacing:-0.2px; line-height:1.2; }
+  .vf-desc { font-size:13px; color:rgba(0,40,20,0.65); line-height:1.7; }
+  .vf-pill { display:inline-flex; align-items:center; gap:5px; background:rgba(0,100,50,0.12); border:1px solid rgba(0,100,50,0.22); color:#005c28; font-size:11px; font-weight:700; letter-spacing:0.8px; padding:4px 12px; border-radius:100px; margin-bottom:14px; }
+  .chip { background:rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.1); color:rgba(0,40,20,0.7); font-size:11px; font-weight:600; padding:4px 12px; border-radius:100px; }
+  .wide-divider { width:1px; height:80px; background:rgba(0,60,30,0.15); flex-shrink:0; }
+  .uptime-num { font-size:28px; font-weight:800; color:#007a40; letter-spacing:-0.5px; }
+  @media(max-width:860px){ .c1,.c2,.c3,.c4,.c5,.c6 { grid-column:span 12; } .vf-cell.wide { flex-direction:column; gap:20px; } .wide .vf-cell-stat { text-align:left; } .vf-h2 { font-size:30px; } .vf-top { flex-direction:column; align-items:flex-start; } }
+
+  /* ── USE CASE — hover visual (bolt.earth style) ── */
+  .usecase2 { background: var(--bg); }
+  .usecase2-visual { width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 0; box-shadow: var(--shadow-lg); position: relative; height: 460px; background: var(--bg2); }
+  .usecase2-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .35s ease; }
+  .usecase2-tabs { display: flex; gap: 0; border-top: 1px solid var(--border-solid); margin-top: 0; }
+  .usecase2-tab { flex: 1; padding: 24px 24px 4px; cursor: pointer; border-top: 2px solid transparent; margin-top: -1px; transition: border-color .2s; }
+  .usecase2-tab.active { border-top: 2px solid var(--green); }
+  .usecase2-tab h3 { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 8px; }
+  .usecase2-tab p { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; }
+
+  /* ── WHY VERDE — social proof band ── */
+  .proof-band { background-image: linear-gradient(-190deg, #fff0 30%, #06d7b01f 50%, #fff 70%); border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); padding: 64px 0; }
+  .proof-grid { display: flex; flex-direction: row; gap: 1px; background: var(--border-solid); border: 1px solid var(--border-solid); border-radius: 12px; overflow: hidden; }
+  .proof-item { flex: 1; background: white; padding: 32px 28px; text-align: center; }
+  .proof-num { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--green-deep); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+  .proof-label { font-size: 13px; color: var(--text-dim); font-weight: 500; }
+
+  /* ── CTA ── */
+  .cta-section { background: linear-gradient(-190deg, rgb(2, 221, 183) 15%, rgb(3, 208, 119) 50%); position: relative; overflow: hidden; padding: 96px 0; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,80,50,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,80,50,0.07) 1px, transparent 1px); background-size: 56px 56px; pointer-events: none; }
+  .cta-section::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 800px 400px at 50% 50%, rgba(255,255,255,0.12) 0%, transparent 70%); pointer-events: none; }
+  .cta-inner { max-width: 760px; margin: 0 auto; text-align: center; position: relative; z-index: 2; padding: 0 var(--container-pad); }
+  .cta-section .section-label { color: #fff; }
+  .cta-section .section-title { color: #0a2415; }
+  .cta-section .section-sub { color: rgba(0,0,0); margin: 0 auto; text-align: center; }
+  .cta-form { display: flex; gap: 12px; margin: 40px auto 0; max-width: 480px; justify-content: center; }
+  .cta-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .cta-tag { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(0,0,0); }
+  .cta-tag::before { content: '✓'; color: #007a40; font-weight: 700; }
+  .cta-stats { margin-top: 56px; display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .cta-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: #0a2415; }
+  .cta-stat-label { font-size: 13px; color: rgba(0,0,0); margin-top: 4px; }
+  .cta-divider { width: 1px; height: 40px; background: rgba(0,60,30,0.2); }
+  .cta-section .btn-primary { background: #ffffff; color: #007a40; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15); }
+  .cta-section .btn-primary:hover { background: #f0fdf6; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--bg); border-top: 1px solid var(--border-solid); padding: 40px 0; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-brand { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text-dim); }
+  .footer-brand span { color: var(--green); }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--text-dimmer); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green); }
+  .footer-copy { font-size: 13px; color: var(--text-dimmer); }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) { :root { --container-pad: 32px; } }
+
+  @media (max-width: 900px) {
+    :root { --container-pad: 24px; }
+    .nav-links { display: none !important; }
+    .nav-hamburger { display: flex !important; }
+    section { padding: 64px 0; }
+
+    .hero-slider { height: 82vh; min-height: 520px; }
+    .slide-sub { max-width: 100%; }
+    .slider-arrow { width: 38px; height: 38px; }
+
+    .compat-grid { flex-direction: column; }
+    .compat-logos { max-width: 100%; grid-template-columns: repeat(3,1fr); }
+
+    .feature-card { flex: 1 1 calc(50% - 2px); min-width: 0; }
+    .specs-layout { flex-direction: column; gap: 0; }
+    .specs-layout > div { width: 100%; }
+
+    .usecase2-visual { height: 320px; }
+    .usecase2-tabs { flex-direction: column; }
+    .usecase2-tab { border-top: none; border-left: 2px solid transparent; margin-top: 0; margin-left: -1px; padding: 16px 0 16px 16px; }
+    .usecase2-tab.active { border-left: 2px solid var(--green); border-top: none; }
+
+    .proof-grid { flex-wrap: wrap; }
+    .proof-item { flex: 1 1 calc(50% - 1px); min-width: 0; border-bottom: 1px solid var(--border-solid); }
+
+    .cta-form { flex-direction: column; max-width: 360px; }
+    .cta-stats { gap: 24px; }
+    .cta-divider { display: none; }
+
+    .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    :root { --container-pad: 16px; }
+    section { padding: 48px 0; }
+    .hero-slider { height: 78vh; }
+    .slider-arrow { display: none; }
+    .slide-actions { flex-direction: column; width: 100%; }
+    .btn-primary, .btn-outline-hero { width: 100%; justify-content: center; }
+    .feature-card { flex: 1 1 100%; }
+    .compat-logos { grid-template-columns: repeat(2,1fr); }
+    .proof-item { padding: 24px 16px; }
+    .proof-num { font-size: 32px; }
+    .cta-tags { gap: 8px; }
+    .cta-tag { font-size: 12px; }
+    .section-title { font-size: clamp(28px, 7vw, 40px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img loading="lazy" src="https://www.verdemobility.com/static/media/logo.33ea012dec70e5ad4e172b81c8732799.svg" width="175" alt="Verdemobility">
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#compatibility">Compatibility</a></li>
+      <li><a href="#specs">Specifications</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
+      <li><a href="#why-levdc">Why LEV DC</a></li>
+      <li><a href="https://www.verdemobility.com/get-in-touch#contact-us" class="nav-cta">Enquire Now</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#compatibility" onclick="closeMenu()">Compatibility</a>
+  <a href="#specs" onclick="closeMenu()">Specifications</a>
+  <a href="#highlights" onclick="closeMenu()">Highlights</a>
+  <a href="#usecases" onclick="closeMenu()">Use Cases</a>
+  <a href="#why-levdc" onclick="closeMenu()">Why LEV DC</a>
+  <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="mobile-cta" onclick="closeMenu()">Enquire Now</a>
+</div>
+
+<!-- HERO SLIDER -->
+<section class="hero-slider" id="hero">
+  <div class="slide active" style="background-image:url('https://picsum.photos/seed/levdc-slide1/1920/1080');">
+    <div class="slide-content">
+      <div class="slide-eyebrow">Now Launching</div>
+      <h1 class="slide-title">LEV DC<br/><span>Fast Charger</span></h1>
+      <p class="slide-sub">Purpose-built DC fast charging for India's 2-wheeler and 3-wheeler EV fleet — compact, smart, and made for high-frequency turnarounds.</p>
+      <div class="slide-actions">
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-outline-hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Contact Us
+        </a>
+        <a href="#specs" class="btn-outline-hero">View Specifications</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('https://picsum.photos/seed/levdc-slide2/1920/1080');">
+    <div class="slide-content">
+      <div class="slide-eyebrow">Built for the Last Mile</div>
+      <h1 class="slide-title">Keep Fleets<br/><span>Always Moving</span></h1>
+      <p class="slide-sub">Rapid turnaround charging designed for delivery riders and 3-wheeler cargo fleets running back-to-back shifts.</p>
+      <div class="slide-actions">
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-outline-hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Contact Us
+        </a>
+        <a href="#usecases" class="btn-outline-hero">Explore Use Cases</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('https://picsum.photos/seed/levdc-slide3/1920/1080');">
+    <div class="slide-content">
+      <div class="slide-eyebrow">Compact. Smart. Reliable.</div>
+      <h1 class="slide-title">Deploy It<br/><span>Almost Anywhere</span></h1>
+      <p class="slide-sub">A small footprint that fits into retail corners, societies, and fleet yards where bulky chargers simply can't go.</p>
+      <div class="slide-actions">
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-outline-hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Contact Us
+        </a>
+        <a href="#compatibility" class="btn-outline-hero">Check Compatibility</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('https://picsum.photos/seed/levdc-slide4/1920/1080');">
+    <div class="slide-content">
+      <div class="slide-eyebrow">Powering Every Ride</div>
+      <h1 class="slide-title">From Commutes<br/><span>To Commercial Routes</span></h1>
+      <p class="slide-sub">One charger, engineered for everything from a daily two-wheeler commute to a full day of last-mile delivery.</p>
+      <div class="slide-actions">
+        <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-outline-hero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Contact Us
+        </a>
+        <a href="#why-levdc" class="btn-outline-hero">Why LEV DC?</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="slider-arrow prev" aria-label="Previous slide" onclick="prevSlide(); resetSliderTimer();">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="slider-arrow next" aria-label="Next slide" onclick="nextSlide(); resetSliderTimer();">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+
+  <div class="slider-dots" id="sliderDots">
+    <button class="slider-dot active" onclick="goToSlide(0); resetSliderTimer();" aria-label="Slide 1"></button>
+    <button class="slider-dot" onclick="goToSlide(1); resetSliderTimer();" aria-label="Slide 2"></button>
+    <button class="slider-dot" onclick="goToSlide(2); resetSliderTimer();" aria-label="Slide 3"></button>
+    <button class="slider-dot" onclick="goToSlide(3); resetSliderTimer();" aria-label="Slide 4"></button>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      ARAI Certified
+    </div>
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Made in India
+    </div>
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      2-yr Warranty
+    </div>
+  </div>
+</div>
+
+<!-- VEHICLE COMPATIBILITY -->
+<section class="compat" id="compatibility">
+  <div class="container">
+    <div class="compat-grid">
+      <div class="compat-left">
+        <p class="section-label reveal">Vehicle Compatibility</p>
+        <h2 class="section-title reveal">Built to Charge Every LEV on the Road</h2>
+        <p class="compat-desc reveal">LEV DC is designed around India's light electric vehicle ecosystem — from daily-commute two-wheelers to high-mileage three-wheeler cargo and passenger fleets. One connector standard, one charger, broad OEM coverage.</p>
+        <div class="compat-logos reveal">
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17V9l4-2 5 2 3 8M10 7h4"/></svg>
+            <span>2W OEM Placeholder</span>
+          </div>
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17V9l4-2 5 2 3 8M10 7h4"/></svg>
+            <span>2W OEM Placeholder</span>
+          </div>
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17V9l4-2 5 2 3 8M10 7h4"/></svg>
+            <span>2W OEM Placeholder</span>
+          </div>
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><rect x="2" y="10" width="14" height="7" rx="1.5"/><path d="M16 12h4l2 3v2h-2"/><circle cx="6" cy="19" r="2"/><circle cx="16" cy="19" r="2"/></svg>
+            <span>3W OEM Placeholder</span>
+          </div>
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><rect x="2" y="10" width="14" height="7" rx="1.5"/><path d="M16 12h4l2 3v2h-2"/><circle cx="6" cy="19" r="2"/><circle cx="16" cy="19" r="2"/></svg>
+            <span>3W OEM Placeholder</span>
+          </div>
+          <div class="compat-logo">
+            <svg viewBox="0 0 24 24"><rect x="2" y="10" width="14" height="7" rx="1.5"/><path d="M16 12h4l2 3v2h-2"/><circle cx="6" cy="19" r="2"/><circle cx="16" cy="19" r="2"/></svg>
+            <span>3W OEM Placeholder</span>
+          </div>
+        </div>
+        
+      </div>
+      <div class="compat-right reveal">
+        <div class="compat-img">
+          <img src="https://picsum.photos/seed/levdc-compat/900/1125" alt="LEV DC charger with compatible two- and three-wheeler EVs" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="specs" id="specs">
+  <div class="container">
+    <p class="section-label reveal">Technical Specifications</p>
+    <h2 class="section-title reveal">Every Number<br/>that Matters</h2>
+
+    <div class="sw">
+      <div class="specs-layout">
+        <div class="specs-sidebar">
+
+          <button class="tab-btn active" onclick="switchTab(0,this)">
+            <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="tab-meta"><span class="tab-label">Power &amp; Electrical</span></div>
+          </button>
+          <div class="tab-divider"></div>
+          <button class="tab-btn" onclick="switchTab(1,this)">
+            <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+            <div class="tab-meta"><span class="tab-label">Connectivity</span></div>
+          </button>
+          <div class="tab-divider"></div>
+          <button class="tab-btn" onclick="switchTab(2,this)">
+            <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H3M21 18H3"/><path d="M16 3v6M8 3v6"/></svg></div>
+            <div class="tab-meta"><span class="tab-label">Mechanical &amp; Env.</span></div>
+          </button>
+          <div class="tab-divider"></div>
+          <button class="tab-btn" onclick="switchTab(3,this)">
+            <div class="tab-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div class="tab-meta"><span class="tab-label">UI &amp; Safety</span></div>
+          </button>
+
+        </div>
+
+        <div class="specs-preview">
+
+          <div id="panel-0" class="panel active">
+            <div class="preview-header">
+              <div class="preview-header-left">
+                <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <div>
+                  <div class="preview-title">Power &amp; Electrical</div>
+                  <div class="preview-subtitle">Core power delivery parameters</div>
+                </div>
+              </div>
+            </div>
+            <div class="spec-row"><span class="spec-key">Output Power</span><span class="spec-val">60 kW / 120 kW</span></div>
+            <div class="spec-row"><span class="spec-key">Input Voltage</span><span class="spec-val">415 VAC (±15%), 3-phase 50 Hz</span></div>
+            <div class="spec-row"><span class="spec-key">Input Wires</span><span class="spec-val">L1, L2, L3, N, PE</span></div>
+            <div class="spec-row"><span class="spec-key">Output Interface</span><span class="spec-val">2 × CCS2 (IEC 62196.3-2014)</span></div>
+            <div class="spec-row"><span class="spec-key">Max Output Current</span><span class="spec-val">200A (120A per gun, dual)</span></div>
+            <div class="spec-row"><span class="spec-key">Efficiency</span><span class="spec-val">95% at nominal output</span></div>
+            <div class="spec-row"><span class="spec-key">Power Factor</span><span class="spec-val">0.99 at nominal output</span></div>
+            <div class="spec-row"><span class="spec-key">Current THD</span><span class="spec-val">5% at nominal output</span></div>
+          </div>
+
+          <div id="panel-1" class="panel">
+            <div class="preview-header">
+              <div class="preview-header-left">
+                <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg></div>
+                <div>
+                  <div class="preview-title">Connectivity &amp; Communication</div>
+                  <div class="preview-subtitle">Network, protocols &amp; authentication</div>
+                </div>
+              </div>
+            </div>
+            <div class="spec-row"><span class="spec-key">Network</span><span class="spec-val">GSM/3G/4G · Ethernet · Wi-Fi · Bluetooth</span></div>
+            <div class="spec-row"><span class="spec-key">OCPP Protocol</span><span class="spec-val">1.6J (upgradable to 2.1)<span class="tag">Upgradable</span></span></div>
+            <div class="spec-row"><span class="spec-key">Vehicle Protocol</span><span class="spec-val">IEC 61851, ISO 15118, DIN 70121</span></div>
+            <div class="spec-row"><span class="spec-key">Vehicle Smart Charging</span><span class="spec-val">IEC 15118 EIM &amp; PNC</span></div>
+            <div class="spec-row"><span class="spec-key">Authentication</span><span class="spec-val">App, RFID Card, QR Code, Password</span></div>
+            <div class="spec-row"><span class="spec-key">RFID Standard</span><span class="spec-val">RC 522 ISO/IEC 14443A / MIFARE</span></div>
+            <div class="spec-row"><span class="spec-key">Configuration</span><span class="spec-val">App &amp; Web Portal</span></div>
+          </div>
+
+          <div id="panel-2" class="panel">
+            <div class="preview-header">
+              <div class="preview-header-left">
+                <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M21 6H3M21 12H3M21 18H3"/><path d="M16 3v6M8 3v6"/></svg></div>
+                <div>
+                  <div class="preview-title">Mechanical &amp; Environment</div>
+                  <div class="preview-subtitle">Physical build &amp; operating conditions</div>
+                </div>
+              </div>
+            </div>
+            <div class="spec-row"><span class="spec-key">Dimensions (L×W×H)</span><span class="spec-val">750 × 520 × 1500 mm (±5 mm)</span></div>
+            <div class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">200 kg (±5 kg)</span></div>
+            <div class="spec-row"><span class="spec-key">IP Rating</span><span class="spec-val">IP55 <span class="tag">Weatherproof</span></span></div>
+            <div class="spec-row"><span class="spec-key">Cooling</span><span class="spec-val">Air Cooling</span></div>
+            <div class="spec-row"><span class="spec-key">Cable Length</span><span class="spec-val">15 ft. Standard</span></div>
+            <div class="spec-row"><span class="spec-key">Operating Temperature</span><span class="spec-val">-10°C to +55°C (derating at extremes)</span></div>
+            <div class="spec-row"><span class="spec-key">Storage Temperature</span><span class="spec-val">-10°C to +70°C (dry)</span></div>
+            <div class="spec-row"><span class="spec-key">Altitude</span><span class="spec-val">Up to 2000 m</span></div>
+            <div class="spec-row"><span class="spec-key">Humidity</span><span class="spec-val">5%–95%, non-condensing</span></div>
+            <div class="spec-row"><span class="spec-key">Noise Level</span><span class="spec-val">≤60 dB</span></div>
+          </div>
+
+          <div id="panel-3" class="panel">
+            <div class="preview-header">
+              <div class="preview-header-left">
+                <div class="preview-header-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div>
+                  <div class="preview-title">User Interface &amp; Safety</div>
+                  <div class="preview-subtitle">Display, controls &amp; protection systems</div>
+                </div>
+              </div>
+            </div>
+            <div class="spec-row"><span class="spec-key">Display</span><span class="spec-val">7/10" TFT LCD Touch Screen</span></div>
+            <div class="spec-row"><span class="spec-key">Visual Indication</span><span class="spec-val">RGB LEDs</span></div>
+            <div class="spec-row"><span class="spec-key">Emergency Stop</span><span class="spec-val">Mushroom Type</span></div>
+            <div class="spec-row"><span class="spec-key">Over-Voltage / Under-Voltage</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Over-Current &amp; Surge</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Ground Fault &amp; Leakage</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Polarity Reverse Protection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Insulation Monitoring</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Cable Temp Detection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+            <div class="spec-row"><span class="spec-key">Earth Presence Detection</span><span class="spec-val"><span class="spec-check"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Built-in</span></span></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURE HIGHLIGHTS -->
+<section class="vf" id="highlights">
+  <div class="vf-wrap">
+
+    <div class="vf-top">
+      <div>
+        <div class="vf-eyebrow">Feature Highlights</div>
+        <h2 class="vf-h2 section-title">Everything You Need in a <br><span>DC Charger</span> - Without the Bulk</h2>
+      </div>
+    </div>
+
+    <div class="vf-bento">
+
+      <div class="vf-cell c1 tall">
+        <div>
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg></div>
+          <div class="vf-title">Compact Footprint</div>
+          <p class="vf-desc">Minimal space requirement without compromising charging performance — fits where larger units simply can't go.</p>
+        </div>
+      </div>
+
+      <div class="vf-cell c2">
+        <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><circle cx="12" cy="20" r="1" fill="#007a40"></circle></svg></div>
+        <div class="vf-title">Smart Connectivity</div>
+        <p class="vf-desc" style="max-width:320px;">Ethernet, Wi-Fi, and GSM/4G with intelligent quad-link failover — always online, always reporting, even when one channel drops.</p>
+        <div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;">
+          <span class="chip">Ethernet</span>
+          <span class="chip">Wi-Fi</span>
+          <span class="chip">GSM / 4G</span>
+          <span class="chip">Bluetooth</span>
+        </div>
+      </div>
+
+      <div class="vf-cell c3">
+        <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+        <div class="vf-title">OCPP Compliant</div>
+        <p class="vf-desc">Integrates with any CMS or roaming platform. Upgradable to 2.1 via OTA — no hardware changes.</p>
+        <div class="vf-pill" style="margin-top: 20px;">OCPP 1.6J → 2.1</div>
+      </div>
+
+      <div class="vf-cell c4">
+        <div class="vf-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+        <div class="vf-title">High Operational Uptime</div>
+        <p class="vf-desc">Industrial-grade architecture for dependable long-duration operations — 24/7, every day.</p>
+        <div style="margin-top:20px;">
+          <div class="uptime-num">99.2%</div>
+          <div style="font-size:11px;color:rgba(0,40,20,0.5);margin-top:2px;">Network uptime</div>
+        </div>
+      </div>
+
+      <div class="vf-cell c5">
+        <div class="vf-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+        <div class="vf-title">Remote Monitoring &amp; Diagnostics</div>
+        <p class="vf-desc">Live charger health, sessions, alerts, and firmware updates — all managed remotely with zero site visits.</p>
+      </div>
+
+      <div class="vf-cell c6 wide">
+        <div class="vf-cell-body">
+          <div class="vf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path></svg></div>
+          <div class="vf-title">Built for Indian Conditions</div>
+          <p class="vf-desc" style="max-width:560px;">Reliable performance across heat, dust, humidity, and demanding outdoor environments.</p>
+        </div>
+        <div class="wide-divider"></div>
+        <div class="vf-cell-stat">
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <div class="wide vf-stat-num">IP55</div>
+              <div class="wide vf-stat-label">Weatherproof Rating</div>
+            </div>
+            <div style="width:100%;height:1px;background:rgba(0,60,30,0.12);"></div>
+            <div>
+              <div class="wide vf-stat-num">50°C</div>
+              <div class="wide vf-stat-label">Max Operating Temp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES — hover visual -->
+<section class="usecase2" id="usecases">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center;">Where It Fits</p>
+    <h2 class="section-title reveal" style="text-align:center;">Built for Every LEV Journey</h2>
+    <p class="section-sub reveal" style="text-align:center;max-width:640px;margin-left:auto;margin-right:auto;">Hover a category below to see how LEV DC fits into that world.</p>
+
+    <div class="usecase2-visual reveal">
+      <img id="usecase2-img" src="https://picsum.photos/seed/levdc-usecase-commute/1400/900" alt="LEV DC charging use case" />
+    </div>
+
+    <div class="usecase2-tabs reveal">
+      <div class="usecase2-tab active" data-img="https://picsum.photos/seed/levdc-usecase-commute/1400/900" onmouseenter="setUsecase(this)" onclick="setUsecase(this)">
+        <h3>Where You Commute</h3>
+        <p>Home and society charging for daily two-wheeler riders — quick top-ups between rides.</p>
+      </div>
+      <div class="usecase2-tab" data-img="https://picsum.photos/seed/levdc-usecase-fleet/1400/900" onmouseenter="setUsecase(this)" onclick="setUsecase(this)">
+        <h3>Where You Deliver</h3>
+        <p>Fleet and hub charging for last-mile 3-wheeler cargo and delivery operators on tight schedules.</p>
+      </div>
+      <div class="usecase2-tab" data-img="https://picsum.photos/seed/levdc-usecase-retail/1400/900" onmouseenter="setUsecase(this)" onclick="setUsecase(this)">
+        <h3>Wherever You Stop</h3>
+        <p>Retail corners, malls, and public charging points — compact enough to fit anywhere riders pass through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY LEV DC -->
+<!-- <section class="features" id="why-levdc">
+  <div class="container">
+    <p class="section-label reveal">Fast Charging Built for Space-Constrained Deployments</p>
+    <h2 class="section-title reveal">Why LEV DC?</h2>
+    <p class="section-sub reveal">VerdeMobility's LEV DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. Whether deployed for delivery fleets, retail parking, societies, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="feature-title">Compact by Design</div>
+        <p class="feature-desc">Engineered for locations with limited installation space.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="feature-title">Fast Turnaround Charging</div>
+        <p class="feature-desc">Reduce vehicle downtime and keep operations moving.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="feature-title">Commercial Grade Reliability</div>
+        <p class="feature-desc">Built for continuous usage in demanding environments.</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+<style>.features-layout {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start; /* required for sticky to work inside flex */
+}
+
+.features-left {
+  flex: 0 0 55%;         /* adjust width ratio as you like */
+  position: sticky;
+  top: 100px;             /* adjust to sit below your fixed header, if any */
+  align-self: flex-start;
+}
+
+.features-right {
+  flex: 1;
+  min-width: 0;
+}
+
+/* If .features-grid was previously a 3-col grid, stack it vertically now
+   so there's actually something to scroll against the sticky column */
+.features-right .features-grid {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+@media (max-width: 900px) {
+  .features-layout {
+    flex-direction: column;
+  }
+  .features-left {
+    position: static;
+  }
+}</style>
+<section class="features" id="why-levdc">
+  <div class="container">
+    <div class="features-layout">
+      <div class="features-left">
+        <p class="section-label reveal">Fast Charging Built for Space-Constrained Deployments</p>
+        <h2 class="section-title reveal">Why LEV DC?</h2>
+        <p class="section-sub reveal">VerdeMobility's LEV DC Fast Charger delivers rapid EV charging performance in a compact and deployment-friendly design — ideal for locations where space, uptime, and operational efficiency matter equally. Whether deployed for delivery fleets, retail parking, societies, or urban charging hubs, it enables reliable fast charging without requiring large infrastructure footprints.</p>
+      </div>
+
+      <div class="features-right">
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="feature-title">Compact by Design</div>
+            <p class="feature-desc">Engineered for locations with limited installation space.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <div class="feature-title">Fast Turnaround Charging</div>
+            <p class="feature-desc">Reduce vehicle downtime and keep operations moving.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="feature-title">Commercial Grade Reliability</div>
+            <p class="feature-desc">Built for continuous usage in demanding environments.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="feature-title">Commercial Grade Reliability</div>
+            <p class="feature-desc">Built for continuous usage in demanding environments.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="feature-title">Commercial Grade Reliability</div>
+            <p class="feature-desc">Built for continuous usage in demanding environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- SOCIAL PROOF BAND -->
+<div class="proof-band">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center;margin-bottom:32px;">VerdeMobility in Numbers</p>
+    <div class="proof-grid">
+      <div class="proof-item reveal"><div class="proof-num">5000+</div><div class="proof-label">Chargers Deployed</div></div>
+      <div class="proof-item reveal"><div class="proof-num">15+</div><div class="proof-label">States Covered</div></div>
+      <div class="proof-item reveal"><div class="proof-num">24/7</div><div class="proof-label">Real Time Monitoring</div></div>
+      <div class="proof-item reveal"><div class="proof-num">99.2%</div><div class="proof-label">Network Uptime</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Ready to deploy<br/>fast charging?</h2>
+    <p class="section-sub">Whether it's a single unit or a large-scale charging network, our team will help you scope, install, and go live fast.</p>
+
+    <div class="cta-form">
+      <a href="https://www.verdemobility.com/get-in-touch#contact-us" class="btn-primary" style="white-space:nowrap; text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        Get a Quote
+      </a>
+    </div>
+
+    <div class="cta-tags">
+      <span class="cta-tag">Tailored Charging Solutions</span>
+      <span class="cta-tag">Hassle-Free Installation</span>
+      <span class="cta-tag">2-Year Warranty</span>
+      <span class="cta-tag">48-Hour Response</span>
+    </div>
+
+    <div class="cta-stats">
+      <div style="text-align:center;">
+        <div class="cta-stat-num">5000+</div>
+        <div class="cta-stat-label">Chargers Deployed</div>
+      </div>
+      <div class="cta-divider"></div>
+      <div style="text-align:center;">
+        <div class="cta-stat-num">15+</div>
+        <div class="cta-stat-label">States Covered</div>
+      </div>
+      <div class="cta-divider"></div>
+      <div style="text-align:center;">
+        <div class="cta-stat-num">24/7</div>
+        <div class="cta-stat-label">Real Time Monitoring</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">Verde<span>Mobility</span> — Think beyond EV Charging.</div>
+      <ul class="footer-links">
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Solutions</a></li>
+        <li><a href="#">VerdeCMS</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="footer-copy">© 2026 VerdeMobility India Pvt. Ltd. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Nav active link
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 80) current = sec.id; });
+    navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : ''; });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  document.addEventListener('click', (e) => {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    }
+  });
+
+  // Specs tabs
+  function switchTab(idx, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + idx).classList.add('active');
+  }
+
+  // Hero slider
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  let currentSlide = 0;
+  let sliderTimer;
+
+  function goToSlide(i) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (i + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+  function resetSliderTimer() {
+    clearInterval(sliderTimer);
+    sliderTimer = setInterval(nextSlide, 6000);
+  }
+  resetSliderTimer();
+
+  // Use case hover visual
+  function setUsecase(tab) {
+    document.querySelectorAll('.usecase2-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const img = document.getElementById('usecase2-img');
+    const newSrc = tab.getAttribute('data-img');
+    if (img.src.indexOf(newSrc) === -1) {
+      img.style.opacity = 0;
+      setTimeout(() => { img.src = newSrc; img.style.opacity = 1; }, 180);
+    }
+  }
+</script>
+
+</body>
+</html>
