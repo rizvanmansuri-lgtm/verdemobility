@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syskara Studio — HMI Platform by System Level Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sls-blue: #003189;
+    --sls-blue-deep: #001c4f;
+    --sls-red: #ca0017;
+    --sls-red-soft: #e23a2e;
+    --ink: #10162b;
+    --paper: #f6f7fb;
+    --paper-warm: #eef1f8;
+    --line: rgba(16,22,43,0.10);
+    --muted: #5b6478;
+    --radius: 14px;
+    --maxw: 1280px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #0b1024;
+      --paper-warm: #0f1530;
+      --ink: #eef1fb;
+      --muted: #a7aec6;
+      --line: rgba(238,241,251,0.12);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #0b1024;
+    --paper-warm: #0f1530;
+    --ink: #eef1fb;
+    --muted: #a7aec6;
+    --line: rgba(238,241,251,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Sora', 'Inter', sans-serif;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0; color:var(--muted); line-height:1.65;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 0;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand svg{height:34px; width:auto;}
+  .brand .divider{width:1px; height:26px; background:var(--line);}
+  .brand .product{
+    font-family:'Sora', sans-serif; font-weight:700; font-size:17px;
+    line-height:1.1;
+  }
+  .brand .product span{display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:11px; color:var(--muted); letter-spacing:.02em;}
+  nav.links{display:flex; align-items:center; gap:30px;}
+  nav.links a{
+    font-size:14.5px; font-weight:500; color:var(--ink); opacity:.78;
+    transition:opacity .15s ease;
+  }
+  nav.links a:hover{opacity:1;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 22px; border-radius:999px;
+    font-weight:600; font-size:14.5px;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--sls-red); color:#fff;}
+  .btn-primary:hover{background:var(--sls-red-soft);}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--sls-blue);}
+  .menu-toggle{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .menu-toggle span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 82% -10%, rgba(0,49,137,.16), transparent 60%),
+      radial-gradient(700px 420px at -5% 110%, rgba(202,0,23,.10), transparent 55%);
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;
+    padding-top:76px; padding-bottom:80px;
+  }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow-line .dot{width:7px; height:7px; border-radius:50%; background:var(--sls-red);}
+  .eyebrow-line span{font-size:13px; font-weight:600; color:var(--sls-blue); letter-spacing:.03em;}
+  :root[data-theme="dark"] .eyebrow-line span, @media (prefers-color-scheme: dark){ .eyebrow-line span{color:#8fb0f5;} }
+  .hero h1{
+    font-size:clamp(38px, 5vw, 58px);
+    line-height:1.03;
+    font-weight:800;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(92deg, var(--sls-blue), var(--sls-red) 115%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero .lede{
+    margin-top:22px; font-size:17.5px; max-width:520px;
+  }
+  .hero .cta-row{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero .stat-row{
+    display:flex; gap:34px; margin-top:48px; padding-top:28px; border-top:1px solid var(--line);
+    
+  }
+  .hero .stat b{display:block; font-family:'Sora',sans-serif; font-size:24px; font-weight:700; color:var(--ink);}
+  .hero .stat span{font-size:12.5px; color:var(--muted);}
+  .hero-visual{position:relative;}
+  .hero-visual .glow{
+    position:absolute; inset:-10%;
+    background:radial-gradient(closest-side, rgba(0,49,137,.22), transparent 70%);
+    filter:blur(10px); z-index:0;
+  }
+  .hero-visual img{position:relative; z-index:1; transform:rotate(-1deg);}
+  .hero-visual .badge{
+    position:absolute; z-index:2; bottom:14px; left:-14px;
+    background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:12px 16px; box-shadow:0 18px 40px rgba(10,20,50,.14);
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-visual .badge .pulse{width:8px; height:8px; border-radius:50%; background:#1fbf6b; box-shadow:0 0 0 rgba(31,191,107,.5); animation:pulse 2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(31,191,107,.45);}
+    70%{box-shadow:0 0 0 9px rgba(31,191,107,0);}
+    100%{box-shadow:0 0 0 0 rgba(31,191,107,0);}
+  }
+  .hero-visual .badge b{font-size:13px; font-weight:700;}
+  .hero-visual .badge small{display:block; color:var(--muted); font-size:11px;}
+
+  /* ---------- section basics ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .kicker{
+    font-size:13px; font-weight:700; color:var(--sls-red); letter-spacing:.03em; margin-bottom:12px; display:block;
+  }
+  .section-head h2{font-size:clamp(28px,3.4vw,38px); font-weight:700; line-height:1.15;}
+  .section-head p{margin-top:16px; font-size:16.5px;}
+
+  /* ---------- Key Capabilities ---------- */
+  #capabilities{background:var(--paper-warm); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .cap-card{
+    background:var(--paper); padding:32px 28px; min-height:200px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .cap-card .icon{
+    width:44px; height:44px; border-radius:10px;
+    background:var(--sls-blue); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cap-card .icon svg{width:22px; height:22px;}
+  .cap-card h3{font-size:17.5px; font-weight:700;}
+  .cap-card p{font-size:14.5px;}
+  .cap-card.wide{grid-column:span 1;}
+
+  /* ---------- Platform architecture rows ---------- */
+  .arch-row{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+    padding:52px 0; border-top:1px solid var(--line);
+  }
+  .arch-row:first-of-type{border-top:none;}
+  .arch-row.reverse .arch-copy{order:2;}
+  .arch-row.reverse .arch-media{order:1;}
+  .arch-tag{
+    display:inline-block; font-size:12.5px; font-weight:700; color:var(--sls-blue);
+    background:rgba(0,49,137,.08); padding:5px 12px; border-radius:999px; margin-bottom:16px;
+  }
+  :root[data-theme="dark"] .arch-tag, @media (prefers-color-scheme: dark){.arch-tag{background:rgba(120,160,255,.14); color:#8fb0f5;}}
+  .arch-copy h3{font-size:24px; font-weight:700; margin-bottom:14px;}
+  .arch-copy p{font-size:15.5px; margin-bottom:18px;}
+  .arch-copy ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .arch-copy li{
+    display:flex; align-items:flex-start; gap:10px; font-size:14.5px; color:var(--ink);
+  }
+  .arch-copy li svg{flex:none; margin-top:3px; width:15px; height:15px; color:var(--sls-red);}
+  .arch-media{
+    background:linear-gradient(160deg, var(--paper-warm), var(--paper));
+    border:1px solid var(--line); border-radius:18px; padding:22px;
+  }
+  .arch-media img{border-radius:10px;}
+
+  /* ---------- Why this matters ---------- */
+  #why{
+    background:linear-gradient(165deg, var(--sls-blue-deep), var(--sls-blue) 68%);
+    color:#fff;
+  }
+  #why .section-head h2, #why .section-head p{color:#fff;}
+  #why .section-head p{color:rgba(255,255,255,.72);}
+  #why .section-head .kicker{color:#ff9d8f;}
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .why-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:var(--radius);
+    padding:26px 24px;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .why-card .mark{
+    flex:none; width:30px; height:30px; border-radius:8px;
+    background:var(--sls-red); display:flex; align-items:center; justify-content:center;
+  }
+  .why-card .mark svg{width:15px; height:15px; color:#fff;}
+  .why-card h4{color:#fff; font-size:15.5px; font-weight:700; margin-bottom:6px;}
+  .why-card p{color:rgba(255,255,255,.68); font-size:13.8px;}
+
+  /* ---------- CTA strip ---------- */
+  #cta-strip{
+    padding:64px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .cta-box{
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    background:var(--paper-warm); border:1px solid var(--line); border-radius:20px;
+    padding:40px 44px;
+  }
+  .cta-box h3{font-size:24px; font-weight:700; max-width:480px;}
+  .cta-box p{margin-top:8px; font-size:14.5px;}
+
+  /* ---------- Footer / More Info ---------- */
+  footer#contact{
+    background:#182AC3; color:#fff; padding:70px 0 30px;
+  }
+  :root[data-theme="dark"] footer#contact, @media (prefers-color-scheme:dark){ footer#contact{background:#05070f;} }
+  .foot-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:48px;
+    padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .foot-brand .brand svg{height:36px;}
+  .foot-brand p{margin-top:16px; color:rgba(255,255,255,.6); font-size:14px; max-width:320px;}
+  .foot-col h5{color:#fff; font-size:12.5px; font-weight:700; letter-spacing:.03em; margin-bottom:18px;}
+  .foot-col a, .foot-col .info-line{
+    display:flex; gap:10px; align-items:flex-start; color:rgba(255,255,255,.7); font-size:14.5px; margin-bottom:14px;
+  }
+  .foot-col a:hover{color:#fff;}
+  .foot-col svg{flex:none; width:16px; height:16px; margin-top:2px; color:var(--sls-red);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:26px; flex-wrap:wrap; gap:10px;
+  }
+  .foot-bottom span{color:rgba(255,255,255,.45); font-size:13px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero .wrap{grid-template-columns:1fr; padding-top:44px;}
+    .hero-visual{order:-1;}
+    .cap-grid{grid-template-columns:1fr 1fr;}
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+  }
+  @media (max-width:620px){
+    .wrap{padding:0 20px;}
+    section{padding:64px 0;}
+    .cap-grid{grid-template-columns:1fr;}
+    .arch-row, .arch-row.reverse{grid-template-columns:1fr;}
+    .arch-row.reverse .arch-copy, .arch-row.reverse .arch-media{order:0;}
+    .why-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr; gap:34px;}
+    .hero .stat-row{gap:22px;}
+    .cta-box{flex-direction:column; align-items:flex-start;}
+  }
+  ::selection{background:var(--sls-red); color:#fff;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">
+      <svg xmlns="http://www.w3.org/2000/svg" width="127.695" height="59.131" viewBox="0 0 127.695 59.131">
+  <g id="Layer_x0020_1" transform="translate(-5358.001 -16613)">
+    <g id="_336483272" transform="translate(5358.001 16613)">
+      <path id="Path_2014" data-name="Path 2014" d="M7647.453,18314.748h7.671a4.649,4.649,0,0,0,.508,2.348,3.5,3.5,0,0,0,3.252,1.563,4.471,4.471,0,0,0,2.78-.807,2.993,2.993,0,0,0,1.254-1.861,2.02,2.02,0,0,0-.547-1.8c-.5-.523-1.774-1.031-3.823-1.49-3.363-.795-5.672-1.836-6.938-3.141a5.389,5.389,0,0,1-1.353-4.988,8.058,8.058,0,0,1,1.837-3.775,9.948,9.948,0,0,1,3.983-2.793,17.806,17.806,0,0,1,6.542-1q4.953,0,7.224,1.838c1.514,1.229,2.185,3.188,2.036,5.869l-.025.434h-7.584a3.34,3.34,0,0,0-.807-2.531,3.456,3.456,0,0,0-2.507-.793,3.68,3.68,0,0,0-2.209.594,2.262,2.262,0,0,0-.968,1.428,1.242,1.242,0,0,0,.385,1.119,5.49,5.49,0,0,0,2.508.943,28.472,28.472,0,0,1,7.087,2.3,5.927,5.927,0,0,1,2.78,2.863,6.536,6.536,0,0,1,.348,3.824,9.726,9.726,0,0,1-2.209,4.58,11.023,11.023,0,0,1-4.418,3.189,17.1,17.1,0,0,1-6.429,1.08q-6.591,0-8.664-2.531A8.458,8.458,0,0,1,7647.453,18314.748Z" transform="translate(-7618.979 -18276.098)" fill="#003189"/>
+      <path id="Path_2015" data-name="Path 2015" d="M9483.507,18332h7.991l-3.114,17.316h8.167l-1.39,7.57H9479Z" transform="translate(-9427.85 -18310.664)" fill="#003189"/>
+      <path id="Path_2016" data-name="Path 2016" d="M10929.668,18314.748h7.671a4.613,4.613,0,0,0,.51,2.348,3.5,3.5,0,0,0,3.251,1.563,4.477,4.477,0,0,0,2.781-.807,2.993,2.993,0,0,0,1.253-1.861,2.018,2.018,0,0,0-.547-1.8c-.5-.523-1.774-1.031-3.822-1.49-3.364-.795-5.672-1.836-6.938-3.141a5.39,5.39,0,0,1-1.353-4.988,8.184,8.184,0,0,1,1.837-3.775,9.955,9.955,0,0,1,3.983-2.793,17.811,17.811,0,0,1,6.543-1q4.951,0,7.222,1.838c1.516,1.229,2.186,3.188,2.036,5.869l-.049.41-7.56.023a3.346,3.346,0,0,0-.806-2.531,3.462,3.462,0,0,0-2.509-.793,3.678,3.678,0,0,0-2.209.594,2.314,2.314,0,0,0-.968,1.428,1.243,1.243,0,0,0,.385,1.119,5.49,5.49,0,0,0,2.508.943,28.48,28.48,0,0,1,7.087,2.3,6.018,6.018,0,0,1,2.793,2.863,6.65,6.65,0,0,1,.335,3.824,9.743,9.743,0,0,1-2.209,4.58,11.032,11.032,0,0,1-4.419,3.189,17.084,17.084,0,0,1-6.417,1.08q-6.611,0-8.677-2.531a7.836,7.836,0,0,1-1.737-4.369A13.052,13.052,0,0,1,10929.668,18314.748Z" transform="translate(-10860.459 -18276.098)" fill="#003189"/>
+      <path id="Path_2017" data-name="Path 2017" d="M8017,20682.59l.311-.869a1.315,1.315,0,0,0,.571.264,2.63,2.63,0,0,0,.731.111,1.4,1.4,0,0,0,.882-.264.905.905,0,0,0,.359-.719.981.981,0,0,0-.211-.67,4.581,4.581,0,0,0-.807-.719,3.656,3.656,0,0,1-.819-.807,1.379,1.379,0,0,1-.223-.92,1.851,1.851,0,0,1,.633-1.4,2.235,2.235,0,0,1,1.489-.506,3.473,3.473,0,0,1,1.341.172l-.3.883a1.509,1.509,0,0,0-.422-.2,2.31,2.31,0,0,0-.547-.086,1.543,1.543,0,0,0-.931.258,1,1,0,0,0-.372.76.857.857,0,0,0,.087.395,1.187,1.187,0,0,0,.272.35c.111.1.348.3.721.57a3.1,3.1,0,0,1,.781.855,1.968,1.968,0,0,1,.211,1.02,1.764,1.764,0,0,1-.67,1.377,2.649,2.649,0,0,1-1.614.473,3.266,3.266,0,0,1-.794-.1A2.558,2.558,0,0,1,8017,20682.59Zm4.083,2.111.05-.857a2.142,2.142,0,0,0,1.205-.26,1.47,1.47,0,0,0,.545-.758c-.422,0-.683-.422-.781-1.254l-.435-3.6h.931l.372,3.5c.025.346.149.521.335.521l1.949-4.023h.968l-2.692,5.414a2.361,2.361,0,0,1-.857,1.006A3.2,3.2,0,0,1,8021.083,20684.7Zm4.581-2.186.483-.8a1.718,1.718,0,0,0,.484.32,1.351,1.351,0,0,0,.559.148,1,1,0,0,0,.671-.223.734.734,0,0,0,.3-.582.49.49,0,0,0-.124-.336,1.758,1.758,0,0,0-.459-.346l-.621-.35a1.134,1.134,0,0,1-.422-.422,1.084,1.084,0,0,1-.112-.547,1.358,1.358,0,0,1,.571-1.078,2.131,2.131,0,0,1,1.316-.412,3.115,3.115,0,0,1,1.253.336l-.422.8a1.324,1.324,0,0,0-.943-.412.924.924,0,0,0-.583.176.55.55,0,0,0-.273.457.5.5,0,0,0,.124.361,2.128,2.128,0,0,0,.46.322l.62.348a1.108,1.108,0,0,1,.422.41,1,1,0,0,1,.112.547,1.611,1.611,0,0,1-.621,1.227,2.3,2.3,0,0,1-1.452.449A2.32,2.32,0,0,1,8025.664,20682.516Zm5.337-3.871h-.56l.175-.672h.558l.249-1.006,1.006-.373-.385,1.379h1.327l-.173.672h-1.341l-.634,2.406a1.853,1.853,0,0,0-.074.436c-.024.459.187.693.646.693a1.9,1.9,0,0,0,.732-.172l-.074.758a3.95,3.95,0,0,1-1.2.137.991.991,0,0,1-.781-.324,1.183,1.183,0,0,1-.236-.867,1.057,1.057,0,0,1,.05-.311Zm3.736,1.873c-.025.148-.05.285-.062.424a1.2,1.2,0,0,0,.3.918,1.233,1.233,0,0,0,.907.32,1.909,1.909,0,0,0,1.092-.395l-.123.881a4.651,4.651,0,0,1-1.292.236c-1.24,0-1.837-.7-1.763-2.1a3.069,3.069,0,0,1,.882-2.072,2.712,2.712,0,0,1,2.022-.846,1.9,1.9,0,0,1,1.13.3.989.989,0,0,1,.385.881,1.511,1.511,0,0,1-.732,1.242,2.876,2.876,0,0,1-1.65.457A2.244,2.244,0,0,1,8034.737,20680.518Zm.187-.621a1.721,1.721,0,0,0,.794.16,2.4,2.4,0,0,0,1.153-.234.746.746,0,0,0,.484-.656c.013-.373-.224-.561-.732-.561A1.781,1.781,0,0,0,8034.924,20679.9Zm9.122,2.9.7-3.053c.024-.123.037-.236.05-.346a.671.671,0,0,0-.758-.8,1.2,1.2,0,0,0-.608.188,1.324,1.324,0,0,0-.472.434l-.807,3.574h-.894l.795-3.426a.587.587,0,0,0,.013-.148c.024-.41-.249-.621-.819-.621a1.146,1.146,0,0,0-.584.2,1.584,1.584,0,0,0-.5.434l-.808,3.563h-.868l.794-3.512a2.968,2.968,0,0,0,.05-.436,2.667,2.667,0,0,0-.062-.82l.845-.148a3.032,3.032,0,0,1,.063.633,1.335,1.335,0,0,1,.62-.457,2.174,2.174,0,0,1,.881-.176c.683,0,1.118.215,1.3.648a1.555,1.555,0,0,1,.646-.473,2.383,2.383,0,0,1,.844-.176c.881,0,1.291.412,1.254,1.256a2.858,2.858,0,0,1-.062.432l-.732,3.229Zm4.965,0,1.5-6.6h.919l-1.315,5.8h2.992l-.187.8Zm5.821-2.283c-.025.148-.05.285-.062.424a1.156,1.156,0,0,0,.3.918,1.225,1.225,0,0,0,.905.32,1.912,1.912,0,0,0,1.093-.395l-.124.881a4.639,4.639,0,0,1-1.292.236c-1.253,0-1.837-.7-1.763-2.1a3.073,3.073,0,0,1,.882-2.072,2.713,2.713,0,0,1,2.023-.846,1.9,1.9,0,0,1,1.129.3.989.989,0,0,1,.385.881,1.511,1.511,0,0,1-.732,1.242,2.915,2.915,0,0,1-1.662.457A2.232,2.232,0,0,1,8054.832,20680.518Zm.186-.621a1.728,1.728,0,0,0,.795.16,2.409,2.409,0,0,0,1.154-.234.749.749,0,0,0,.484-.656c.012-.373-.224-.561-.745-.561A1.78,1.78,0,0,0,8055.018,20679.9Zm5.325,3.006h-.224l-1.154-4.941h.895l.7,3.326,2-3.326h.992Zm3.984-2.385a1.736,1.736,0,0,0-.062.424,1.148,1.148,0,0,0,.285.918,1.261,1.261,0,0,0,.919.32,1.938,1.938,0,0,0,1.092-.395l-.137.881a4.555,4.555,0,0,1-1.291.236c-1.241,0-1.837-.7-1.763-2.1a3.077,3.077,0,0,1,.881-2.072,2.716,2.716,0,0,1,2.024-.846,1.875,1.875,0,0,1,1.129.3.963.963,0,0,1,.385.881,1.513,1.513,0,0,1-.732,1.242,2.879,2.879,0,0,1-1.651.457A2.164,2.164,0,0,1,8064.327,20680.518Zm.174-.621a1.724,1.724,0,0,0,.794.16,2.5,2.5,0,0,0,1.167-.234.756.756,0,0,0,.472-.656c.025-.373-.224-.561-.731-.561A1.793,1.793,0,0,0,8064.5,20679.9Zm5.5,2.371-.138.635c-.968,0-1.427-.361-1.39-1.082a10.623,10.623,0,0,1,.3-1.439l1.078-4.381h.895l-1.03,4.107a12.564,12.564,0,0,0-.335,1.6C8069.354,20682.084,8069.565,20682.268,8070,20682.268Zm3.909.322.311-.869a1.309,1.309,0,0,0,.571.264,2.632,2.632,0,0,0,.732.111,1.4,1.4,0,0,0,.881-.264.9.9,0,0,0,.359-.719.985.985,0,0,0-.21-.67,4.631,4.631,0,0,0-.808-.719,3.656,3.656,0,0,1-.819-.807,1.39,1.39,0,0,1-.223-.92,1.853,1.853,0,0,1,.632-1.4,2.241,2.241,0,0,1,1.49-.506,3.473,3.473,0,0,1,1.341.172l-.3.883a1.469,1.469,0,0,0-.422-.2,2.2,2.2,0,0,0-.546-.086,1.545,1.545,0,0,0-.931.258,1,1,0,0,0-.372.76.869.869,0,0,0,.086.395,1.223,1.223,0,0,0,.273.35c.111.1.348.3.721.57a3.088,3.088,0,0,1,.781.855,1.968,1.968,0,0,1,.212,1.02,1.768,1.768,0,0,1-.671,1.377,2.646,2.646,0,0,1-1.613.473,3.263,3.263,0,0,1-.795-.1A2.558,2.558,0,0,1,8073.909,20682.59Zm4.468-1.562a3.5,3.5,0,0,1,.87-2.223,2.526,2.526,0,0,1,1.96-.92,1.7,1.7,0,0,1,1.329.473,1.849,1.849,0,0,1,.4,1.354,4.6,4.6,0,0,1-.347,1.439,3.024,3.024,0,0,1-.969,1.254,2.568,2.568,0,0,1-1.539.5,1.616,1.616,0,0,1-1.3-.5A1.782,1.782,0,0,1,8078.377,20681.027Zm.907-.051c-.037.809.272,1.217.955,1.217a1.467,1.467,0,0,0,1.254-.732,3.432,3.432,0,0,0,.533-1.713c.037-.77-.285-1.166-.968-1.166a1.337,1.337,0,0,0-.931.373,2.249,2.249,0,0,0-.62.941A3.6,3.6,0,0,0,8079.284,20680.977Zm5.857,1.291-.124.635c-.968,0-1.438-.361-1.4-1.082a10.494,10.494,0,0,1,.3-1.439l1.08-4.381h.894l-1.03,4.107a12.948,12.948,0,0,0-.335,1.6C8084.509,20682.084,8084.708,20682.268,8085.142,20682.268Zm2.893-4.295-.7,3.078a2.516,2.516,0,0,0-.062.373c-.024.5.224.756.746.756a1.547,1.547,0,0,0,.942-.359,1.509,1.509,0,0,0,.57-.869l.708-2.979h.906l-1.129,4.828h-.907l.162-.682a2.02,2.02,0,0,1-1.787.783,1.087,1.087,0,0,1-.856-.336,1.306,1.306,0,0,1-.273-.943,3.47,3.47,0,0,1,.074-.473l.708-3.178Zm4.643.672h-.56l.175-.672h.558l.249-1.006,1-.373-.385,1.379h1.328l-.174.672h-1.341l-.632,2.406a1.814,1.814,0,0,0-.075.436c-.025.459.187.693.646.693a1.843,1.843,0,0,0,.72-.172l-.062.758a4.016,4.016,0,0,1-1.205.137,1,1,0,0,1-.782-.324,1.249,1.249,0,0,1-.247-.867,1.938,1.938,0,0,1,.062-.311Zm4.555-2.557a.569.569,0,0,1,.422.172.525.525,0,0,1,.149.422.594.594,0,0,1-.2.424.556.556,0,0,1-.422.172.522.522,0,0,1-.422-.172.551.551,0,0,1-.148-.424.623.623,0,0,1,.2-.422A.613.613,0,0,1,8097.231,20676.088Zm-1.713,6.713.931-4.1h-.633l.2-.707h1.464l-1.092,4.8Zm2.632-1.773a3.565,3.565,0,0,1,.868-2.223,2.533,2.533,0,0,1,1.974-.92,1.689,1.689,0,0,1,1.316.473,1.791,1.791,0,0,1,.4,1.354,4.227,4.227,0,0,1-.348,1.439,3,3,0,0,1-.969,1.254,2.509,2.509,0,0,1-1.538.5,1.634,1.634,0,0,1-1.3-.5A1.778,1.778,0,0,1,8098.15,20681.027Zm.905-.051c-.037.809.286,1.217.956,1.217a1.467,1.467,0,0,0,1.254-.732,3.452,3.452,0,0,0,.534-1.713c.037-.77-.286-1.166-.969-1.166a1.341,1.341,0,0,0-.932.373,2.258,2.258,0,0,0-.62.941A4.117,4.117,0,0,0,8099.056,20680.977Zm6.914,1.824.645-2.8a3.4,3.4,0,0,0,.088-.621c.037-.521-.224-.77-.757-.77a1.586,1.586,0,0,0-.658.176,1.919,1.919,0,0,0-.584.434l-.794,3.586h-.869l.832-3.66c.012-.088.024-.176.037-.3a2.641,2.641,0,0,0-.062-.793l.844-.164a4.475,4.475,0,0,1,.075.721,1.974,1.974,0,0,1,1.626-.721c.868,0,1.278.449,1.241,1.33a3.949,3.949,0,0,1-.087.607l-.67,2.979Zm1.825-.285.483-.8a1.636,1.636,0,0,0,.5.32,1.309,1.309,0,0,0,.547.148,1.05,1.05,0,0,0,.682-.223.759.759,0,0,0,.286-.582.441.441,0,0,0-.124-.336,1.758,1.758,0,0,0-.459-.346l-.621-.35a1.1,1.1,0,0,1-.409-.422.961.961,0,0,1-.125-.547,1.389,1.389,0,0,1,.571-1.078,2.155,2.155,0,0,1,1.316-.412,3.115,3.115,0,0,1,1.253.336l-.422.8a1.32,1.32,0,0,0-.931-.412.983.983,0,0,0-.6.176.544.544,0,0,0-.149.818,2.277,2.277,0,0,0,.472.322l.608.348a1.03,1.03,0,0,1,.422.41,1.017,1.017,0,0,1,.112.547,1.578,1.578,0,0,1-.621,1.227,2.286,2.286,0,0,1-1.44.449A2.36,2.36,0,0,1,8107.795,20682.516Z" transform="translate(-7983.996 -20625.57)" fill="#ca0017"/>
+      <path id="Path_2018" data-name="Path 2018" d="M5409.933,16613c-7.024,2.719-14.323,5.51-21.374,10.178-6.354,4.2-13.268,10.141-18.047,18.494-7.783,13.828.98,24.6,20.1,24.227-11,1.082-22.417.311-28.809-6.639a12.989,12.989,0,0,1-3.5-12.053,24.978,24.978,0,0,1,3.525-8.117C5369.93,16625.6,5390.968,16615.73,5409.933,16613Z" transform="translate(-5358.001 -16613)" fill="#ca0017"/>
+      <path id="Path_2019" data-name="Path 2019" d="M7608,16889.8c7.708-4.73,15.317-9.98,31.291-10.947,8.527-.127,12.437,4.307,10.786,11.617,3.5-4.494,4.828-7.969,3.413-11.109a7.765,7.765,0,0,0-5.461-4.4,21.744,21.744,0,0,0-7.262-.385C7629.783,16875.332,7616.266,16882.182,7608,16889.8Z" transform="translate(-7580.073 -16871.211)" fill="#003189"/>
+    </g>
+  </g>
+</svg>
+      <span class="divider"></span>
+      <span class="product">Syskara Studio<span>by System Level Solutions</span></span>
+    </a>
+    <nav class="links">
+      <a href="#capabilities">Key Capabilities</a>
+      <a href="#platform">Platform</a>
+      <a href="#why">Why This Matters</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary">More Info</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO / BANNER -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow-line"><span class="dot"></span><span>HMI PLATFORM · SYSTEM LEVEL SOLUTIONS</span></div>
+        <h1>One platform for every <em>custom HMI</em> you'll ever ship.</h1>
+        <p class="lede">Syskara Studio pairs a configurable embedded-Linux compute board with a drag-and-drop design tool — so EV chargers, industrial machines, appliances and kiosks all run on the same reusable screen platform.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Get More Info</a>
+          <a href="#platform" class="btn btn-ghost">See the platform</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>3.5"–55"+</b><span>Any screen size, touch or non-touch</span></div>
+          <div class="stat"><b>6</b><span>Built-in industrial interfaces</span></div>
+          <div class="stat"><b>Made in India</b><span>Strategic self-reliant supply</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <img src="assets/bannerimg.png" alt="Syskara Studio HMI Platform" />
+        <div class="badge">
+          <span class="pulse"></span>
+          <div><b>Online</b><small>Live system telemetry</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY CAPABILITIES -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">KEY CAPABILITIES</span>
+        <h2>Everything an HMI needs, built in from the start</h2>
+        <p>A single hardware and software stack that adapts to the display, the protocol, and the application in front of it.</p>
+      </div>
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+          </div>
+          <h3>Configurable Linux Platform</h3>
+          <p>Purpose-built embedded Linux for flexibility, security, and performance.</p>
+        </div>
+        <div class="cap-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10v4M10 10v4M14 10v4M18 10v4"/></svg>
+          </div>
+          <h3>Industrial Connectivity</h3>
+          <p>USB, Ethernet, SD card storage, RS-485, RS-232, UART, and CAN interfaces built in.</p>
+        </div>
+        <div class="cap-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="8" height="20" rx="1.5"/><rect x="14" y="6" width="6" height="12" rx="1"/></svg>
+          </div>
+          <h3>Any Screen, Any Size</h3>
+          <p>Supports LCD displays from 3.5" to 55"+, with or without touch.</p>
+        </div>
+        <div class="cap-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+          </div>
+          <h3>Drag-and-Drop UI Design</h3>
+          <p>Create and deploy custom HMI screens quickly from a PC.</p>
+        </div>
+        <div class="cap-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+          </div>
+          <h3>One Platform, Multiple Applications</h3>
+          <p>Easily adapt for EV chargers, industrial machines, appliances, kiosks, and more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM ARCHITECTURE OVERVIEW -->
+  <section id="platform">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">PLATFORM ARCHITECTURE OVERVIEW</span>
+        <h2>From design tool to display, in three layers</h2>
+        <p>Design the screens on a PC, run them on in-house compute hardware, and show them on whatever display the application calls for.</p>
+      </div>
+
+      <div class="arch-row">
+        <div class="arch-copy">
+          <span class="arch-tag">Design Tool</span>
+          <h3>PC-based drag-and-drop UI design</h3>
+          <p>Build screen flow and configure widgets visually — gauges, charts, buttons, icons — without writing firmware for every new product line.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Visual screen-flow and widget configuration</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Deploy custom HMI screens straight from a PC</li>
+          </ul>
+        </div>
+        <div class="arch-media"><img src="assets/img2.png" alt="Syskara Studio drag-and-drop HMI design tool running on a laptop"></div>
+      </div>
+
+      <div class="arch-row reverse">
+        <div class="arch-copy">
+          <span class="arch-tag">Compute Hardware</span>
+          <h3>In-house compute board, industrial I/O</h3>
+          <p>An in-house compute board running embedded Linux, with the industrial I/O real deployments need already on the board.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>RS-485, RS-232, UART, and CAN on board</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>USB, Ethernet, and SD card storage included</li>
+          </ul>
+        </div>
+        <div class="arch-media"><img src="assets/img4.png" alt="Syskara Studio in-house compute board with RS-485, RS-232, UART and CAN interfaces"></div>
+      </div>
+
+      <div class="arch-row">
+        <div class="arch-copy">
+          <span class="arch-tag">Display Interface Layer</span>
+          <h3>Screen-size agnostic, 3.5" to 55"+</h3>
+          <p>The same platform scales from a handheld panel to a wall-mounted kiosk display, with or without capacitive touch.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Capacitive touch or non-touch displays</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Phone-size panels through 55"+ kiosk screens</li>
+          </ul>
+        </div>
+        <div class="arch-media"><img src="assets/img3.png" alt="Syskara Studio interface running across phone, tablet, panel and monitor displays"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY THIS MATTERS -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">WHY THIS MATTERS</span>
+        <h2>Built to shorten every HMI project that comes after the first</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <div><h4>Faster custom HMI delivery</h4><p>Reuse the same design tool and board for the next product instead of starting over.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><h4>Reusable platform</h4><p>One hardware and software base supports many product lines.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div><h4>Broad addressable range</h4><p>From 3.5" handheld panels to 55"+ kiosk displays on one platform.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
+          <div><h4>Strategic self-reliance</h4><p>An in-house compute board and design tool, not a third-party black box.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          <div><h4>Future-ready supply chain</h4><p>Built for continuity as component sourcing and standards evolve.</p></div>
+        </div>
+        <div class="why-card">
+          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13M9 21v-6h6v6"/></svg></div>
+          <div><h4>Made in India</h4><p>Designed, built, and supported locally by System Level Solutions.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-strip">
+    <div class="wrap">
+      <div class="cta-box">
+        <div>
+          <h3>Ready to put Syskara Studio on your next product?</h3>
+          <p>Talk to the System Level Solutions team about your screen, protocol, and deployment needs.</p>
+        </div>
+        <a href="./assets/SyskaraHMISystemBrochure.pdf" target="_blank" class="btn btn-primary">More Info</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / MORE INFO -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><img src="./assets/slslogowhite.svg" alt=""></a>
+        <p>Syskara Studio is System Level Solutions' configurable HMI platform — one design tool and compute board for EV chargers, industrial machines, appliances, and kiosks.</p>
+      </div>
+      <div class="foot-col">
+        <h5>MORE INFO</h5>
+        <div class="info-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>32, D4, Phase 1, GIDC Estate,<br>V.U. Nagar, Gujarat - 388121</span>
+        </div>
+        <a href="tel:+919898042339">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          +91 98980 42339
+        </a>
+      </div>
+      <div class="foot-col">
+        <h5>ONLINE</h5>
+        <a href="https://slscorp.com" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+          slscorp.com
+        </a>
+        <a href="mailto:info@slscorp.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          info@slscorp.com
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 System Level Solutions. Syskara Studio HMI Platform.</span>
+      <span>Configurable Linux Platform · Made in India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('nav.links a, .btn[href^="#"], a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const id = this.getAttribute('href');
+      if(id && id.startsWith('#') && id.length>1){
+        const target = document.querySelector(id);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
